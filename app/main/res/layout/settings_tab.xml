@@ -1,6 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-</LinearLayout>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true" 
+    android:padding="15dp">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/notifications_enabled_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="3dp"
+            android:textSize="15sp"
+            android:text="@string/notifications_enabled_label" />
+
+        <TextView
+            android:id="@+id/notification_time_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="3dp"
+            android:textSize="15sp"
+            android:text="@string/notification_time_label" />
+
+        <TextView
+            android:id="@+id/notification_days_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="3dp"
+            android:textSize="15sp"
+            android:text="@string/notification_days_label" />
+
+        <TextView
+            android:id="@+id/notification_sound_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="3dp"
+            android:textSize="15sp"
+            android:text="@string/notification_sound_label" />
+
+        <TextView
+            android:id="@+id/show_name_price_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="3dp"
+            android:textSize="15sp"
+            android:text="@string/show_name_price_label" />
+
+        <TextView
+            android:id="@+id/show_on_boot_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="3dp"
+            android:textSize="15sp"
+            android:text="@string/show_on_boot_label" />
+
+        <TextView
+            android:id="@+id/play_notification_sound_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="3dp"
+            android:textSize="15sp"
+            android:text="@string/play_notification_sound_label" />
+
+        <TextView
+            android:id="@+id/vibrate_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="3dp"
+            android:textSize="15sp"            
+            android:text="@string/vibrate_label" />
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1" >
+        </FrameLayout>
+
+        <!-- content fixated to the bottom of the screen -->
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:paddingTop="15dp" >
+            
+            <Button
+                android:id="@+id/change_settings_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/change_settings_button"
+                android:width="120dp" />
+
+            <Button
+                android:id="@+id/test_notification_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/test_notification_button"
+                android:width="120dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

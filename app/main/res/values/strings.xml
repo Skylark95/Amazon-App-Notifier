@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">"Amazon App Notifier "</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Settings</string>
+    <string name="app_name">"Amazon App Notifier"</string>
+
+    <!-- Setting Tab -->
+    <string name="notifications_enabled_label">Notifications Enabled:</string>
+    <string name="show_name_price_label">Show app name and price:</string>
+    <string name="show_on_boot_label">Show notification on boot:</string>
+    <string name="play_notification_sound_label">Play Notification sound:</string>
+    <string name="vibrate_label">Vibrate on notification:</string>
+    <string name="notification_time_label">Notification Time:</string>
+    <string name="notification_days_label">Notification Days:</string>
+    <string name="notification_sound_label">Notification Sound:</string>
+    <string name="change_settings_button">Change Settings</string>
+    <string name="test_notification_button">Test Notification</string>
+    
 
 </resources>
