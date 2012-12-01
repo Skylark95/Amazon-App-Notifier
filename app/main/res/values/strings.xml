@@ -10,6 +10,9 @@
     <string name="menu_changelog">@string/changelog_button</string>
     <string name="menu_uk_users">@string/uk_users_button</string>
     <string name="menu_donate">@string/donate_button</string>
+    
+    <!-- Dialogs -->
+    <string name="close_button">Close</string>
 
     <!-- Setting Tab -->
     <string name="notifications_enabled_label">Notifications Enabled:</string>

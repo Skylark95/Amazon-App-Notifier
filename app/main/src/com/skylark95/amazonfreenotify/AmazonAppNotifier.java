@@ -8,6 +8,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.sample.fragments.TabsAdapter;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 import com.skylark95.amazonfreenotify.fragment.AboutFragment;
 import com.skylark95.amazonfreenotify.fragment.DonateFragment;
 import com.skylark95.amazonfreenotify.fragment.SettingsFragment;
@@ -17,7 +18,7 @@ import com.skylark95.amazonfreenotify.fragment.SettingsFragment;
  * 
  * @author Derek
  */
-public class MainTabsActivity extends SherlockFragmentActivity {
+public class AmazonAppNotifier extends SherlockFragmentActivity {
 	
 	private TabHost tabHost;
 	private ViewPager viewPager;
@@ -28,7 +29,7 @@ public class MainTabsActivity extends SherlockFragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);		
+		setContentView(R.layout.activity_amazon_app_notifier);		
 		
 		tabHost = (TabHost) findViewById(android.R.id.tabhost);
 		tabHost.setup();
@@ -56,6 +57,16 @@ public class MainTabsActivity extends SherlockFragmentActivity {
 	    MenuInflater inflater = getSupportMenuInflater();
 	    inflater.inflate(R.menu.activity_main, menu);
 	    return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_donate:
+			tabHost.setCurrentTabByTag("donate");
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 
 }

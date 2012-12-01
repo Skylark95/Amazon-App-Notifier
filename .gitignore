@@ -8,12 +8,17 @@
 # Java class files
 *.class
 
+# Java jar files
+*.jar
+
 # generated files
 bin/
 gen/
 
 # Local configuration file (sdk path, etc)
 local.properties
+project.properties
+proguard-project.txt
 
 # Eclipse project files
 .classpath
