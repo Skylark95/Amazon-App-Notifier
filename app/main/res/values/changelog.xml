@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="changelog_titles">
+        <item>Version 1.0.4 &#8211; 9/22/12</item>
+        <item>Version 1.0.3 &#8211; 9/21/12</item>
+        <item>Version 1.0.2 &#8211; 9/21/12</item>
+        <item>Version 1.0.1 &#8211; 8/13/2012</item>
+        <item>Version 1.0 &#8211; 05/16/2012</item>
+    </string-array>
+    <string-array name="changelog_text">
+        <item> <!-- v1.0.4 -->
+            &#8226; Minor bug fix affecting free version<br />
+        </item>
+        <item> <!-- v1.0.3 -->
+            &#8226; If Appstore not found on phone, clicking notification redirects to download page<br />
+            &#8226; Fix startup crash on some phones<br />
+        </item>
+        <item> <!-- v1.0.2 -->
+            &#8226; Added Option to disable vibrate<br />
+        </item>
+        <item> <!-- v1.0.1 -->
+            &#8226; Fixed notifications not appearing on some phones (4.0 ICS, 4.1 Jelly Bean)<br />
+            &#8226; Increased timeout for reading app name and price to 30 seconds (Less error downloading data messages on a slow connection)<br />
+            &#8226; Fixed notification so when clicked on it launches the appstore on the main store page instead of the last open view (Get to downloading your free app faster!)<br />
+            &#8226; Works great on my new Nexus 7! :)<br />
+        </item>
+        <item> <!-- v1.0 -->
+            &#8226; Initial release<br />
+        </item>
+    </string-array>
+
+</resources>

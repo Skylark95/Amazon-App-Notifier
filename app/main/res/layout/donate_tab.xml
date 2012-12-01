@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-</LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="15dp" >
+
+    <TextView
+        android:id="@+id/donate_description_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/donate_description_text"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/donate_description_text"
+        android:layout_below="@+id/donate_description_text" 
+        android:paddingTop="20dp">
+
+        <Spinner
+            android:id="@+id/donation_amounts_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".50"
+            android:entries="@array/donation_amounts" />
+
+        <Button
+            android:id="@+id/donate_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".50"
+            android:text="@string/donate_button" />
+    </LinearLayout>
+
+</RelativeLayout>

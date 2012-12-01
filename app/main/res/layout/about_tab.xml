@@ -1,6 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-</LinearLayout>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    android:padding="15dp" >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/about_app_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about_app_name_label"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/about_app_version_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:text="@string/about_app_version_label" />
+
+        <TextView
+            android:id="@+id/about_developer_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about_developer_label"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/about_contact_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about_contact_label"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/about_website_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about_website_label"
+            android:textSize="15sp" />
+        
+        <TextView
+            android:id="@+id/about_libraries_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/about_libraries_label"
+            android:textStyle="bold"
+            android:paddingTop="10dp" />
+        
+        <TextView
+            android:id="@+id/about_libraries_text"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="@string/about_libraries_text"
+            android:paddingLeft="15dp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/changelog_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".50"
+                android:text="@string/changelog_button" />
+
+            <Button
+                android:id="@+id/uk_users_button"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight=".50"
+                android:text="@string/uk_users_button" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

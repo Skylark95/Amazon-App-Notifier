@@ -2,6 +2,14 @@
 <resources>
 
     <string name="app_name">"Amazon App Notifier"</string>
+    <string name="app_version">2.0</string>
+    
+    <!-- Menus -->
+    <string name="menu_change_settings">@string/change_settings_button</string>
+    <string name="menu_test_notification">@string/test_notification_button</string>
+    <string name="menu_changelog">@string/changelog_button</string>
+    <string name="menu_uk_users">@string/uk_users_button</string>
+    <string name="menu_donate">@string/donate_button</string>
 
     <!-- Setting Tab -->
     <string name="notifications_enabled_label">Notifications Enabled:</string>
@@ -12,8 +20,36 @@
     <string name="notification_time_label">Notification Time:</string>
     <string name="notification_days_label">Notification Days:</string>
     <string name="notification_sound_label">Notification Sound:</string>
+    <string name="notifiy_for_games">Notify for games:</string>
     <string name="change_settings_button">Change Settings</string>
     <string name="test_notification_button">Test Notification</string>
+
+    <!-- About Tab -->
+    <string name="about_app_name_label">@string/app_name</string>
+    <string name="about_app_version_label">Version: 2.0</string>
+    <string name="about_developer_label">Developer: Skylark95</string>
+    <string name="about_contact_label">Contact: <a href="mailto:skylark95atc@gmail.com">skylark95atc@gmail.com</a></string>    
+    <string name="about_website_label">Website: <a href="http://www.skylark95.com/">http://www.skylark95.com/"</a></string>
+    <string name="about_libraries_label">Thanks to the following open source projects:</string>
+    <string name="about_libraries_text">
+         &#8226; ActionBarSherlock
+         \n&#8226; CommonsWare Android Components
+    </string>
     
+    <string name="changelog_button">Changelog</string>    
+    <string name="uk_users_button">UK Users</string>    
+
+    <!-- Donate Tab -->
+    <string name="donate_description_text">    This app is and always will be free without ads.  If you would like support it\'s development send a donation!</string>
+    <string name="donations_prompt">Select an amount</string>
+    <string name="donate_button">Donate</string>
+
+    <string-array name="donation_amounts">
+        <item>$1</item>
+        <item>$2</item>
+        <item>$3</item>
+        <item>$5</item>
+        <item>$10</item>
+    </string-array>
 
 </resources>

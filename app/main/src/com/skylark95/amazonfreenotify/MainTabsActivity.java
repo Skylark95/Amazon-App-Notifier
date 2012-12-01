@@ -6,6 +6,8 @@ import android.widget.TabHost;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.sample.fragments.TabsAdapter;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 import com.skylark95.amazonfreenotify.fragment.AboutFragment;
 import com.skylark95.amazonfreenotify.fragment.DonateFragment;
 import com.skylark95.amazonfreenotify.fragment.SettingsFragment;
@@ -47,6 +49,13 @@ public class MainTabsActivity extends SherlockFragmentActivity {
 	protected void onSaveInstanceState(Bundle outState) {
 	    super.onSaveInstanceState(outState);
 	    outState.putString(TAB_KEY, tabHost.getCurrentTabTag());
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getSupportMenuInflater();
+	    inflater.inflate(R.menu.activity_main, menu);
+	    return true;
 	}
 
 }
