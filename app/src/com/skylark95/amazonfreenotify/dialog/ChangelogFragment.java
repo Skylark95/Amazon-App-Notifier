@@ -1,8 +1,5 @@
 package com.skylark95.amazonfreenotify.dialog;
 
-import java.io.InputStream;
-
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +20,6 @@ public class ChangelogFragment extends SherlockDialogFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View dialogView = inflater.inflate(R.layout.fragment_dialog, container, false);
-		String s = "test";
 		
 		Button button = (Button) dialogView.findViewById(R.id.close_button);
 		button.setOnClickListener(new OnClickListener() {

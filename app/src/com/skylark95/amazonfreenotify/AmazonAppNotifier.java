@@ -12,6 +12,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.skylark95.amazonfreenotify.fragment.AboutFragment;
 import com.skylark95.amazonfreenotify.fragment.DonateFragment;
 import com.skylark95.amazonfreenotify.fragment.SettingsFragment;
+import com.skylark95.amazonfreenotify.ui.ButtonMenuActions;
 
 /**
  * Main Activity for Amazon App Notifier
@@ -61,9 +62,18 @@ public class AmazonAppNotifier extends SherlockFragmentActivity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		ButtonMenuActions actions = new ButtonMenuActions();
+		
 		switch (item.getItemId()) {
 		case R.id.menu_donate:
 			tabHost.setCurrentTabByTag("donate");
+			return true;
+		case R.id.menu_change_settings:
+			actions.launchPreferences(this);
+			return true;
+		case R.id.menu_test_notification:
+			actions.testNotification(this);
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}

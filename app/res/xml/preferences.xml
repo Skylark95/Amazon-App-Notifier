@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <CheckBoxPreference
+        android:key="pref_enabled"
+        android:title="@string/pref_enabled"
+        android:summary="@string/pref_enabled_summ"
+        android:defaultValue="true"/>
+    <CheckBoxPreference
+        android:key="pref_show_name_price"
+        android:title="@string/pref_show_name_price"
+        android:summary="@string/pref_show_name_price_summ"
+        android:defaultValue="true"/>
+    <CheckBoxPreference
+        android:key="pref_show_on_boot"
+        android:title="@string/pref_show_on_boot"
+        android:summary="@string/pref_show_on_boot_summ"
+        android:defaultValue="true"/>
+    <CheckBoxPreference
+        android:key="pref_play_notification_sound"
+        android:title="@string/pref_play_notification_sound"
+        android:summary="@string/pref_play_notification_sound_summ"
+        android:defaultValue="true"/>
+    <CheckBoxPreference
+        android:key="pref_vibrate"
+        android:title="@string/pref_vibrate"
+        android:summary="@string/pref_vibrate_summ"
+        android:defaultValue="true"/>
+    <CheckBoxPreference
+        android:key="pref_expandable_notification"
+        android:title="@string/pref_expandable_notification"
+        android:summary="@string/pref_expandable_notification_summ"
+        android:defaultValue="true"/>
+    <CheckBoxPreference
+        android:key="pref_notifiy_for_games"
+        android:title="@string/pref_notifiy_for_games"
+        android:summary="@string/pref_notifiy_for_games_summ"
+        android:defaultValue="true"/>
+</PreferenceScreen>

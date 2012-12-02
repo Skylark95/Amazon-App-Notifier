@@ -3,18 +3,18 @@
 
     <item
         android:id="@+id/menu_change_settings"
-        android:title="@string/menu_change_settings"/>
+        android:title="@string/change_settings_button"/>
     <item
         android:id="@+id/menu_test_notification"
-        android:title="@string/menu_test_notification"/>
+        android:title="@string/test_notification_button"/>
     <item
         android:id="@+id/menu_changelog"
-        android:title="@string/menu_changelog"/>
+        android:title="@string/changelog_button"/>
     <item
         android:id="@+id/menu_uk_users"
-        android:title="@string/menu_uk_users"/>
+        android:title="@string/uk_users_button"/>
     <item
         android:id="@+id/menu_donate"
-        android:title="@string/menu_donate"/>
+        android:title="@string/donate_button"/>
 
 </menu>

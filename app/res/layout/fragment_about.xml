@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- ScrollView with buttons at bottom -->
+<!-- See: http://stackoverflow.com/questions/2386866/how-to-align-views-at-the-bottom-of-the-screen -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -12,60 +14,37 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/about_app_name_label"
+            android:id="@+id/about_app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/about_app_name_label"
+            android:text="@string/app_name"
             android:textSize="18sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/about_app_version_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:text="@string/about_app_version_label" />
-
-        <TextView
-            android:id="@+id/about_developer_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/about_developer_label"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/about_contact_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/about_contact_label"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/about_website_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/about_website_label"
-            android:textSize="15sp" />
         
         <TextView
-            android:id="@+id/about_libraries_label"
+            android:id="@+id/about_app_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/about_libraries_label"
-            android:textStyle="bold"
+            android:text="@string/app_version_label" />
+        
+        <TextView
+            android:id="@+id/about_html"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:paddingTop="10dp" />
-        
-        <TextView
-            android:id="@+id/about_libraries_text"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:text="@string/about_libraries_text"
-            android:paddingLeft="15dp" />
 
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1">
+        </FrameLayout>
+
+        <!-- content fixated to the bottom of the screen -->
+        
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
+            android:gravity="center_horizontal"
             android:orientation="horizontal" >
 
             <Button

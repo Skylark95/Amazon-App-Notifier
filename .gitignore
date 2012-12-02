@@ -19,6 +19,7 @@ gen/
 local.properties
 project.properties
 proguard-project.txt
+*.log
 
 # Eclipse project files
 .classpath

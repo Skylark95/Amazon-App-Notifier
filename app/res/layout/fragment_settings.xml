@@ -17,9 +17,10 @@
             android:id="@+id/notifications_enabled_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingBottom="3dp"
+            android:paddingBottom="15dp"
             android:text="@string/notifications_enabled_label"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/notification_time_label"
@@ -78,11 +79,19 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/expandable_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="3dp"
+            android:text="@string/expandable_notification"
+            android:textSize="15sp" />
+        
+        <TextView
             android:id="@+id/notifiy_for_games"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingBottom="3dp"
-            android:text="@string/notifiy_for_games"
+            android:text="@string/notifiy_for_games_label"
             android:textSize="15sp" />
 
         <FrameLayout
@@ -98,7 +107,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:orientation="horizontal"
-            android:paddingTop="15dp" >
+            android:paddingTop="20dp" >
 
             <Button
                 android:id="@+id/change_settings_button"
