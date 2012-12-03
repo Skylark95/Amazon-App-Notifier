@@ -1,4 +1,4 @@
-package com.skylark95.amazonfreenotify.fragment;
+package com.skylark95.amazonfreenotify.ui.tabs;
 
 import java.io.IOException;
 import java.io.InputStream;

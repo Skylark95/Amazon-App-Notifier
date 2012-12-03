@@ -1,38 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
-    <CheckBoxPreference
-        android:key="pref_enabled"
-        android:title="@string/pref_enabled"
-        android:summary="@string/pref_enabled_summ"
-        android:defaultValue="true"/>
-    <CheckBoxPreference
-        android:key="pref_show_name_price"
-        android:title="@string/pref_show_name_price"
-        android:summary="@string/pref_show_name_price_summ"
-        android:defaultValue="true"/>
-    <CheckBoxPreference
-        android:key="pref_show_on_boot"
-        android:title="@string/pref_show_on_boot"
-        android:summary="@string/pref_show_on_boot_summ"
-        android:defaultValue="true"/>
-    <CheckBoxPreference
-        android:key="pref_play_notification_sound"
-        android:title="@string/pref_play_notification_sound"
-        android:summary="@string/pref_play_notification_sound_summ"
-        android:defaultValue="true"/>
-    <CheckBoxPreference
-        android:key="pref_vibrate"
-        android:title="@string/pref_vibrate"
-        android:summary="@string/pref_vibrate_summ"
-        android:defaultValue="true"/>
-    <CheckBoxPreference
-        android:key="pref_expandable_notification"
-        android:title="@string/pref_expandable_notification"
-        android:summary="@string/pref_expandable_notification_summ"
-        android:defaultValue="true"/>
-    <CheckBoxPreference
-        android:key="pref_notifiy_for_games"
-        android:title="@string/pref_notifiy_for_games"
-        android:summary="@string/pref_notifiy_for_games_summ"
-        android:defaultValue="true"/>
+
+    <PreferenceCategory
+        android:key="pref_basic_settings_title"
+        android:title="@string/pref_basic_settings_title" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_enabled"
+            android:summary="@string/pref_enabled_summ"
+            android:title="@string/pref_enabled" />
+
+        <com.skylark95.amazonfreenotify.ui.settings.TimePickerPreference
+            android:defaultValue="12:00"
+            android:dialogTitle="@string/pref_notification_time"
+            android:key="pref_notification_time"
+            android:summary="@string/pref_notification_time_summ"
+            android:title="@string/pref_notification_time" />
+
+        <MultiSelectListPreference
+            android:defaultValue="@array/pref_notification_days_values"
+            android:dialogTitle="@string/pref_notification_days"
+            android:entries="@array/pref_notification_days_entries"
+            android:entryValues="@array/pref_notification_days_values"
+            android:key="pref_notification_days"
+            android:summary="@string/pref_notification_days_summ"
+            android:title="@string/pref_notification_days" />
+
+        <RingtonePreference
+            android:defaultValue="content://settings/system/notification_sound"
+            android:dialogTitle="@string/pref_notification_sound"
+            android:key="pref_notification_sound"
+            android:ringtoneType="notification"
+            android:showDefault="true"
+            android:showSilent="false"
+            android:summary="@string/pref_notification_sound_summ"
+            android:title="@string/pref_notification_sound" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="pref_advanced_settings_title"
+        android:title="@string/pref_advanced_settings_title" >
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_show_name_price"
+            android:summary="@string/pref_show_name_price_summ"
+            android:title="@string/pref_show_name_price" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_show_on_boot"
+            android:summary="@string/pref_show_on_boot_summ"
+            android:title="@string/pref_show_on_boot" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_play_notification_sound"
+            android:summary="@string/pref_play_notification_sound_summ"
+            android:title="@string/pref_play_notification_sound" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_vibrate"
+            android:summary="@string/pref_vibrate_summ"
+            android:title="@string/pref_vibrate" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_expandable_notification"
+            android:summary="@string/pref_expandable_notification_summ"
+            android:title="@string/pref_expandable_notification" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_notifiy_for_games"
+            android:summary="@string/pref_notifiy_for_games_summ"
+            android:title="@string/pref_notifiy_for_games" />
+    </PreferenceCategory>
+
 </PreferenceScreen>

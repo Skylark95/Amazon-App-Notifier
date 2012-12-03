@@ -1,4 +1,4 @@
-package com.skylark95.amazonfreenotify.fragment;
+package com.skylark95.amazonfreenotify.ui.tabs;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -13,12 +13,13 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.skylark95.amazonfreenotify.R;
-import com.skylark95.amazonfreenotify.settings.Preferences;
-import com.skylark95.amazonfreenotify.ui.ButtonMenuActions;
+import com.skylark95.amazonfreenotify.ui.actions.ButtonMenuActions;
+import com.skylark95.amazonfreenotify.ui.settings.Preferences;
+import com.skylark95.amazonfreenotify.util.Utils;
 
 public class SettingsFragment extends SherlockFragment {
 
-	private View view;
+	private View settingsView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -27,27 +28,40 @@ public class SettingsFragment extends SherlockFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.fragment_settings, container, false);
-
-		setupTextLabels(view);
-		setupButtons(view);
-
-		return view;
+		settingsView = inflater.inflate(R.layout.fragment_settings, container, false);
+		setupButtons(settingsView);
+		return settingsView;
 	}
 	
 	@Override
 	public void onResume() {
 		super.onResume();
-		setupTextLabels(view);
+		refreshTextLabels(settingsView);
 	}
 
-	private void setupTextLabels(View view) {
+	private void setupButtons(View view) {
+		final ButtonMenuActions actions = new ButtonMenuActions();
+	
+		Button changeSettingsButton = (Button) view.findViewById(R.id.change_settings_button);
+		changeSettingsButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				actions.launchPreferences(getActivity());
+			}
+		});
+	
+		Button testNotificationButton = (Button) view.findViewById(R.id.test_notification_button);
+		testNotificationButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				actions.testNotification(getActivity());
+			}
+		});
+	}
+
+	private void refreshTextLabels(View view) {
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 		setNotificationsEnabledText(view, pref);
-
-		TextView noificationTimeText = (TextView) view.findViewById(R.id.notification_time_label);
-		noificationTimeText.setText(getActivity().getString(R.string.notification_time_label) + " " + "12:00 PM");
+		setNotificationTimeText(view, pref);
 
 		TextView notificationDaysText = (TextView) view.findViewById(R.id.notification_days_label);		
 		notificationDaysText.setText(getActivity().getString(R.string.notification_days_label) + " " + "All");
@@ -61,6 +75,13 @@ public class SettingsFragment extends SherlockFragment {
 		setVibrateText(view, pref);
 		setExpandedNotificationText(view, pref);
 		setNotifyForGamesText(view, pref);
+	}
+
+	private void setNotificationTimeText(View view, SharedPreferences pref) {
+		TextView noificationTimeText = (TextView) view.findViewById(R.id.notification_time_label);
+		String time = Utils.formatTime(pref.getString(Preferences.PREF_NOTIFICATION_TIME, "12:00"));
+		
+		noificationTimeText.setText(getActivity().getString(R.string.notification_time_label) + " " + time);
 	}
 
 	private void setNotifyForGamesText(View view, SharedPreferences pref) {
@@ -103,24 +124,6 @@ public class SettingsFragment extends SherlockFragment {
 		boolean showNamePrice = pref.getBoolean(Preferences.PREF_SHOW_NAME_PRICE, true);
 		
 		showNamePriceText.setText(getActivity().getString(R.string.show_name_price_label) + " " + booleanToYesNo(showNamePrice));
-	}
-
-	private void setupButtons(View view) {
-		final ButtonMenuActions actions = new ButtonMenuActions();
-	
-		Button changeSettingsButton = (Button) view.findViewById(R.id.change_settings_button);
-		changeSettingsButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				actions.launchPreferences(getActivity());
-			}
-		});
-	
-		Button testNotificationButton = (Button) view.findViewById(R.id.test_notification_button);
-		testNotificationButton.setOnClickListener(new OnClickListener() {
-			public void onClick(View v) {
-				actions.testNotification(getActivity());
-			}
-		});
 	}
 
 	private void setNotificationsEnabledText(View view, SharedPreferences pref) {

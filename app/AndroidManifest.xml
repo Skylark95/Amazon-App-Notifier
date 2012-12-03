@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.skylark95.amazonfreenotify.settings.Preferences"
+            android:name="com.skylark95.amazonfreenotify.ui.settings.Preferences"
             android:label="@string/title_activity_preference" >
         </activity>
     </application>

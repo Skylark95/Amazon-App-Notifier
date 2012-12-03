@@ -9,10 +9,10 @@ import com.actionbarsherlock.sample.fragments.TabsAdapter;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.skylark95.amazonfreenotify.fragment.AboutFragment;
-import com.skylark95.amazonfreenotify.fragment.DonateFragment;
-import com.skylark95.amazonfreenotify.fragment.SettingsFragment;
-import com.skylark95.amazonfreenotify.ui.ButtonMenuActions;
+import com.skylark95.amazonfreenotify.ui.actions.ButtonMenuActions;
+import com.skylark95.amazonfreenotify.ui.tabs.AboutFragment;
+import com.skylark95.amazonfreenotify.ui.tabs.DonateFragment;
+import com.skylark95.amazonfreenotify.ui.tabs.SettingsFragment;
 
 /**
  * Main Activity for Amazon App Notifier
@@ -24,6 +24,7 @@ public class AmazonAppNotifier extends SherlockFragmentActivity {
 	private TabHost tabHost;
 	private ViewPager viewPager;
 	private TabsAdapter tabsAdapter;
+	private ButtonMenuActions menuActions;
 	
 	private static final String TAB_KEY = "tab";
 	
@@ -45,6 +46,8 @@ public class AmazonAppNotifier extends SherlockFragmentActivity {
 		if (savedInstanceState != null) {
 	        tabHost.setCurrentTabByTag(savedInstanceState.getString(TAB_KEY));
 	    }
+		
+		menuActions = new ButtonMenuActions();
 	}
 
 	@Override
@@ -61,18 +64,16 @@ public class AmazonAppNotifier extends SherlockFragmentActivity {
 	}
 	
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		ButtonMenuActions actions = new ButtonMenuActions();
-		
+	public boolean onOptionsItemSelected(MenuItem item) {		
 		switch (item.getItemId()) {
 		case R.id.menu_donate:
 			tabHost.setCurrentTabByTag("donate");
 			return true;
 		case R.id.menu_change_settings:
-			actions.launchPreferences(this);
+			menuActions.launchPreferences(this);
 			return true;
 		case R.id.menu_test_notification:
-			actions.testNotification(this);
+			menuActions.testNotification(this);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

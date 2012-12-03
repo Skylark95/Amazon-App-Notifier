@@ -1,4 +1,4 @@
-package com.skylark95.amazonfreenotify.dialog;
+package com.skylark95.amazonfreenotify.ui.dialog;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

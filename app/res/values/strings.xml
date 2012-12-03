@@ -18,16 +18,23 @@
     <string name="expandable_notification">Expandable Notification:</string>
     <string name="notifiy_for_games_label">Notify for games:</string>
     <string name="change_settings_button">Change Settings</string>
-    <string name="test_notification_button">Test Notification</string>
-    
+    <string name="test_notification_button">Test Notification</string>    
     <string name="test_notification_toast">Launching Test Notification&#8230;</string>
 
     <!-- Preferences -->
     <string name="title_activity_preference">Settings</string>
+    <string name="pref_basic_settings_title">Basic Settings</string>
+    <string name="pref_advanced_settings_title">Advanced Settings</string>
     <string name="pref_enabled">Enable Notifications</string>
     <string name="pref_enabled_summ">Enable/Disable Free App of the Day Notifications</string>
+    <string name="pref_notification_time">Notification Time</string>
+    <string name="pref_notification_time_summ">The time to pop up a notification\n(Currently %s)</string>
+    <string name="pref_notification_days">Notification Days</string>
+    <string name="pref_notification_days_summ">The days to pop up a notification\n(Currently %s)</string>
+    <string name="pref_notification_sound">Notification Sound</string>
+    <string name="pref_notification_sound_summ">The sound to play for a notification\n(Currently %s)</string>
     <string name="pref_show_name_price">Show Name/Price</string>
-    <string name="pref_show_name_price_summ">Show app name and price in the notification (Disable to prevent data usage)</string>
+    <string name="pref_show_name_price_summ">Show app name and price in the notification\n(Disable to prevent data usage)</string>
     <string name="pref_show_on_boot">Show on boot</string>
     <string name="pref_show_on_boot_summ">Launch a notification when the phone boots</string>
     <string name="pref_play_notification_sound">Play sound</string>
@@ -35,10 +42,28 @@
     <string name="pref_vibrate">Vibrate</string>
     <string name="pref_vibrate_summ">Vibrate when the notification launches</string>
     <string name="pref_expandable_notification">Expandable Notification</string>
-    <string name="pref_expandable_notification_summ">Uses expandable notifications to add the free app\'s description (Android 4.1+ only)</string>
+    <string name="pref_expandable_notification_summ">Uses expandable notifications to add the free app\'s description\n(Android 4.1+ only)</string>
     <string name="pref_notifiy_for_games">Notify for games</string>
     <string name="pref_notifiy_for_games_summ">Uncheck if you don\'t want notifications for games</string>
     
+    <string-array name="pref_notification_days_entries">
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thrusday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+    </string-array>
+    <string-array name="pref_notification_days_values">
+        <item>Sun</item>
+        <item>Mon</item>
+        <item>Tu</item>
+        <item>Wed</item>
+        <item>Th</item>
+        <item>Fri</item>
+        <item>Sat</item>
+    </string-array>
 
     <!-- About Tab -->
     <string name="app_version_label">Version:</string>

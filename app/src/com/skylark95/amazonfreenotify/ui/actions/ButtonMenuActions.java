@@ -1,11 +1,11 @@
-package com.skylark95.amazonfreenotify.ui;
+package com.skylark95.amazonfreenotify.ui.actions;
 
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
 import com.skylark95.amazonfreenotify.R;
-import com.skylark95.amazonfreenotify.settings.Preferences;
+import com.skylark95.amazonfreenotify.ui.settings.Preferences;
 
 public class ButtonMenuActions {
 
