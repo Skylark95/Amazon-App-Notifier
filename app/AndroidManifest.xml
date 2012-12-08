@@ -33,6 +33,10 @@
             android:name="com.skylark95.amazonfreenotify.ui.settings.Preferences"
             android:label="@string/title_activity_preference" >
         </activity>
+        <activity
+            android:name="com.skylark95.amazonfreenotify.ui.settings.PrefNotificationDays"
+            android:label="@string/pref_notification_days_screen" >
+        </activity>
     </application>
 
 </manifest>

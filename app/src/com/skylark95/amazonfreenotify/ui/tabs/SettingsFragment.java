@@ -15,7 +15,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 import com.skylark95.amazonfreenotify.R;
 import com.skylark95.amazonfreenotify.ui.actions.ButtonMenuActions;
 import com.skylark95.amazonfreenotify.ui.settings.Preferences;
-import com.skylark95.amazonfreenotify.util.Utils;
+import com.skylark95.amazonfreenotify.ui.settings.SettingsUtils;
 
 public class SettingsFragment extends SherlockFragment {
 
@@ -62,13 +62,8 @@ public class SettingsFragment extends SherlockFragment {
 
 		setNotificationsEnabledText(view, pref);
 		setNotificationTimeText(view, pref);
-
-		TextView notificationDaysText = (TextView) view.findViewById(R.id.notification_days_label);		
-		notificationDaysText.setText(getActivity().getString(R.string.notification_days_label) + " " + "All");
-
-		TextView notificationSoundText = (TextView) view.findViewById(R.id.notification_sound_label);
-		notificationSoundText.setText(getActivity().getString(R.string.notification_sound_label) + " " + "My Ringtone");
-
+		setNotificationDaysText(view);
+		setNotificationSoundText(view);
 		setShowNamePriceText(view, pref);
 		setShowOnBootText(view, pref);
 		setPlayNotificationSoundText(view, pref);
@@ -77,9 +72,23 @@ public class SettingsFragment extends SherlockFragment {
 		setNotifyForGamesText(view, pref);
 	}
 
+	private void setNotificationSoundText(View view) {
+		TextView notificationSoundText = (TextView) view.findViewById(R.id.notification_sound_label);
+		String ringtone = SettingsUtils.getRingtoneDisplayValue(getActivity());
+		
+		notificationSoundText.setText(getActivity().getString(R.string.notification_sound_label) + " " + ringtone);
+	}
+
+	private void setNotificationDaysText(View view) {
+		TextView notificationDaysText = (TextView) view.findViewById(R.id.notification_days_label);
+		String days = SettingsUtils.getDaysDisplayValue(getActivity());
+		
+		notificationDaysText.setText(getActivity().getString(R.string.notification_days_label) + " " + days);
+	}
+
 	private void setNotificationTimeText(View view, SharedPreferences pref) {
 		TextView noificationTimeText = (TextView) view.findViewById(R.id.notification_time_label);
-		String time = Utils.formatTime(pref.getString(Preferences.PREF_NOTIFICATION_TIME, "12:00"));
+		String time = SettingsUtils.getTimeDisplayValue(getActivity());
 		
 		noificationTimeText.setText(getActivity().getString(R.string.notification_time_label) + " " + time);
 	}

@@ -10,6 +10,7 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.skylark95.amazonfreenotify.ui.actions.ButtonMenuActions;
+import com.skylark95.amazonfreenotify.ui.settings.Preferences;
 import com.skylark95.amazonfreenotify.ui.tabs.AboutFragment;
 import com.skylark95.amazonfreenotify.ui.tabs.DonateFragment;
 import com.skylark95.amazonfreenotify.ui.tabs.SettingsFragment;
@@ -31,7 +32,8 @@ public class AmazonAppNotifier extends SherlockFragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_amazon_app_notifier);		
+		Preferences.setDefaultValues(this);
+		setContentView(R.layout.activity_amazon_app_notifier);	
 		
 		tabHost = (TabHost) findViewById(android.R.id.tabhost);
 		tabHost.setup();

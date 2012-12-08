@@ -10,21 +10,22 @@
             android:summary="@string/pref_enabled_summ"
             android:title="@string/pref_enabled" />
 
-        <com.skylark95.amazonfreenotify.ui.settings.TimePickerPreference
+        <apt.tutorial.TimePreference
             android:defaultValue="12:00"
             android:dialogTitle="@string/pref_notification_time"
             android:key="pref_notification_time"
             android:summary="@string/pref_notification_time_summ"
             android:title="@string/pref_notification_time" />
 
-        <MultiSelectListPreference
-            android:defaultValue="@array/pref_notification_days_values"
-            android:dialogTitle="@string/pref_notification_days"
-            android:entries="@array/pref_notification_days_entries"
-            android:entryValues="@array/pref_notification_days_values"
-            android:key="pref_notification_days"
-            android:summary="@string/pref_notification_days_summ"
-            android:title="@string/pref_notification_days" />
+        <Preference
+            android:key="pref_notification_days_screen"
+            android:summary="@string/pref_notification_days_screen_summ"
+            android:title="@string/pref_notification_days_screen" >
+            <intent 
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="com.skylark95.amazonfreenotify"
+                android:targetClass="com.skylark95.amazonfreenotify.ui.settings.PrefNotificationDays" />
+        </Preference>
 
         <RingtonePreference
             android:defaultValue="content://settings/system/notification_sound"
