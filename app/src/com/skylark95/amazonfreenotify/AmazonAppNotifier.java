@@ -2,18 +2,21 @@ package com.skylark95.amazonfreenotify;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.widget.TabHost;
 
+import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.sample.fragments.TabsAdapter;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.skylark95.amazonfreenotify.ui.actions.ButtonMenuActions;
 import com.skylark95.amazonfreenotify.ui.settings.Preferences;
 import com.skylark95.amazonfreenotify.ui.tabs.AboutFragment;
 import com.skylark95.amazonfreenotify.ui.tabs.DonateFragment;
 import com.skylark95.amazonfreenotify.ui.tabs.SettingsFragment;
+import com.skylark95.amazonfreenotify.ui.util.ButtonMenuActions;
+import com.skylark95.amazonfreenotify.util.Logger;
 
 /**
  * Main Activity for Amazon App Notifier
@@ -22,40 +25,43 @@ import com.skylark95.amazonfreenotify.ui.tabs.SettingsFragment;
  */
 public class AmazonAppNotifier extends SherlockFragmentActivity {
 	
-	private TabHost tabHost;
 	private ViewPager viewPager;
 	private TabsAdapter tabsAdapter;
-	private ButtonMenuActions menuActions;
 	
-	private static final String TAB_KEY = "tab";
+	private static final String TAB_KEY = "tab_position";	
+	private static final String TAG = Logger.getTag(AmazonAppNotifier.class);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.v(TAG, "ENTER - onCreate()");
 		Preferences.setDefaultValues(this);
 		setContentView(R.layout.activity_amazon_app_notifier);	
 		
-		tabHost = (TabHost) findViewById(android.R.id.tabhost);
-		tabHost.setup();
-		
+		buildTabs(savedInstanceState);		
+		Log.v(TAG, "EXIT - onCreate()");
+	}
+
+	private void buildTabs(Bundle savedInstanceState) {
+		ActionBar actionBar = getSupportActionBar();
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		viewPager = (ViewPager) findViewById(R.id.pager);
-		
-		tabsAdapter = new TabsAdapter(this, tabHost, viewPager);		
-		tabsAdapter.addTab(tabHost.newTabSpec("settings").setIndicator("Settings"), SettingsFragment.class, null);
-		tabsAdapter.addTab(tabHost.newTabSpec("about").setIndicator("About"), AboutFragment.class, null);
-		tabsAdapter.addTab(tabHost.newTabSpec("donate").setIndicator("Donate"), DonateFragment.class, null);
+		tabsAdapter = new TabsAdapter(this, viewPager);		
+		tabsAdapter.addTab(actionBar.newTab().setText("Settings"), SettingsFragment.class, null);
+		tabsAdapter.addTab(actionBar.newTab().setText("About"), AboutFragment.class, null);
+		tabsAdapter.addTab(actionBar.newTab().setText("Donate"), DonateFragment.class, null);
 		
 		if (savedInstanceState != null) {
-	        tabHost.setCurrentTabByTag(savedInstanceState.getString(TAB_KEY));
+			Log.v(TAG, "Restoring tab state");
+			actionBar.getTabAt(savedInstanceState.getInt(TAB_KEY)).select();
 	    }
-		
-		menuActions = new ButtonMenuActions();
 	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 	    super.onSaveInstanceState(outState);
-	    outState.putString(TAB_KEY, tabHost.getCurrentTabTag());
+	    Log.v(TAG, "Saving tab state");
+	    outState.putInt(TAB_KEY, getSupportActionBar().getSelectedTab().getPosition());
 	}
 	
 	@Override
@@ -69,13 +75,16 @@ public class AmazonAppNotifier extends SherlockFragmentActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {		
 		switch (item.getItemId()) {
 		case R.id.menu_donate:
-			tabHost.setCurrentTabByTag("donate");
+			Log.v(TAG, "MENU - Donate");
+			getSupportActionBar().getTabAt(getSupportActionBar().getTabCount() - 1).select();
 			return true;
 		case R.id.menu_change_settings:
-			menuActions.launchPreferences(this);
+			Log.v(TAG, "MENU - Change Settings");
+			ButtonMenuActions.launchPreferences(this);
 			return true;
 		case R.id.menu_test_notification:
-			menuActions.testNotification(this);
+			Log.v(TAG, "MENU - Test Notification");
+			ButtonMenuActions.testNotification(this);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

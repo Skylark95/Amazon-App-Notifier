@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,13 +14,16 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.skylark95.amazonfreenotify.R;
-import com.skylark95.amazonfreenotify.ui.actions.ButtonMenuActions;
 import com.skylark95.amazonfreenotify.ui.settings.Preferences;
-import com.skylark95.amazonfreenotify.ui.settings.SettingsUtils;
+import com.skylark95.amazonfreenotify.ui.util.ButtonMenuActions;
+import com.skylark95.amazonfreenotify.ui.util.SettingsUtils;
+import com.skylark95.amazonfreenotify.util.Logger;
 
 public class SettingsFragment extends SherlockFragment {
 
 	private View settingsView;
+	
+	private static final String TAG = Logger.getTag(SettingsFragment.class);
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -28,36 +32,41 @@ public class SettingsFragment extends SherlockFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		Log.v(TAG, "ENTER - onCreateView()");
 		settingsView = inflater.inflate(R.layout.fragment_settings, container, false);
 		setupButtons(settingsView);
+		Log.v(TAG, "EXIT - onCreateView()");
 		return settingsView;
 	}
 	
 	@Override
 	public void onResume() {
 		super.onResume();
+		Log.v(TAG, "ENTER - onResume()");
 		refreshTextLabels(settingsView);
+		Log.v(TAG, "EXIT - onResume()");
 	}
 
-	private void setupButtons(View view) {
-		final ButtonMenuActions actions = new ButtonMenuActions();
-	
+	private void setupButtons(View view) {	
 		Button changeSettingsButton = (Button) view.findViewById(R.id.change_settings_button);
 		changeSettingsButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				actions.launchPreferences(getActivity());
+				Log.v(TAG, "BUTTON - Change Settings");
+				ButtonMenuActions.launchPreferences(getActivity());
 			}
 		});
 	
 		Button testNotificationButton = (Button) view.findViewById(R.id.test_notification_button);
 		testNotificationButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				actions.testNotification(getActivity());
+				Log.v(TAG, "BUTTON - Test Notification");
+				ButtonMenuActions.testNotification(getActivity());
 			}
 		});
 	}
 
 	private void refreshTextLabels(View view) {
+		Log.v(TAG, "Refreshing Text Labels");
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
 		setNotificationsEnabledText(view, pref);
@@ -70,6 +79,7 @@ public class SettingsFragment extends SherlockFragment {
 		setVibrateText(view, pref);
 		setExpandedNotificationText(view, pref);
 		setNotifyForGamesText(view, pref);
+		Log.v(TAG, "DONE Refreshing Text Labels");
 	}
 
 	private void setNotificationSoundText(View view) {

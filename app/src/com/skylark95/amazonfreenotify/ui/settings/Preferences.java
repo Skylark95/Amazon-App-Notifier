@@ -6,9 +6,12 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.skylark95.amazonfreenotify.R;
+import com.skylark95.amazonfreenotify.ui.util.SettingsUtils;
+import com.skylark95.amazonfreenotify.util.Logger;
 
 public class Preferences extends SherlockPreferenceActivity implements OnSharedPreferenceChangeListener {
 	
@@ -23,30 +26,39 @@ public class Preferences extends SherlockPreferenceActivity implements OnSharedP
 	public static final String PREF_EXPANDABLE_NOTIFICATION = "pref_expandable_notification";
 	public static final String PREF_NOTIFY_FOR_GAMES = "pref_notifiy_for_games";
 	
+	private static final String TAG = Logger.getTag(Preferences.class);
+	
 	public static void setDefaultValues(Context context) {
 		PreferenceManager.setDefaultValues(context, R.xml.preferences, false);
+		PrefNotificationDays.setDefaultValues(context);
 	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.v(TAG, "ENTER - onCreate()");
 		addPreferencesFromResource(R.xml.preferences);
 		setNotificationTimePrefSummary();
 		setNotificationSoundPrefSummary();
+		Log.v(TAG, "EXIT - onCreate()");
 	}
 
 	@Override
 	protected void onResume() {
 	    super.onResume();
+	    Log.v(TAG, "ENTER - onResume()");
 	    setNotificationDayPrefSummary();
 	    setNotificationSoundPrefSummary();
 	    getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+	    Log.v(TAG, "EXIT - onResume()");
 	}
 
 	@Override
 	protected void onPause() {
 	    super.onPause();
+	    Log.v(TAG, "ENTER - onPause()");
 	    getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
+	    Log.v(TAG, "EXIT - onPause()");
 	}
 
 	@Override
@@ -57,21 +69,27 @@ public class Preferences extends SherlockPreferenceActivity implements OnSharedP
 	}
 
 	private void setNotificationTimePrefSummary() {
+		Log.v(TAG, "Updating Time Preference Summary");
 		Preference notificationTimePref = findPreference(PREF_NOTIFICATION_TIME);
 		String notificationTimeSumm = getString(R.string.pref_notification_time_summ);
 		notificationTimePref.setSummary(String.format(notificationTimeSumm, SettingsUtils.getTimeDisplayValue(this)));
+		Log.v(TAG, "DONE Updating Time Preference Summary");
 	}
 	
 	private void setNotificationDayPrefSummary() {
+		Log.v(TAG, "Updating Days Preference Summary");
 		Preference notificationDayPrefScreen = findPreference(Preferences.PREF_NOTIFICATION_DAYS_SCREEN);		
 		String notificationDaySumm = getString(R.string.pref_notification_days_screen_summ);
 		notificationDayPrefScreen.setSummary(String.format(notificationDaySumm, SettingsUtils.getDaysDisplayValue(this)));
+		Log.v(TAG, "DONE Updating Days Preference Summary");
 	}
 
 	private void setNotificationSoundPrefSummary() {
+		Log.v(TAG, "Updating Notification Sound Preference Summary");
 		Preference notificationSoundPref = findPreference(PREF_NOTIFICATION_SOUND);
 		String notificationSoundSumm = getString(R.string.pref_notification_sound_summ);
-		notificationSoundPref.setSummary(String.format(notificationSoundSumm, SettingsUtils.getRingtoneDisplayValue(this)));		
+		notificationSoundPref.setSummary(String.format(notificationSoundSumm, SettingsUtils.getRingtoneDisplayValue(this)));
+		Log.v(TAG, "DONE Updating Notification Sound Preference Summary");
 	}
 	
 }

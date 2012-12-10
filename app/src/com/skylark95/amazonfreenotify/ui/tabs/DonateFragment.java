@@ -10,6 +10,7 @@ import com.skylark95.amazonfreenotify.R;
 
 public class DonateFragment extends SherlockFragment {
 	
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
