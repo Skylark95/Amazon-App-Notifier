@@ -4,6 +4,8 @@
     <string name="app_name">Amazon App Notifier</string>
 
     <!-- Dialogs -->
+    <string name="changelog_title">Changelog</string>
+    <string name="uk_users_title">UK Users</string>    
     <string name="close_button">Close</string>
 
     <!-- Setting Tab -->
@@ -60,7 +62,7 @@
     <string name="uk_users_button">UK Users</string>
 
     <!-- Donate Tab -->
-    <string name="donate_description_text">This app is and always will be free without ads.  If you would like support it\'s development send a donation!</string>
+    <string name="donate_description_text">This app is and always will be free without ads.  If you would like to support it\'s development send a donation!</string>
     <string name="donations_prompt">Select an amount</string>
     <string name="donate_button">Donate</string>
 

@@ -86,6 +86,14 @@ public class AmazonAppNotifier extends SherlockFragmentActivity {
 			Log.v(TAG, "MENU - Test Notification");
 			ButtonMenuActions.testNotification(this);
 			return true;
+		case R.id.menu_changelog:
+			Log.v(TAG, "MENU - Changelog");
+			ButtonMenuActions.showChangelog(getSupportFragmentManager());
+			return true;
+		case R.id.menu_uk_users:
+			Log.v(TAG, "MENU - UK Users");
+			ButtonMenuActions.showUkUsers(getSupportFragmentManager());
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}

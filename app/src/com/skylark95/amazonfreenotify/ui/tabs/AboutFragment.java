@@ -50,14 +50,22 @@ public class AboutFragment extends SherlockFragment {
 			}
 		});
 		
+		Button ukUsersButton = (Button) view.findViewById(R.id.uk_users_button);
+		ukUsersButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Log.v(TAG, "BUTTON - UK Users");
+				ButtonMenuActions.showUkUsers(getFragmentManager());
+			}
+		});
+		
 	}
 
 	private void setHtmlText(View view) {
 		Log.v(TAG, "Creating about_html view");
 		TextView aboutTextView = (TextView) view.findViewById(R.id.about_html);		
-		InputStream in = getActivity().getResources().openRawResource(R.raw.html_about);		
+		InputStream in = getSherlockActivity().getResources().openRawResource(R.raw.html_about);		
 		try {
-			HtmlUtil.createHtmlView(getActivity(), aboutTextView, in);
+			HtmlUtil.createHtmlView(getSherlockActivity(), aboutTextView, in);
 		} catch (IOException e) {
 			Log.e(TAG, "Could not read html file", e);
 		}
@@ -72,8 +80,8 @@ public class AboutFragment extends SherlockFragment {
 		Log.v(TAG, "Getting application version");
 		String result = "";
         try {
-            PackageManager manager = getActivity().getPackageManager();
-            PackageInfo info = manager.getPackageInfo(getActivity().getPackageName(), 0);
+            PackageManager manager = getSherlockActivity().getPackageManager();
+            PackageInfo info = manager.getPackageInfo(getSherlockActivity().getPackageName(), 0);
 
             result = info.versionName;
         } catch (NameNotFoundException e) {

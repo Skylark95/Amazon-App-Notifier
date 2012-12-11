@@ -52,7 +52,7 @@ public class SettingsFragment extends SherlockFragment {
 		changeSettingsButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Log.v(TAG, "BUTTON - Change Settings");
-				ButtonMenuActions.launchPreferences(getActivity());
+				ButtonMenuActions.launchPreferences(getSherlockActivity());
 			}
 		});
 	
@@ -60,14 +60,14 @@ public class SettingsFragment extends SherlockFragment {
 		testNotificationButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				Log.v(TAG, "BUTTON - Test Notification");
-				ButtonMenuActions.testNotification(getActivity());
+				ButtonMenuActions.testNotification(getSherlockActivity());
 			}
 		});
 	}
 
 	private void refreshTextLabels(View view) {
 		Log.v(TAG, "Refreshing Text Labels");
-		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
 
 		setNotificationsEnabledText(view, pref);
 		setNotificationTimeText(view, pref);
@@ -84,65 +84,65 @@ public class SettingsFragment extends SherlockFragment {
 
 	private void setNotificationSoundText(View view) {
 		TextView notificationSoundText = (TextView) view.findViewById(R.id.notification_sound_label);
-		String ringtone = SettingsUtils.getRingtoneDisplayValue(getActivity());
+		String ringtone = SettingsUtils.getRingtoneDisplayValue(getSherlockActivity());
 		
-		notificationSoundText.setText(getActivity().getString(R.string.notification_sound_label) + " " + ringtone);
+		notificationSoundText.setText(getSherlockActivity().getString(R.string.notification_sound_label) + " " + ringtone);
 	}
 
 	private void setNotificationDaysText(View view) {
 		TextView notificationDaysText = (TextView) view.findViewById(R.id.notification_days_label);
-		String days = SettingsUtils.getDaysDisplayValue(getActivity());
+		String days = SettingsUtils.getDaysDisplayValue(getSherlockActivity());
 		
-		notificationDaysText.setText(getActivity().getString(R.string.notification_days_label) + " " + days);
+		notificationDaysText.setText(getSherlockActivity().getString(R.string.notification_days_label) + " " + days);
 	}
 
 	private void setNotificationTimeText(View view, SharedPreferences pref) {
 		TextView noificationTimeText = (TextView) view.findViewById(R.id.notification_time_label);
-		String time = SettingsUtils.getTimeDisplayValue(getActivity());
+		String time = SettingsUtils.getTimeDisplayValue(getSherlockActivity());
 		
-		noificationTimeText.setText(getActivity().getString(R.string.notification_time_label) + " " + time);
+		noificationTimeText.setText(getSherlockActivity().getString(R.string.notification_time_label) + " " + time);
 	}
 
 	private void setNotifyForGamesText(View view, SharedPreferences pref) {
 		TextView notifyForGamesText = (TextView) view.findViewById(R.id.notifiy_for_games);
 		boolean notifyForGames = pref.getBoolean(Preferences.PREF_NOTIFY_FOR_GAMES, true);
 		
-		notifyForGamesText.setText(getActivity().getString(R.string.notifiy_for_games_label) + " " + booleanToYesNo(notifyForGames));
+		notifyForGamesText.setText(getSherlockActivity().getString(R.string.notifiy_for_games_label) + " " + booleanToYesNo(notifyForGames));
 	}
 
 	private void setExpandedNotificationText(View view, SharedPreferences pref) {
 		TextView expandedNotificationText = (TextView) view.findViewById(R.id.expandable_notification);
 		boolean expandedNotification = pref.getBoolean(Preferences.PREF_EXPANDABLE_NOTIFICATION, true);
 		
-		expandedNotificationText.setText(getActivity().getString(R.string.expandable_notification) + " " + booleanToYesNo(expandedNotification));
+		expandedNotificationText.setText(getSherlockActivity().getString(R.string.expandable_notification) + " " + booleanToYesNo(expandedNotification));
 	}
 
 	private void setVibrateText(View view, SharedPreferences pref) {
 		TextView vibrateText = (TextView) view.findViewById(R.id.vibrate_label);
 		boolean vibrate = pref.getBoolean(Preferences.PREF_VIBRATE, true);
 		
-		vibrateText.setText(getActivity().getString(R.string.vibrate_label) + " " + booleanToYesNo(vibrate));
+		vibrateText.setText(getSherlockActivity().getString(R.string.vibrate_label) + " " + booleanToYesNo(vibrate));
 	}
 
 	private void setPlayNotificationSoundText(View view, SharedPreferences pref) {
 		TextView playNotificationSoundText = (TextView) view.findViewById(R.id.play_notification_sound_label);
 		boolean playNofificationSound = pref.getBoolean(Preferences.PREF_PLAY_NOTIFICATION_SOUND, true);
 		
-		playNotificationSoundText.setText(getActivity().getString(R.string.play_notification_sound_label) + " " + booleanToYesNo(playNofificationSound));
+		playNotificationSoundText.setText(getSherlockActivity().getString(R.string.play_notification_sound_label) + " " + booleanToYesNo(playNofificationSound));
 	}
 
 	private void setShowOnBootText(View view, SharedPreferences pref) {
 		TextView showOnBootText = (TextView) view.findViewById(R.id.show_on_boot_label);
 		boolean showOnBoot = pref.getBoolean(Preferences.PREF_SHOW_ON_BOOT, true);
 		
-		showOnBootText.setText(getActivity().getString(R.string.show_on_boot_label) + " " + booleanToYesNo(showOnBoot));
+		showOnBootText.setText(getSherlockActivity().getString(R.string.show_on_boot_label) + " " + booleanToYesNo(showOnBoot));
 	}
 
 	private void setShowNamePriceText(View view, SharedPreferences pref) {
 		TextView showNamePriceText = (TextView) view.findViewById(R.id.show_name_price_label);
 		boolean showNamePrice = pref.getBoolean(Preferences.PREF_SHOW_NAME_PRICE, true);
 		
-		showNamePriceText.setText(getActivity().getString(R.string.show_name_price_label) + " " + booleanToYesNo(showNamePrice));
+		showNamePriceText.setText(getSherlockActivity().getString(R.string.show_name_price_label) + " " + booleanToYesNo(showNamePrice));
 	}
 
 	private void setNotificationsEnabledText(View view, SharedPreferences pref) {
@@ -155,7 +155,7 @@ public class SettingsFragment extends SherlockFragment {
 			notificationsEnabledText.setTextColor(Color.RED);
 		}		
 		
-		notificationsEnabledText.setText(getActivity().getString(R.string.notifications_enabled_label) + " " + booleanToYesNo(enabled));
+		notificationsEnabledText.setText(getSherlockActivity().getString(R.string.notifications_enabled_label) + " " + booleanToYesNo(enabled));
 	}
 
 	private String booleanToYesNo(boolean b) {

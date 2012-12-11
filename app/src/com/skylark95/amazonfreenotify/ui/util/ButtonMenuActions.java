@@ -2,13 +2,12 @@ package com.skylark95.amazonfreenotify.ui.util;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.skylark95.amazonfreenotify.R;
-import com.skylark95.amazonfreenotify.ui.dialog.ChangelogFragment;
+import com.skylark95.amazonfreenotify.ui.dialog.HtmlDialogFragment;
 import com.skylark95.amazonfreenotify.ui.settings.Preferences;
 
 public class ButtonMenuActions {
@@ -27,8 +26,13 @@ public class ButtonMenuActions {
 	}
 
 	public static void showChangelog(FragmentManager manager) {
-		SherlockDialogFragment changelog = new ChangelogFragment();
-		changelog.show(manager, "changelog");
+		SherlockDialogFragment dialog = HtmlDialogFragment.newInstance(R.string.changelog_title, R.raw.html_changelog);
+		dialog.show(manager, "changelog");
+	}
+	
+	public static void showUkUsers(FragmentManager manager) {
+		SherlockDialogFragment dialog = HtmlDialogFragment.newInstance(R.string.uk_users_title, R.raw.html_uk_users);
+		dialog.show(manager, "ukusers");
 	}
 
 }
