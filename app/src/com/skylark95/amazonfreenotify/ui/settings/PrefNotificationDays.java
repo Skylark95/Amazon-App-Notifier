@@ -3,9 +3,11 @@ package com.skylark95.amazonfreenotify.ui.settings;
 import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
 
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
+import com.actionbarsherlock.view.MenuItem;
 import com.skylark95.amazonfreenotify.R;
 import com.skylark95.amazonfreenotify.util.Logger;
 
@@ -30,7 +32,18 @@ public class PrefNotificationDays extends SherlockPreferenceActivity {
 		super.onCreate(savedInstanceState);
 		Log.v(TAG, "ENTER - onCreate()");
 		addPreferencesFromResource(R.xml.pref_notification_days);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		Log.v(TAG, "EXIT - onCreate()");
 	}
+	
+	@Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+        case android.R.id.home:
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 	
 }

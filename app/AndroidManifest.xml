@@ -25,17 +25,24 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.skylark95.amazonfreenotify.ui.settings.Preferences"
-            android:label="@string/title_activity_preference" >
+            android:label="@string/title_activity_preference" 
+            android:parentActivityName="com.skylark95.amazonfreenotify.AmazonAppNotifier" >
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.skylark95.amazonfreenotify.AmazonAppNotifier" />
         </activity>
         <activity
             android:name="com.skylark95.amazonfreenotify.ui.settings.PrefNotificationDays"
-            android:label="@string/pref_notification_days_screen" >
+            android:label="@string/pref_notification_days_screen"
+            android:parentActivityName="com.skylark95.amazonfreenotify.ui.settings.Preferences" >
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.skylark95.amazonfreenotify.ui.settings.Preferences" />
         </activity>
     </application>
 
