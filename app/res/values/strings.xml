@@ -3,6 +3,14 @@
 
     <string name="app_name">Amazon App Notifier</string>
 
+    <!-- Notification -->
+    <string name="app_store_package">com.amazon.venezia</string>
+    <string name="app_store_download_url">http://www.amazon.com/amazonappstoreapp</string>
+    <string name="notification_simple_title">Amazon Free App Notifier</string>
+    <string name="notification_simple_text">Click to launch the Amazon Appstore</string>
+    <string name="notification_simple_offline_text">Currently Offline: Cannot provide app data</string>
+    <string name="notification_simple_no_app_store_text">Click to download the Amazon Appstore</string>
+    
     <!-- Dialogs -->
     <string name="changelog_title">Changelog</string>
     <string name="uk_users_title">UK Users</string>    

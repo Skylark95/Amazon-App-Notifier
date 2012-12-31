@@ -44,6 +44,8 @@
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.skylark95.amazonfreenotify.ui.settings.Preferences" />
         </activity>
+        
+        <service android:name="com.skylark95.amazonfreenotify.service.FreeAppNotificationService" />
     </application>
 
 </manifest>

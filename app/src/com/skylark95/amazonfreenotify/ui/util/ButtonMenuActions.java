@@ -6,7 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
+import com.commonsware.cwac.wakeful.WakefulIntentService;
 import com.skylark95.amazonfreenotify.R;
+import com.skylark95.amazonfreenotify.service.FreeAppNotificationService;
 import com.skylark95.amazonfreenotify.ui.dialog.HtmlDialogFragment;
 import com.skylark95.amazonfreenotify.ui.settings.Preferences;
 
@@ -21,8 +23,7 @@ public class ButtonMenuActions {
 
 	public static void testNotification(Context context) {
 		Toast.makeText(context, R.string.test_notification_toast, Toast.LENGTH_SHORT).show();
-		//TODO launch notification service on separate thread
-		Toast.makeText(context, "Just kidding. I still have to write that part.", Toast.LENGTH_SHORT).show();
+		WakefulIntentService.sendWakefulWork(context, FreeAppNotificationService.class);
 	}
 
 	public static void showChangelog(FragmentManager manager) {
