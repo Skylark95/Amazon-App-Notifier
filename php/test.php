@@ -1,10 +1,10 @@
 <?php
 
-include 'parser.php';
+include 'AppDataParser.php';
 
-$appData = parseAppData();
+$parser = new AppDataParser();
+$appData = $parser->parseToArray();
 
-echo '<b>appUrl:</b> ' . $appData->appUrl . '<br>';
-echo '<b>appTitle:</b> ' . $appData->appTitle . '<br>';
+echo json_encode($appData);
 
 ?>
