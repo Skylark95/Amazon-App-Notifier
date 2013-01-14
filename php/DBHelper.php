@@ -1,16 +1,14 @@
 <?php
 
-require 'Constants.php';
+require_once 'Constants.php';
+require_once 'DataAccessException.php';
 require 'p/DBConstants.php';
+
 
 class DBHelper {
 	
-	function insertAppData($appData) {		
-		$con = mysql_connect("localhost", DB_USER, DB_PASS);
-		if (!$con)
-		{
-			die('Could not connect: ' . mysql_error());
-		}
+	function insertTodaysAppData($appData) {		
+		$con = $this->getCon();
 		
 		mysql_select_db("skylarkn_amazonnotify_dev", $con);
 
@@ -21,14 +19,74 @@ class DBHelper {
 		$appCategory = mysql_real_escape_string($appData[APP_CATEGORY]);
 		$appDescription = mysql_real_escape_string($appData[APP_DESCRIPTION]);
 		
-		$query = mysql_query("INSERT INTO FREE_APP_OF_DAY (APP_DATE, APP_URL, APP_TITLE, APP_DEVELOPER, APP_LIST_PRICE, APP_CATEGORY, APP_DESCRIPTION)
-			  		 VALUES (CURDATE(), '$appUrl', '$appTitle', '$appDeveloper', '$appListPrice', '$appCategory', '$appDescription')");
+		$result = mysql_query("INSERT INTO free_app_of_day (
+								app_date,
+								app_url,
+								app_title,
+								app_developer,
+								app_list_price,
+								app_category,
+								app_description)
+			  		 		  VALUES (
+								CURDATE(),
+								'$appUrl',
+								'$appTitle',
+								'$appDeveloper',
+								'$appListPrice',
+								'$appCategory',
+								'$appDescription'
+							  )");
 		
-		if(!$query) {
-			die('Could not insert: ' . mysql_error());
+		if(!$result) {
+			$message = 'Could not insert: ' . mysql_error();
+			mysql_close($con);
+			throw new DataAccessException($message);
 		}
 		
 		mysql_close($con);		
+	}
+	
+	function selectAppDataForDate($date) {
+		$con = $this->getCon();
+		
+		mysql_select_db("skylarkn_amazonnotify_dev", $con);
+		
+		$result = mysql_query("SELECT
+								app_date,
+								app_url,
+								app_title,
+								app_developer,
+								app_list_price,
+								app_category,
+								app_description
+							  FROM free_app_of_day
+							  WHERE app_date = '$date'");
+		
+		if(!$result) {
+			$message = 'Could not select: ' . mysql_error();
+			mysql_close($con);
+			throw new DataAccessException($message);			
+		}		
+		if (mysql_num_rows($result) == 0) {
+			$message = "No rows found for $date";
+			mysql_close($con);
+			throw new DataAccessException($message);
+		}
+		
+		$row = mysql_fetch_assoc($result);		
+		mysql_close($con);
+		
+		return $row;
+	}
+	
+	private function getCon() {
+		$con = mysql_connect("localhost", DB_USER, DB_PASS);
+		if (!$con)
+		{
+			$message = 'Could not connect: ' . mysql_error();
+			throw new DataAccessException($message);
+		}
+		return $con; 
 	}
 	
 }

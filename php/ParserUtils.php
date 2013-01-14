@@ -1,5 +1,7 @@
 <?php
 
+require_once 'libs/simple_html_dom.php';
+
 function getBucketByName($html, $name) {
 	$retVal = null;
 

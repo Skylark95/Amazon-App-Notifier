@@ -2,7 +2,7 @@
 
 require 'libs/simple_html_dom.php';
 require 'ParserUtils.php';
-require 'Constants.php';
+require_once 'Constants.php';
 
 class AppDataParser {
 
