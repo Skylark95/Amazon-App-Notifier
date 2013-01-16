@@ -1,8 +1,8 @@
 <?php
 
 require 'DataAccessException.php';
-require 'config/AppData.php';
 require 'config/DB.php';
+require_once 'config/AppData.php';
 
 class DBHelper {
 	

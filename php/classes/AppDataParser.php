@@ -1,6 +1,7 @@
 <?php
 
 require 'libs/simple_html_dom.php';
+require_once 'config/AppData.php';
 
 define("AMAZON_DOMAIN", "http://www.amazon.com");
 define("AMAZON_APPSTORE_URL", "http://www.amazon.com/mobile-apps/b?ie=UTF8&node=2350149011");
