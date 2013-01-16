@@ -19,6 +19,7 @@ gen/
 local.properties
 project.properties
 proguard-project.txt
+app/proguard/
 *.log
 
 # Eclipse project files
@@ -27,6 +28,7 @@ proguard-project.txt
 .checkstyle
 .settings/
 
-# Misc
-/php/p/
-/php/libs/
+# PHP
+/php/classes/libs/
+/php/classes/config/DB.php
+/php/.buildpath

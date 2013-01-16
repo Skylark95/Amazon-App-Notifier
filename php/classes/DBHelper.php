@@ -1,14 +1,15 @@
 <?php
 
-require_once 'Constants.php';
-require_once 'DataAccessException.php';
-require 'p/DBConstants.php';
-
+require 'DataAccessException.php';
+require 'config/AppData.php';
+require 'config/DB.php';
 
 class DBHelper {
 	
-	function insertTodaysAppData($appData) {		
-		$con = $this->getCon();
+	private function __construct() { }
+	
+	public static function insertTodaysAppData($appData) {
+		$con = DBHelper::getCon();
 		
 		mysql_select_db("skylarkn_amazonnotify_dev", $con);
 
@@ -46,8 +47,8 @@ class DBHelper {
 		mysql_close($con);		
 	}
 	
-	function selectAppDataForDate($date) {
-		$con = $this->getCon();
+	public static function selectAppDataForDate($date) {
+		$con = DBHelper::getCon();
 		
 		mysql_select_db("skylarkn_amazonnotify_dev", $con);
 		
@@ -79,8 +80,8 @@ class DBHelper {
 		return $row;
 	}
 	
-	private function getCon() {
-		$con = mysql_connect("localhost", DB_USER, DB_PASS);
+	private static function getCon() {
+		$con = mysql_connect(DB_HOST, DB_USER, DB_PASS);
 		if (!$con)
 		{
 			$message = 'Could not connect: ' . mysql_error();
