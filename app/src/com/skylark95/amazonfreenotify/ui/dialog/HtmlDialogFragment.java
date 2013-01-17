@@ -1,13 +1,11 @@
 package com.skylark95.amazonfreenotify.ui.dialog;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Scroller;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
@@ -39,13 +37,13 @@ public class HtmlDialogFragment extends SherlockDialogFragment {
 	}
 
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		InputStream in = getSherlockActivity().getResources().openRawResource(getArguments().getInt(KEY_HTML));
+		String html = getSherlockActivity().getResources().getString(getArguments().getInt(KEY_HTML));
 		TextView textView = new TextView(getSherlockActivity());
 		textView.setTextSize(15);
 		textView.setPadding(20, 20, 20, 20);
 		
 		try {
-			HtmlUtil.createHtmlView(getSherlockActivity(), textView, in);
+			HtmlUtil.createHtmlView(getSherlockActivity(), textView, html);
 		} catch (IOException e) {
 			Log.e(TAG, "Could not create html view for dialog", e);
 		}

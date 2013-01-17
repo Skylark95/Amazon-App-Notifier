@@ -27,12 +27,12 @@ public class ButtonMenuActions {
 	}
 
 	public static void showChangelog(FragmentManager manager) {
-		SherlockDialogFragment dialog = HtmlDialogFragment.newInstance(R.string.changelog_title, R.raw.html_changelog);
+		SherlockDialogFragment dialog = HtmlDialogFragment.newInstance(R.string.changelog_title, R.string.html_changelog);
 		dialog.show(manager, "changelog");
 	}
 	
 	public static void showUkUsers(FragmentManager manager) {
-		SherlockDialogFragment dialog = HtmlDialogFragment.newInstance(R.string.uk_users_title, R.raw.html_uk_users);
+		SherlockDialogFragment dialog = HtmlDialogFragment.newInstance(R.string.uk_users_title, R.string.html_uk_users);
 		dialog.show(manager, "ukusers");
 	}
 

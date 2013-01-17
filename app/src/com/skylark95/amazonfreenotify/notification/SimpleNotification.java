@@ -8,7 +8,7 @@ import android.support.v4.app.NotificationCompat;
 
 import com.skylark95.amazonfreenotify.R;
 
-public class SimpleFreeAppNotification implements FreeAppNotification {
+public class SimpleNotification implements FreeAppNotification {
 	
 	private Context context;
 	private Intent intent;
@@ -16,7 +16,7 @@ public class SimpleFreeAppNotification implements FreeAppNotification {
 	
 	private static final int ID = 1;
 	
-	public SimpleFreeAppNotification(Context context, Intent intent, String text) {
+	public SimpleNotification(Context context, Intent intent, String text) {
 		this.context = context;
 		this.intent = intent;
 		this.text = text;

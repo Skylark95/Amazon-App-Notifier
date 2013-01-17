@@ -1,43 +1,68 @@
 package com.skylark95.amazonfreenotify.beans;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class FreeAppData {
 
-	private String appName;
-	private String appAuthor;
-	private String appPrice;
-	private String appDescription;
+	@JsonProperty("app_date")
+	private String appDate;
+	
+	@JsonProperty("app_url")
+	private String appUrl;
+	
+	@JsonProperty("app_title")
+	private String appTitle;
+	
+	@JsonProperty("app_developer")
+	private String appDeveloper;
+	
+	@JsonProperty("app_list_price")
+	private String appListPrice;
+	
+	@JsonProperty("app_category")
 	private String appCategory;
+	
+	@JsonProperty("app_description")
+	private String appDescription;
 
-	public String getAppName() {
-		return appName;
+	public String getAppDate() {
+		return appDate;
 	}
 
-	public void setAppName(String appName) {
-		this.appName = appName;
+	public void setAppDate(String appDate) {
+		this.appDate = appDate;
 	}
 
-	public String getAppAuthor() {
-		return appAuthor;
+	public String getAppUrl() {
+		return appUrl;
 	}
 
-	public void setAppAuthor(String appAuthor) {
-		this.appAuthor = appAuthor;
+	public void setAppUrl(String appUrl) {
+		this.appUrl = appUrl;
 	}
 
-	public String getAppPrice() {
-		return appPrice;
+	public String getAppTitle() {
+		return appTitle;
 	}
 
-	public void setAppPrice(String appPrice) {
-		this.appPrice = appPrice;
+	public void setAppTitle(String appTitle) {
+		this.appTitle = appTitle;
 	}
 
-	public String getAppDescription() {
-		return appDescription;
+	public String getAppDeveloper() {
+		return appDeveloper;
 	}
 
-	public void setAppDescription(String appDescription) {
-		this.appDescription = appDescription;
+	public void setAppDeveloper(String appDeveloper) {
+		this.appDeveloper = appDeveloper;
+	}
+
+	public String getAppListPrice() {
+		return appListPrice;
+	}
+
+	public void setAppListPrice(String appListPrice) {
+		this.appListPrice = appListPrice;
 	}
 
 	public String getAppCategory() {
@@ -46,6 +71,14 @@ public class FreeAppData {
 
 	public void setAppCategory(String appCategory) {
 		this.appCategory = appCategory;
+	}
+
+	public String getAppDescription() {
+		return appDescription;
+	}
+
+	public void setAppDescription(String appDescription) {
+		this.appDescription = appDescription;
 	}
 
 }

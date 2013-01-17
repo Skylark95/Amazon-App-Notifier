@@ -1,7 +1,6 @@
 package com.skylark95.amazonfreenotify.ui.tabs;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -62,10 +61,9 @@ public class AboutFragment extends SherlockFragment {
 
 	private void setHtmlText(View view) {
 		Log.v(TAG, "Creating about_html view");
-		TextView aboutTextView = (TextView) view.findViewById(R.id.about_html);		
-		InputStream in = getSherlockActivity().getResources().openRawResource(R.raw.html_about);		
+		TextView aboutTextView = (TextView) view.findViewById(R.id.about_html);			
 		try {
-			HtmlUtil.createHtmlView(getSherlockActivity(), aboutTextView, in);
+			HtmlUtil.createHtmlView(getSherlockActivity(), aboutTextView, getString(R.string.html_about));
 		} catch (IOException e) {
 			Log.e(TAG, "Could not read html file", e);
 		}

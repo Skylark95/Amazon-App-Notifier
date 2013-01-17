@@ -1,9 +1,11 @@
 package com.skylark95.amazonfreenotify.ui.util;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,19 +14,17 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.skylark95.amazonfreenotify.ui.settings.PrefNotificationDays;
 import com.skylark95.amazonfreenotify.ui.settings.Preferences;
 
 
 public class SettingsUtils {
 	
-	private static final Set<String> WEEKDAYS = ImmutableSet.of("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
-	private static final Set<String> WEEKEND =  ImmutableSet.of("Saturday", "Sunday");	
+	private static final List<String> WEEKDAYS = Arrays.asList(new String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"});
+	private static final List<String> WEEKEND = Arrays.asList(new String[] {"Saturday", "Sunday"});	
+	
+	private SettingsUtils() {
+	}
 	
 	public static String getTimeDisplayValue(Context context) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -51,7 +51,7 @@ public class SettingsUtils {
 	
 	public static String getDaysDisplayValue(Context context) {		
 		Map<String, Boolean> notificationDayPrefs = loadNotificationDays(context);
-		List<String> days = Lists.newArrayList();
+		List<String> days = new ArrayList<String>();
 		
 		for (Map.Entry<String, Boolean> preference : notificationDayPrefs.entrySet()) {
 			if (preference.getValue()) {
@@ -100,7 +100,7 @@ public class SettingsUtils {
 	}
 
 	private static List<String> getAbbrDays(List<String> days) {
-		List<String> abbrDays = Lists.newArrayList();
+		List<String> abbrDays = new ArrayList<String>();
 		if (days.contains("Sunday")) {
 			abbrDays.add("Sun");
 		}
@@ -122,11 +122,11 @@ public class SettingsUtils {
 		if (days.contains("Saturday")) {
 			abbrDays.add("Sat");
 		}
-		return ImmutableList.copyOf(abbrDays);
+		return abbrDays;
 	}
 	
 	private static Map<String, Boolean> loadNotificationDays(Context context) {
-		Map<String, Boolean> notificationDays = Maps.newHashMap();
+		Map<String, Boolean> notificationDays = new HashMap<String, Boolean>();
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		notificationDays.put("Sunday", prefs.getBoolean(PrefNotificationDays.PREF_NOTIFICATION_DAYS_SUNDAY, true));		
 		notificationDays.put("Monday", prefs.getBoolean(PrefNotificationDays.PREF_NOTIFICATION_DAYS_MONDAY, true));		
@@ -135,7 +135,7 @@ public class SettingsUtils {
 		notificationDays.put("Thursday", prefs.getBoolean(PrefNotificationDays.PREF_NOTIFICATION_DAYS_THURSDAY, true));		
 		notificationDays.put("Friday", prefs.getBoolean(PrefNotificationDays.PREF_NOTIFICATION_DAYS_FRIDAY, true));		
 		notificationDays.put("Saturday", prefs.getBoolean(PrefNotificationDays.PREF_NOTIFICATION_DAYS_SATURDAY, true));		
-		return ImmutableMap.copyOf(notificationDays);
+		return notificationDays;
 	}
 
 }
