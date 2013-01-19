@@ -44,15 +44,6 @@ public abstract class FreeAppNotification {
 		return builder;
 	}
 
-	protected void addTickerText(Builder builder, String contentTitle, String contentText) {
-		StringBuilder sb = new StringBuilder()
-			.append(contentTitle)
-			.append("\n")
-			.append(contentText);
-		
-		builder.setTicker(sb.toString());		
-	}
-
 	private void addSound(NotificationCompat.Builder builder) {
 		Uri sound = getSound();
 		if (sound != null && isSound()) {

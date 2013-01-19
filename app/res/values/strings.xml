@@ -10,6 +10,7 @@
     
     <string name="notification_simple_title">Amazon Free App Notifier</string>
     <string name="notification_simple_text">Click to launch the Amazon Appstore</string>
+    <string name="notification_error_text">Error Downloading Data</string>
     <string name="notification_simple_offline_text">Device is currently offline</string>
     <string name="notification_simple_no_app_store_text">Click to download the Amazon Appstore</string>
     

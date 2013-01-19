@@ -2,7 +2,9 @@ package com.skylark95.amazonfreenotify.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
@@ -41,8 +43,14 @@ public class Preferences extends SherlockPreferenceActivity implements OnSharedP
 		Log.v(TAG, "ENTER - onCreate()");
 		addPreferencesFromResource(R.xml.preferences);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		
 		setNotificationTimePrefSummary();
 		setNotificationSoundPrefSummary();
+		
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+			findPreference(PREF_EXPANDABLE_NOTIFICATION).setEnabled(false);
+		}
+		
 		Log.v(TAG, "EXIT - onCreate()");
 	}
 	

@@ -17,16 +17,6 @@
             android:summary="@string/pref_notification_time_summ"
             android:title="@string/pref_notification_time" />
 
-        <Preference
-            android:key="pref_notification_days_screen"
-            android:summary="@string/pref_notification_days_screen_summ"
-            android:title="@string/pref_notification_days_screen" >
-            <intent 
-                android:action="android.intent.action.VIEW"
-                android:targetPackage="com.skylark95.amazonfreenotify"
-                android:targetClass="com.skylark95.amazonfreenotify.settings.PrefNotificationDays" />
-        </Preference>
-
         <RingtonePreference
             android:defaultValue="content://settings/system/notification_sound"
             android:dialogTitle="@string/pref_notification_sound"
@@ -36,6 +26,17 @@
             android:showSilent="false"
             android:summary="@string/pref_notification_sound_summ"
             android:title="@string/pref_notification_sound" />
+        
+        <Preference
+            android:key="pref_notification_days_screen"
+            android:summary="@string/pref_notification_days_screen_summ"
+            android:title="@string/pref_notification_days_screen" >
+            <intent 
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="com.skylark95.amazonfreenotify"
+                android:targetClass="com.skylark95.amazonfreenotify.settings.PrefNotificationDays" />
+        </Preference>
+        
     </PreferenceCategory>
     <PreferenceCategory
         android:key="pref_advanced_settings_title"
@@ -62,14 +63,14 @@
             android:title="@string/pref_vibrate" />
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="pref_expandable_notification"
-            android:summary="@string/pref_expandable_notification_summ"
-            android:title="@string/pref_expandable_notification" />
-        <CheckBoxPreference
-            android:defaultValue="true"
             android:key="pref_notifiy_for_games"
             android:summary="@string/pref_notifiy_for_games_summ"
             android:title="@string/pref_notifiy_for_games" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_expandable_notification"
+            android:summary="@string/pref_expandable_notification_summ"
+            android:title="@string/pref_expandable_notification" />
     </PreferenceCategory>
 
 </PreferenceScreen>
