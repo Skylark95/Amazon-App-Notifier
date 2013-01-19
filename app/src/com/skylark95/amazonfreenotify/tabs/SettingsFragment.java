@@ -1,4 +1,4 @@
-package com.skylark95.amazonfreenotify.ui.tabs;
+package com.skylark95.amazonfreenotify.tabs;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -14,10 +14,10 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.skylark95.amazonfreenotify.R;
-import com.skylark95.amazonfreenotify.ui.settings.Preferences;
-import com.skylark95.amazonfreenotify.ui.util.ButtonMenuActions;
-import com.skylark95.amazonfreenotify.ui.util.SettingsUtils;
+import com.skylark95.amazonfreenotify.settings.Preferences;
+import com.skylark95.amazonfreenotify.util.ButtonMenuActions;
 import com.skylark95.amazonfreenotify.util.Logger;
+import com.skylark95.amazonfreenotify.util.SettingsUtils;
 
 public class SettingsFragment extends SherlockFragment {
 

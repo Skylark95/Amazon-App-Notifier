@@ -1,4 +1,4 @@
-package com.skylark95.amazonfreenotify.ui.tabs;
+package com.skylark95.amazonfreenotify.tabs;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

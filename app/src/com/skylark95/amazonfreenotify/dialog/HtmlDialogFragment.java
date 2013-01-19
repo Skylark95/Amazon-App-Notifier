@@ -1,4 +1,4 @@
-package com.skylark95.amazonfreenotify.ui.dialog;
+package com.skylark95.amazonfreenotify.dialog;
 
 import java.io.IOException;
 
@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.skylark95.amazonfreenotify.R;
-import com.skylark95.amazonfreenotify.ui.util.HtmlUtil;
+import com.skylark95.amazonfreenotify.util.HtmlUtil;
 import com.skylark95.amazonfreenotify.util.Logger;
 
 public class HtmlDialogFragment extends SherlockDialogFragment {

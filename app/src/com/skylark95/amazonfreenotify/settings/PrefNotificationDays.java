@@ -1,4 +1,4 @@
-package com.skylark95.amazonfreenotify.ui.settings;
+package com.skylark95.amazonfreenotify.settings;
 
 import android.content.Context;
 import android.os.Bundle;

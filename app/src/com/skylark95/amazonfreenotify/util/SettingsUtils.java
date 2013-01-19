@@ -1,4 +1,4 @@
-package com.skylark95.amazonfreenotify.ui.util;
+package com.skylark95.amazonfreenotify.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,8 +14,8 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 
-import com.skylark95.amazonfreenotify.ui.settings.PrefNotificationDays;
-import com.skylark95.amazonfreenotify.ui.settings.Preferences;
+import com.skylark95.amazonfreenotify.settings.PrefNotificationDays;
+import com.skylark95.amazonfreenotify.settings.Preferences;
 
 
 public class SettingsUtils {

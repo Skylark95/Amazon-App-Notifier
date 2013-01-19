@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="html_about">
+        <![CDATA[
+        <html>
+		<head>
+		</head>
+		<body>
+			Amazon App Notifier is a free and <a href="https://github.com/Skylark95/Amazon-App-Notifier">open source</a> notification manager for providing 
+			notifications for the free app of the day on the <a href="http://www.amazon.com/gp/mas/get-appstore/android">Amazon Appstore.</a><br/>
+			<br/>
+			Developer: Skylark95<br/>
+			Contact: skylark95atc@gmail.com<br/>
+			Website: <a href="http://www.skylark95.com/">http://www.skylark95.com/</a><br/>
+			<br/>
+			Thanks to the following open source projects:<br/>
+			&#8226; <a href="http://actionbarsherlock.com/">ActionBarSherlock</a><br/>
+			&#8226; <a href="http://commonsware.com/cwac">CommonsWare Android Components</a><br/>
+			&#8226; <a href="http://wiki.fasterxml.com/JacksonHome">Jackson JSON Processor</a><br/>
+		</body>
+		</html>
+        ]]>
+    </string>
+    <string name="html_changelog">
+        <![CDATA[
+        <html>
+		<head>
+		</head>
+		<body>
+			<b>Version 2.0 - TBD</b><br/>
+				Completely rewritten with new UI and open source<br/>
+				<br/>
+			<b>Version 1.0.3 - 9/21/2012</b><br/>
+				If Appstore not found on phone, clicking notification redirects to download page<br/>
+				<br/>
+				Fix startup crash on some phones<br/>
+				<br/>
+			<b>Version 1.0.2 - 9/21/2012</b><br/>
+				Added Option to disable vibrate<br/>
+				<br/>
+			<b>Version 1.0.1 - 08/13/2012</b><br/>	
+				Fixed notifications not appearing on some phones (4.0 ICS, 4.1 Jelly Bean)<br/>
+				<br/>
+				Increased timeout for reading app name and price to 30 seconds (Less error downloading data messages on a slow connection)<br/>
+				<br/>
+				Fixed notification so when clicked on it launches the appstore on the main store page instead of the last open view (Get to downloading your free app faster!)<br/>
+				<br/>
+				 Works great on my new Nexus 7! :)<br/>
+				<br/>
+			<b>Version 1.0 - 05/16/2012</b><br/>
+				Initial release
+		</body>
+		</html>
+        ]]>
+    </string>
+    <string name="html_uk_users">
+        <![CDATA[
+        <html>
+		<head>
+		</head>
+		<body>
+		    <p>Currently this app only gives notifications for what the free app of the day is in the US.</p>
+		    <p>I have been working on adding an option to read what the UK free app of the day is. One problem I am facing right now though is 
+		    where to pull the data for UK\'s free app of the day from.</p>
+		    
+		    <p>Right now the free app info for the US is pulled from this page...<br/>
+		    <a href="http://www.amazon.com/mobile-apps/b?ie=UTF8&amp;node=2350149011">http://www.amazon.com/mobile-apps/b?ie=UTF8&amp;node=2350149011</a></p>
+		    
+		    <p>Problem is that amazon has not seem to have implemented the appstore into the UK domain <a href="http://www.amazon.co.uk/">amazon.co.uk</a>.
+		    Until I can do a search for apps on the amazon UK domain, I don\'t yet have a solid way to pull info for the free 
+		    app of the day in the UK.</p>
+		    
+		    <p>If you know somewhere where I can look up what the free app of the day is in the UK outside of the appstore app let me know by sending me 
+		    an email at skylark95atc@gmail.com or submitting an enhancement at <a href="https://github.com/Skylark95/Amazon-App-Notifier/issues/">my page on GitHub</a> 
+		    with the details.</p>
+		    
+		    <p>Many users have been requesting this feature and I would like to get it added</p>
+		    
+		    Thanks!<br/>
+		    <b>Sky</b>
+		</body>
+		</html>
+        ]]>
+    </string>
+    
+</resources>

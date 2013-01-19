@@ -1,4 +1,4 @@
-package com.skylark95.amazonfreenotify.ui.util;
+package com.skylark95.amazonfreenotify.util;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,9 +8,9 @@ import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.commonsware.cwac.wakeful.WakefulIntentService;
 import com.skylark95.amazonfreenotify.R;
+import com.skylark95.amazonfreenotify.dialog.HtmlDialogFragment;
 import com.skylark95.amazonfreenotify.service.FreeAppNotificationService;
-import com.skylark95.amazonfreenotify.ui.dialog.HtmlDialogFragment;
-import com.skylark95.amazonfreenotify.ui.settings.Preferences;
+import com.skylark95.amazonfreenotify.settings.Preferences;
 
 public class ButtonMenuActions {
 	

@@ -1,4 +1,4 @@
-package com.skylark95.amazonfreenotify.ui.tabs;
+package com.skylark95.amazonfreenotify.tabs;
 
 import java.io.IOException;
 
@@ -16,8 +16,8 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.skylark95.amazonfreenotify.R;
-import com.skylark95.amazonfreenotify.ui.util.ButtonMenuActions;
-import com.skylark95.amazonfreenotify.ui.util.HtmlUtil;
+import com.skylark95.amazonfreenotify.util.ButtonMenuActions;
+import com.skylark95.amazonfreenotify.util.HtmlUtil;
 import com.skylark95.amazonfreenotify.util.Logger;
 
 public class AboutFragment extends SherlockFragment {

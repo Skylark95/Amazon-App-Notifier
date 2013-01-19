@@ -1,4 +1,4 @@
-package com.skylark95.amazonfreenotify.ui.util;
+package com.skylark95.amazonfreenotify.util;
 
 import java.io.IOException;
 

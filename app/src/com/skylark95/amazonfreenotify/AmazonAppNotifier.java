@@ -10,11 +10,11 @@ import com.actionbarsherlock.sample.fragments.TabsAdapter;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.skylark95.amazonfreenotify.ui.settings.Preferences;
-import com.skylark95.amazonfreenotify.ui.tabs.AboutFragment;
-import com.skylark95.amazonfreenotify.ui.tabs.DonateFragment;
-import com.skylark95.amazonfreenotify.ui.tabs.SettingsFragment;
-import com.skylark95.amazonfreenotify.ui.util.ButtonMenuActions;
+import com.skylark95.amazonfreenotify.settings.Preferences;
+import com.skylark95.amazonfreenotify.tabs.AboutFragment;
+import com.skylark95.amazonfreenotify.tabs.DonateFragment;
+import com.skylark95.amazonfreenotify.tabs.SettingsFragment;
+import com.skylark95.amazonfreenotify.util.ButtonMenuActions;
 import com.skylark95.amazonfreenotify.util.Logger;
 
 /**

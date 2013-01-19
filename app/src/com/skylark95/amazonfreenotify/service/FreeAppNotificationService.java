@@ -19,8 +19,8 @@ public class FreeAppNotificationService extends WakefulIntentService {
 	@Override
 	protected void doWakefulWork(Intent intent) {
 		Log.v(TAG, "Enter - doWakefulWork()");
-		FreeAppNotification notification = FreeAppNotificationFactory.build(this);
-		notification.show();
+		FreeAppNotification notification = FreeAppNotificationFactory.buildNotification(this);
+		notification.showNotification();
 		Log.v(TAG, "EXIT - doWakefulWork()");
 	}
 

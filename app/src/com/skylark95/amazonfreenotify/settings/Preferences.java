@@ -1,4 +1,4 @@
-package com.skylark95.amazonfreenotify.ui.settings;
+package com.skylark95.amazonfreenotify.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -12,8 +12,8 @@ import android.util.Log;
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.skylark95.amazonfreenotify.R;
-import com.skylark95.amazonfreenotify.ui.util.SettingsUtils;
 import com.skylark95.amazonfreenotify.util.Logger;
+import com.skylark95.amazonfreenotify.util.SettingsUtils;
 
 public class Preferences extends SherlockPreferenceActivity implements OnSharedPreferenceChangeListener {
 	
