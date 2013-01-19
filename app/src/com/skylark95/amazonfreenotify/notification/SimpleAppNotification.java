@@ -4,7 +4,6 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationCompat.Builder;
 
 import com.skylark95.amazonfreenotify.R;
 
@@ -38,7 +37,7 @@ public class SimpleAppNotification extends FreeAppNotification {
 	private String buildTickerText() {
 		return new StringBuilder()
 			.append(contentTitle)
-			.append("\n")
+			.append('\n')
 			.append(contentText)
 			.toString();
 	}

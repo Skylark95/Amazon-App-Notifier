@@ -17,6 +17,8 @@ public class HtmlDialogFragment extends SherlockDialogFragment {
 
 	private static final String KEY_TITLE = "title";
 	private static final String KEY_HTML = "html";
+	private static final int TEXT_SIZE = 15;
+	private static final int PADDING = 20;
 	
 	private static final String TAG = Logger.getTag(HtmlDialogFragment.class);
 	
@@ -39,8 +41,8 @@ public class HtmlDialogFragment extends SherlockDialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		String html = getSherlockActivity().getResources().getString(getArguments().getInt(KEY_HTML));
 		TextView textView = new TextView(getSherlockActivity());
-		textView.setTextSize(15);
-		textView.setPadding(20, 20, 20, 20);
+		textView.setTextSize(TEXT_SIZE);
+		textView.setPadding(PADDING, PADDING, PADDING, PADDING);
 		
 		try {
 			HtmlUtil.createHtmlView(getSherlockActivity(), textView, html);

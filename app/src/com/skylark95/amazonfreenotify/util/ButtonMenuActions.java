@@ -12,9 +12,11 @@ import com.skylark95.amazonfreenotify.dialog.HtmlDialogFragment;
 import com.skylark95.amazonfreenotify.service.FreeAppNotificationService;
 import com.skylark95.amazonfreenotify.settings.Preferences;
 
-public class ButtonMenuActions {
+public final class ButtonMenuActions {
 	
-	private ButtonMenuActions() {}
+	private ButtonMenuActions() {
+	}
+	
 
 	public static void launchPreferences(Context context) {
 		Intent prefrences = new Intent(context, Preferences.class);

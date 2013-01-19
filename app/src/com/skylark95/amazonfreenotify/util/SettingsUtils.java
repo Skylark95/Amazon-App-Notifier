@@ -18,10 +18,15 @@ import com.skylark95.amazonfreenotify.settings.PrefNotificationDays;
 import com.skylark95.amazonfreenotify.settings.Preferences;
 
 
-public class SettingsUtils {
+public final class SettingsUtils {
 	
 	private static final List<String> WEEKDAYS = Arrays.asList(new String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"});
 	private static final List<String> WEEKEND = Arrays.asList(new String[] {"Saturday", "Sunday"});	
+	private static final int NOON_HOUR = 12;
+	private static final int MIDNIGHT_HOUR = 0;
+	private static final int NUM_DAYS_WEEK = 7;
+	private static final int NUM_DAYS_WEEKDAY = 5;
+	private static final int NUM_DAYS_WEEKEND = 2;
 	
 	private SettingsUtils() {
 	}
@@ -34,13 +39,13 @@ public class SettingsUtils {
 		String minute = split[1];
 		String amPm = "AM";
 		
-		if (hour == 0) {
-			hour = 12;
-		} else if (hour == 12) {
+		if (hour == MIDNIGHT_HOUR) {
+			hour = NOON_HOUR;
+		} else if (hour == NOON_HOUR) {
 			amPm = "PM";
-		} else if (hour > 12) {
+		} else if (hour > NOON_HOUR) {
 			amPm = "PM";
-			hour = hour - 12;
+			hour = hour - NOON_HOUR;
 		}
 		if (minute.length() == 1) {
 			minute = "0" + minute;
@@ -60,18 +65,18 @@ public class SettingsUtils {
 		}
 		
 		String summary;
-		if (days.size() == 7) {
+		if (days.size() == NUM_DAYS_WEEK) {
 			summary = "All";
-		} else if (days.size() == 5 && days.containsAll(WEEKDAYS)) {
+		} else if (days.size() == NUM_DAYS_WEEKDAY && days.containsAll(WEEKDAYS)) {
 			summary = "Weekdays";
-		} else if (days.size() == 2 && days.containsAll(WEEKEND)) {
+		} else if (days.size() == NUM_DAYS_WEEKEND && days.containsAll(WEEKEND)) {
 			summary = "Weekend";
-		} else if (days.size() > 0){
+		} else if (days.size() > 0) {
 			List<String> abbrDays = getAbbrDays(days);			
 			StringBuilder sb = new StringBuilder();
 			Iterator<String> iterator = abbrDays.iterator();
 			sb.append(iterator.next());
-			while(iterator.hasNext()) {
+			while (iterator.hasNext()) {
 				sb.append(", ");
 				sb.append(iterator.next());
 			}

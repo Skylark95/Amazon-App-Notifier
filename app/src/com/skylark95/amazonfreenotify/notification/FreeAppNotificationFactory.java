@@ -10,8 +10,6 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.skylark95.amazonfreenotify.R;
 import com.skylark95.amazonfreenotify.beans.AppDataResponse;
 import com.skylark95.amazonfreenotify.net.AppDataReader;
@@ -67,12 +65,6 @@ public final class FreeAppNotificationFactory {
 				PendingIntent storeDownloadLink = getAppStoreDownloadIntent(context);				
 				notification = new SimpleAppNotification(context, storeDownloadLink, title, text);
 			}
-		} catch (JsonParseException e) {
-			Log.e(TAG, "Download Error (JsonParseException): " + e.getMessage(), e);
-			notification = buildErrorNotification(context, appStore);
-		} catch (JsonMappingException e) {
-			Log.e(TAG, "Download Error (JsonMappingException): " + e.getMessage(), e);
-			notification = buildErrorNotification(context, appStore);
 		} catch (IOException e) {
 			Log.e(TAG, "Download Error (IOException): " + e.getMessage(), e);
 			notification = buildErrorNotification(context, appStore);

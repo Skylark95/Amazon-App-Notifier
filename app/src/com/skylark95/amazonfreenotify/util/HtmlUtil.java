@@ -7,7 +7,7 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
-public class HtmlUtil {
+public final class HtmlUtil {
 
 	private HtmlUtil() {
 	}

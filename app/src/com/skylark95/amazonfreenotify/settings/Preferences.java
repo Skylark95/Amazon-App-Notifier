@@ -2,7 +2,6 @@ package com.skylark95.amazonfreenotify.settings;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Build;
 import android.os.Bundle;
@@ -60,8 +59,10 @@ public class Preferences extends SherlockPreferenceActivity implements OnSharedP
         case android.R.id.home:
             NavUtils.navigateUpFromSameTask(this);
             return true;
+        default:
+        	return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+        
     }
 
 	@Override

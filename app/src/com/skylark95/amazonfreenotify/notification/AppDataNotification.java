@@ -50,7 +50,7 @@ public class AppDataNotification extends FreeAppNotification {
 	}
 
 	private void addText(NotificationCompat.Builder builder) {
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			builder.setContentText("By: " + freeAppData.getAppDeveloper());
 			builder.setContentInfo("List Price: " + freeAppData.getAppListPrice());
 		} else {
@@ -68,10 +68,10 @@ public class AppDataNotification extends FreeAppNotification {
 	private String buildTickerText() {
 		return new StringBuilder()
 			.append(freeAppData.getAppTitle())
-			.append("\n")
+			.append('\n')
 			.append("By: ")
 			.append(freeAppData.getAppDeveloper())
-			.append("\n")
+			.append('\n')
 			.append("List Price: ")
 			.append(freeAppData.getAppListPrice())
 			.toString();

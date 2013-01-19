@@ -7,6 +7,6 @@ import com.skylark95.amazonfreenotify.beans.FreeAppData;
 
 public interface DescriptionHelper {
 	
-	public Notification buildBigTextStyleNotification(Builder builder, FreeAppData appData);
+	Notification buildBigTextStyleNotification(Builder builder, FreeAppData appData);
 
 }
