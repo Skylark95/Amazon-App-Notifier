@@ -89,9 +89,24 @@ public class Preferences extends SherlockPreferenceActivity implements OnSharedP
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		if (PREF_NOTIFICATION_TIME.equals(key)) {
 			setNotificationTimePrefSummary();
-			WakefulIntentService.cancelAlarms(this);
-			WakefulIntentService.scheduleAlarms(new FreeAppNotificationListener(), this);
-		} 
+			Log.d(TAG, "UPDATED - Reschedule Alarms");
+			updateAlarms();
+		} else if (PREF_ENABLED.equals(key)) {
+			if (sharedPreferences.getBoolean(PREF_ENABLED, true)) {
+				Log.d(TAG, "ENABLED - Schedule Alarms");
+				updateAlarms();
+			} else {
+				Log.d(TAG, "DISABLED - Cancel Alarms");
+				WakefulIntentService.cancelAlarms(this);
+			}			
+		}
+	}
+
+	private void updateAlarms() {
+		Log.v(TAG, "Updating Alarms");
+		WakefulIntentService.cancelAlarms(this);
+		WakefulIntentService.scheduleAlarms(new FreeAppNotificationListener(), this);
+		Log.v(TAG, "DONE Updating Alarms");
 	}
 
 	private void setNotificationTimePrefSummary() {

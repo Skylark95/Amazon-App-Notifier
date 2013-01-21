@@ -13,7 +13,7 @@ public class TestAppNotificationService extends WakefulIntentService {
 	private static final String TAG = Logger.getTag(TestAppNotificationService.class);
 
 	public TestAppNotificationService() {
-		super("FreeAppNotificationService");
+		super("TestAppNotificationService");
 	}
 
 	@Override

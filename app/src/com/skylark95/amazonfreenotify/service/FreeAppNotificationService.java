@@ -7,6 +7,7 @@ import com.commonsware.cwac.wakeful.WakefulIntentService;
 import com.skylark95.amazonfreenotify.notification.FreeAppNotification;
 import com.skylark95.amazonfreenotify.notification.FreeAppNotificationFactory;
 import com.skylark95.amazonfreenotify.util.Logger;
+import com.skylark95.amazonfreenotify.util.SettingsUtils;
 
 public class FreeAppNotificationService extends WakefulIntentService {
 	
@@ -19,11 +20,11 @@ public class FreeAppNotificationService extends WakefulIntentService {
 	@Override
 	protected void doWakefulWork(Intent intent) {
 		Log.v(TAG, "ENTER - doWakefulWork()");
-		FreeAppNotification notification = FreeAppNotificationFactory.buildNotification(this);
-		notification.showNotificationIfNecessary();
+		if (SettingsUtils.isTodayChecked(this)) {
+			FreeAppNotification notification = FreeAppNotificationFactory.buildNotification(this);
+			notification.showNotificationIfNecessary();
+		}
 		Log.v(TAG, "EXIT - doWakefulWork()");
-	}
-
-	
+	}	
 
 }
