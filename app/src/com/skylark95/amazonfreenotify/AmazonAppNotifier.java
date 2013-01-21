@@ -10,6 +10,9 @@ import com.actionbarsherlock.sample.fragments.TabsAdapter;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.commonsware.cwac.wakeful.WakefulIntentService;
+import com.skylark95.amazonfreenotify.alarm.FreeAppNotificationListener;
+import com.skylark95.amazonfreenotify.settings.FirstStartPreferences;
 import com.skylark95.amazonfreenotify.settings.Preferences;
 import com.skylark95.amazonfreenotify.tabs.AboutFragment;
 import com.skylark95.amazonfreenotify.tabs.DonateFragment;
@@ -35,9 +38,13 @@ public class AmazonAppNotifier extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 		Log.v(TAG, "ENTER - onCreate()");
 		Preferences.setDefaultValues(this);
-		setContentView(R.layout.activity_amazon_app_notifier);	
+		setContentView(R.layout.activity_amazon_app_notifier);
+		buildTabs(savedInstanceState);
 		
-		buildTabs(savedInstanceState);		
+		if (FirstStartPreferences.isFirstStart(this)) {
+			WakefulIntentService.scheduleAlarms(new FreeAppNotificationListener(), this);
+		}		
+		
 		Log.v(TAG, "EXIT - onCreate()");
 	}
 

@@ -9,7 +9,7 @@ import com.skylark95.amazonfreenotify.beans.FreeAppData;
 public class JellybeanDescriptionHelper implements DescriptionHelper {
 
 	
-	public JellybeanDescriptionHelper() {
+	protected JellybeanDescriptionHelper() {
 	}
 
 	@Override

@@ -46,6 +46,24 @@
         </activity>
         
         <service android:name="com.skylark95.amazonfreenotify.service.FreeAppNotificationService" />
+        <service android:name="com.skylark95.amazonfreenotify.service.TestAppNotificationService" />
+        
+        <receiver android:name="com.commonsware.cwac.wakeful.AlarmReceiver">
+		  <intent-filter>
+		    <action android:name="android.intent.action.BOOT_COMPLETED"/>
+		  </intent-filter>
+		
+		  <meta-data
+		    android:name="com.commonsware.cwac.wakeful"
+		    android:resource="@xml/wakeful"/>
+		</receiver>
+		
+        <receiver android:name="com.skylark95.amazonfreenotify.receiver.NotifyOnBootReceiver">
+		  <intent-filter>
+		    <action android:name="android.intent.action.BOOT_COMPLETED"/>
+		  </intent-filter>
+		</receiver>
+		
     </application>
 
 </manifest>

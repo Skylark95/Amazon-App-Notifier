@@ -17,7 +17,9 @@ public class AppDataNotification extends FreeAppNotification {
 	private PendingIntent pendingIntent;
 	private FreeAppData freeAppData;
 	
-	public AppDataNotification(Context context, PendingIntent pendingIntent, FreeAppData freeAppData) {
+	private static final String CATEGORY_GAMES = "Games";
+	
+	protected AppDataNotification(Context context, PendingIntent pendingIntent, FreeAppData freeAppData) {
 		super(context);
 		this.context = context;
 		this.pendingIntent = pendingIntent;
@@ -25,7 +27,7 @@ public class AppDataNotification extends FreeAppNotification {
 	}
 	
 	@Override
-	protected Notification buildNotification() {		
+	protected Notification buildNotification() {
 		NotificationCompat.Builder builder = getBaseBuilder(pendingIntent);
 		builder.setContentTitle(freeAppData.getAppTitle());
 		builder.setTicker(buildTickerText());
@@ -75,6 +77,28 @@ public class AppDataNotification extends FreeAppNotification {
 			.append("List Price: ")
 			.append(freeAppData.getAppListPrice())
 			.toString();
+	}
+
+	@Override
+	protected boolean shouldShowNotification() {
+		boolean retVal;
+		
+		if (isShowGames()) {
+			retVal = true;
+		} else {
+			retVal = !isAppGame();
+		}
+		
+		return retVal;
+	}
+
+	private boolean isAppGame() {
+		return CATEGORY_GAMES.equals(freeAppData.getAppCategory());
+	}
+
+	private boolean isShowGames() {
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+		return pref.getBoolean(Preferences.PREF_NOTIFY_FOR_GAMES, true);
 	}
 
 }

@@ -26,12 +26,12 @@ public final class FreeAppNotificationFactory {
 
 	public static FreeAppNotification buildNotification(Context context) {
 		PendingIntent appStore = getAppStoreIntent(context);
-		FreeAppNotification notification = buildNotification(context, appStore);
+		FreeAppNotification notification = build(context, appStore);
 		
 		return notification;
 	}
 
-	private static FreeAppNotification buildNotification(Context context, PendingIntent appStore) {
+	private static FreeAppNotification build(Context context, PendingIntent appStore) {
 		FreeAppNotification notification;
 		if (NetworkUtils.isDeviceOnline(context)) {
 			notification = buildOnlineNotification(context, appStore);			

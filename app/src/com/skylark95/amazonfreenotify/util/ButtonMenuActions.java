@@ -9,7 +9,7 @@ import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.commonsware.cwac.wakeful.WakefulIntentService;
 import com.skylark95.amazonfreenotify.R;
 import com.skylark95.amazonfreenotify.dialog.HtmlDialogFragment;
-import com.skylark95.amazonfreenotify.service.FreeAppNotificationService;
+import com.skylark95.amazonfreenotify.service.TestAppNotificationService;
 import com.skylark95.amazonfreenotify.settings.Preferences;
 
 public final class ButtonMenuActions {
@@ -25,7 +25,7 @@ public final class ButtonMenuActions {
 
 	public static void testNotification(Context context) {
 		Toast.makeText(context, R.string.test_notification_toast, Toast.LENGTH_SHORT).show();
-		WakefulIntentService.sendWakefulWork(context, FreeAppNotificationService.class);
+		WakefulIntentService.sendWakefulWork(context, TestAppNotificationService.class);
 	}
 
 	public static void showChangelog(FragmentManager manager) {

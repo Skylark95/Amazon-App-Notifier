@@ -46,6 +46,7 @@ public class HtmlDialogFragment extends SherlockDialogFragment {
 		
 		try {
 			HtmlUtil.createHtmlView(getSherlockActivity(), textView, html);
+			Log.v(TAG, "Created html view for dialog");
 		} catch (IOException e) {
 			Log.e(TAG, "Could not create html view for dialog", e);
 		}

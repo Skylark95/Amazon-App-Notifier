@@ -8,19 +8,19 @@ import com.skylark95.amazonfreenotify.notification.FreeAppNotification;
 import com.skylark95.amazonfreenotify.notification.FreeAppNotificationFactory;
 import com.skylark95.amazonfreenotify.util.Logger;
 
-public class FreeAppNotificationService extends WakefulIntentService {
+public class TestAppNotificationService extends WakefulIntentService {
 	
-	private static final String TAG = Logger.getTag(FreeAppNotificationService.class);
+	private static final String TAG = Logger.getTag(TestAppNotificationService.class);
 
-	public FreeAppNotificationService() {
+	public TestAppNotificationService() {
 		super("FreeAppNotificationService");
 	}
 
 	@Override
 	protected void doWakefulWork(Intent intent) {
-		Log.v(TAG, "ENTER - doWakefulWork()");
+		Log.v(TAG, "Enter - doWakefulWork()");
 		FreeAppNotification notification = FreeAppNotificationFactory.buildNotification(this);
-		notification.showNotificationIfNecessary();
+		notification.showNotificationReguardless();
 		Log.v(TAG, "EXIT - doWakefulWork()");
 	}
 

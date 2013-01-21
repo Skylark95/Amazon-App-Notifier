@@ -2,6 +2,7 @@ package com.skylark95.amazonfreenotify.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -33,7 +34,7 @@ public final class SettingsUtils {
 	
 	public static String getTimeDisplayValue(Context context) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		String time = prefs.getString(Preferences.PREF_NOTIFICATION_TIME, "12:00");
+		String time = prefs.getString(Preferences.PREF_NOTIFICATION_TIME, "12:0");
 		String[] split = time.split(":");
 		int hour = Integer.parseInt(split[0]);
 		String minute = split[1];
@@ -102,6 +103,29 @@ public final class SettingsUtils {
 		}
 		
 		return ringtoneName;
+	}
+	
+	public static long getTimeInMillis(Context context) {
+		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+		String timeStr = pref.getString(Preferences.PREF_NOTIFICATION_TIME, "12:0");
+		String[] hourMinute = timeStr.split(":");
+		
+		int hour = Integer.parseInt(hourMinute[0]);
+		int minute = Integer.parseInt(hourMinute[1]);
+		
+		Calendar cal = Calendar.getInstance();
+		
+		// Add one day if time has already passed
+		if (cal.get(Calendar.HOUR_OF_DAY) >= hour
+				&& cal.get(Calendar.MINUTE) >= minute) {
+			cal.add(Calendar.DATE, 1);
+		}
+			
+		cal.set(Calendar.HOUR_OF_DAY, hour);
+		cal.set(Calendar.MINUTE, minute);
+		cal.set(Calendar.SECOND, 0);
+		
+		return cal.getTimeInMillis();
 	}
 
 	private static List<String> getAbbrDays(List<String> days) {

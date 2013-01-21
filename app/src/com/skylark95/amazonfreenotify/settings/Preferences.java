@@ -12,7 +12,9 @@ import android.util.Log;
 
 import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
+import com.commonsware.cwac.wakeful.WakefulIntentService;
 import com.skylark95.amazonfreenotify.R;
+import com.skylark95.amazonfreenotify.alarm.FreeAppNotificationListener;
 import com.skylark95.amazonfreenotify.util.Logger;
 import com.skylark95.amazonfreenotify.util.SettingsUtils;
 
@@ -87,6 +89,8 @@ public class Preferences extends SherlockPreferenceActivity implements OnSharedP
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		if (PREF_NOTIFICATION_TIME.equals(key)) {
 			setNotificationTimePrefSummary();
+			WakefulIntentService.cancelAlarms(this);
+			WakefulIntentService.scheduleAlarms(new FreeAppNotificationListener(), this);
 		} 
 	}
 

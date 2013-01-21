@@ -41,5 +41,10 @@ public class SimpleAppNotification extends FreeAppNotification {
 			.append(contentText)
 			.toString();
 	}
+
+	@Override
+	protected boolean shouldShowNotification() {
+		return true;
+	}
 	
 }

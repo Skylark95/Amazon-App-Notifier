@@ -26,7 +26,19 @@ public abstract class FreeAppNotification {
 	
 	protected abstract Notification buildNotification();
 	
-	public void showNotification() {
+	protected abstract boolean shouldShowNotification();
+	
+	public void showNotificationReguardless() {
+		showNotification();
+	}
+	
+	public void showNotificationIfNecessary() {
+		if (shouldShowNotification()) {
+			showNotification();
+		}
+	}
+	
+	private void showNotification() {
 		Notification notification = buildNotification();
 		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);		
 		notificationManager.notify(TAG, ID, notification);
