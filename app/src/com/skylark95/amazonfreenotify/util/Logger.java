@@ -6,7 +6,7 @@ public final class Logger {
 	private Logger() {		
 	}
 
-	public static <T> String getTag(Class<T> clazz) {
+	public static String getTag(Class<?> clazz) {
 		return clazz.getSimpleName();
 	}	
 

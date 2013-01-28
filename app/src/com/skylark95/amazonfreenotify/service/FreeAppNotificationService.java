@@ -21,6 +21,7 @@ public class FreeAppNotificationService extends WakefulIntentService {
 	protected void doWakefulWork(Intent intent) {
 		Log.v(TAG, "ENTER - doWakefulWork()");
 		if (SettingsUtils.isTodayChecked(this)) {
+			Log.d(TAG, "Today is checked");
 			FreeAppNotification notification = FreeAppNotificationFactory.buildNotification(this);
 			notification.showNotificationIfNecessary();
 		}

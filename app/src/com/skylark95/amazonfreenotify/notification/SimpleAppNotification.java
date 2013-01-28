@@ -4,14 +4,18 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.skylark95.amazonfreenotify.R;
+import com.skylark95.amazonfreenotify.util.Logger;
 
 public class SimpleAppNotification extends FreeAppNotification {
 	
 	private PendingIntent pendingIntent;
 	private String contentTitle;
 	private String contentText;
+	
+	private static final String TAG = Logger.getTag(SimpleAppNotification.class);
 	
 	protected SimpleAppNotification(Context context, PendingIntent pendingIntent, String contentText) {
 		this(context, pendingIntent, context.getString(R.string.notification_simple_title), contentText);
@@ -25,12 +29,14 @@ public class SimpleAppNotification extends FreeAppNotification {
 	}
 	
 	@Override
-	protected Notification buildNotification() {		
+	protected Notification buildNotification() {	
+		Log.v(TAG, "ENTER - buildNotification()");
 		NotificationCompat.Builder builder = getBaseBuilder(pendingIntent); 
 		builder.setContentTitle(contentTitle)
 			.setContentText(contentText)
 			.setTicker(buildTickerText());
 		
+		Log.v(TAG, "EXIT - buildNotification()");
 		return builder.build();
 	}
 	

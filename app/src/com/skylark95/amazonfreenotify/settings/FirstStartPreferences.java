@@ -5,6 +5,7 @@ import com.skylark95.amazonfreenotify.util.Logger;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.AsyncTask;
 import android.util.Log;
 
 
@@ -23,16 +24,29 @@ public final class FirstStartPreferences {
 		
 		if (firstStart) {
 			Log.i(TAG, "App First Start");
-			handleFirstStart(pref);
+			new FirstStartHandler().execute(pref);
 		}
 		
 		return firstStart;
 	}
+	
+	private static class FirstStartHandler extends AsyncTask<SharedPreferences, Void, Boolean> {
 
-	private static void handleFirstStart(SharedPreferences pref) {
-		Editor editor = pref.edit();
-		editor.putBoolean(PREF_IS_FIRST_START, false);
-		editor.commit();
+		@Override
+		protected Boolean doInBackground(SharedPreferences... params) {
+			SharedPreferences pref = params[0];
+			Editor editor = pref.edit();
+			editor.putBoolean(PREF_IS_FIRST_START, false);
+			return editor.commit();
+		}
+
+		@Override
+		protected void onPostExecute(Boolean result) {
+			if (!result) {
+				Log.e(TAG, "Could not update first start preference");
+			}
+		}
+		
 	}
 
 }

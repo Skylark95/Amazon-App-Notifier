@@ -7,9 +7,11 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.skylark95.amazonfreenotify.beans.FreeAppData;
 import com.skylark95.amazonfreenotify.settings.Preferences;
+import com.skylark95.amazonfreenotify.util.Logger;
 
 public class AppDataNotification extends FreeAppNotification {
 
@@ -18,6 +20,8 @@ public class AppDataNotification extends FreeAppNotification {
 	private FreeAppData freeAppData;
 	
 	private static final String CATEGORY_GAMES = "Games";
+
+	private static final String TAG = Logger.getTag(AppDataNotification.class);
 	
 	protected AppDataNotification(Context context, PendingIntent pendingIntent, FreeAppData freeAppData) {
 		super(context);
@@ -28,6 +32,7 @@ public class AppDataNotification extends FreeAppNotification {
 	
 	@Override
 	protected Notification buildNotification() {
+		Log.v(TAG, "ENTER - buildNotification()");
 		NotificationCompat.Builder builder = getBaseBuilder(pendingIntent);
 		builder.setContentTitle(freeAppData.getAppTitle());
 		builder.setTicker(buildTickerText());
@@ -35,6 +40,7 @@ public class AppDataNotification extends FreeAppNotification {
 		addText(builder);
 		Notification notification = buildWithDescription(builder);
 		
+		Log.v(TAG, "EXIT - buildNotification()");
 		return notification;
 	}
 
@@ -43,9 +49,11 @@ public class AppDataNotification extends FreeAppNotification {
 		Notification notification;
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
 				&& pref.getBoolean(Preferences.PREF_EXPANDABLE_NOTIFICATION, true)) {
+			Log.v(TAG, "Adding description");
 			DescriptionHelper helper = new JellybeanDescriptionHelper();
 			notification = helper.buildBigTextStyleNotification(builder, freeAppData);
 		} else {
+			Log.v(TAG, "Not adding description");
 			notification = builder.build();
 		}
 		return notification;
@@ -53,9 +61,11 @@ public class AppDataNotification extends FreeAppNotification {
 
 	private void addText(NotificationCompat.Builder builder) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			Log.v(TAG, "Adding Honeycomb text");
 			builder.setContentText("By: " + freeAppData.getAppDeveloper());
 			builder.setContentInfo("List Price: " + freeAppData.getAppListPrice());
 		} else {
+			Log.v(TAG, "Adding Gingerbread text");
 			String text = new StringBuilder()
 				.append(freeAppData.getAppListPrice())
 				.append(" - ")
@@ -84,8 +94,10 @@ public class AppDataNotification extends FreeAppNotification {
 		boolean retVal;
 		
 		if (isShowGames()) {
+			Log.v(TAG, "shouldShowNotification = true");
 			retVal = true;
 		} else {
+			Log.v(TAG, "shouldShowNotification = false");
 			retVal = !isAppGame();
 		}
 		

@@ -20,6 +20,7 @@
     <string name="close_button">Close</string>
 
     <!-- Setting Tab -->
+    <string name="settings_tab_title">Settings</string>
     <string name="notifications_enabled_label">Notifications Enabled:</string>
     <string name="show_name_price_label">Show app name and price:</string>
     <string name="show_on_boot_label">Show notification on boot:</string>
@@ -68,11 +69,13 @@
     <string name="pref_notification_days_saturday">Saturday</string>
     
     <!-- About Tab -->
+    <string name="about_tab_title">About</string>
     <string name="app_version_label">Version:</string>
     <string name="changelog_button">Changelog</string>
     <string name="uk_users_button">UK Users</string>
 
     <!-- Donate Tab -->
+    <string name="donate_tab_title">Donate</string>
     <string name="donate_description_text">This app is and always will be free without ads.  If you would like to support it\'s development send a donation!</string>
     <string name="donations_prompt">Select an amount</string>
     <string name="donate_button">Donate</string>

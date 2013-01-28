@@ -9,16 +9,20 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
+import android.util.Log;
 
 import com.skylark95.amazonfreenotify.R;
 import com.skylark95.amazonfreenotify.settings.Preferences;
+import com.skylark95.amazonfreenotify.util.Logger;
 
 public abstract class FreeAppNotification {	
 	
 	private Context context;
 	
-	private static final String TAG = "FreeAppNotification";
-	private static final int ID = 1;
+	private static final String NOTIFICATION_TAG = "FreeAppNotification";
+	private static final int NOTIFICATION_ID = 1;
+	
+	private static final String TAG = Logger.getTag(FreeAppNotification.class);
 	
 	protected FreeAppNotification(Context context) {
 		this.context = context;
@@ -41,10 +45,11 @@ public abstract class FreeAppNotification {
 	private void showNotification() {
 		Notification notification = buildNotification();
 		NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);		
-		notificationManager.notify(TAG, ID, notification);
+		notificationManager.notify(NOTIFICATION_TAG, NOTIFICATION_ID, notification);
 	}
 	
-	protected Builder getBaseBuilder(PendingIntent pendingIntent) {		
+	protected Builder getBaseBuilder(PendingIntent pendingIntent) {	
+		Log.v(TAG, "Base Builder Called");
 		NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
 			.setSmallIcon(R.drawable.notify_icon)
 			.setContentIntent(pendingIntent)
@@ -59,6 +64,7 @@ public abstract class FreeAppNotification {
 	private void addSound(NotificationCompat.Builder builder) {
 		Uri sound = getSound();
 		if (sound != null && isSound()) {
+			Log.v(TAG, "Setting notification sound");
 			builder.setSound(sound);
 		}
 	}
@@ -66,9 +72,11 @@ public abstract class FreeAppNotification {
 	private int getDefaults() {
 		int defaults = 0;
 		if (isVibrate()) {
+			Log.v(TAG, "Setting notification default vibrate");
 			defaults |= Notification.DEFAULT_VIBRATE;
 		}
 		if (getSound() == null && isSound()) {
+			Log.v(TAG, "Setting notification default sound");
 			defaults |= Notification.DEFAULT_SOUND;
 		}
 		return defaults;

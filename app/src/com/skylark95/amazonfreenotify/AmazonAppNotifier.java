@@ -42,6 +42,7 @@ public class AmazonAppNotifier extends SherlockFragmentActivity {
 		buildTabs(savedInstanceState);
 		
 		if (FirstStartPreferences.isFirstStart(this)) {
+			Log.v(TAG, "Schedule alarms for first time");
 			WakefulIntentService.scheduleAlarms(new FreeAppNotificationListener(), this);
 		}		
 		
@@ -53,9 +54,9 @@ public class AmazonAppNotifier extends SherlockFragmentActivity {
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		tabsAdapter = new TabsAdapter(this, viewPager);		
-		tabsAdapter.addTab(actionBar.newTab().setText("Settings"), SettingsFragment.class, null);
-		tabsAdapter.addTab(actionBar.newTab().setText("About"), AboutFragment.class, null);
-		tabsAdapter.addTab(actionBar.newTab().setText("Donate"), DonateFragment.class, null);
+		tabsAdapter.addTab(actionBar.newTab().setText(getString(R.string.settings_tab_title)), SettingsFragment.class, null);
+		tabsAdapter.addTab(actionBar.newTab().setText(getString(R.string.about_tab_title)), AboutFragment.class, null);
+		tabsAdapter.addTab(actionBar.newTab().setText(getString(R.string.donate_tab_title)), DonateFragment.class, null);
 		
 		if (savedInstanceState != null) {
 			Log.v(TAG, "Restoring tab state");
