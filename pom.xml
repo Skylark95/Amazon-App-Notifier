@@ -2,21 +2,27 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.skylark95.amazonfreenotify</groupId>
-	<artifactId>parent</artifactId>
+	<groupId>com.skylark95</groupId>
+	<artifactId>amazonfreenotify-parent</artifactId>
 	<version>2.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	
-	<name>AmazonAppNotifier-Parent</name>
+
+	<name>AmazonAppNotifier</name>
 	<description>Open source rewrite of Amazon App Notifier</description>
 	<url>http://www.skylark95.com/</url>
-	
+
 	<modules>
-	    <module>app</module>
-	    <module>php</module>
-	    <module>sql</module>
+		<module>app</module>
+		<module>php</module>
+		<module>sql</module>
 	</modules>
-	
+
+	<scm>
+		<url>https://github.com/Skylark95/Amazon-App-Notifier/</url>
+		<connection>scm:git:git://github.com/Skylark95/Amazon-App-Notifier.git</connection>
+		<developerConnection>scm:git:git@github.com:Skylark95/Amazon-App-Notifier.git</developerConnection>
+	</scm>
+
 	<developers>
 		<developer>
 			<name>Derek</name>
@@ -29,7 +35,7 @@
 			</roles>
 		</developer>
 	</developers>
-	
+
 	<licenses>
 		<license>
 			<name>GPL v3</name>
@@ -37,23 +43,30 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	
+
 	<issueManagement>
 		<system>GitHub Issues</system>
 		<url>https://github.com/Skylark95/Amazon-App-Notifier/issues</url>
 	</issueManagement>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<java.version>1.6</java.version>
+		<javadoc.version>2.9</javadoc.version>
+		<jxr.version>2.3</jxr.version>
+		<pmd.version>2.7.1</pmd.version>
+		<reports.version>2.6</reports.version>
+		<findbugs.version>2.5.2</findbugs.version>
+		<checkstyle.version>2.9.1</checkstyle.version>
+
 		<android.version>4.2_r1</android.version>
 		<android.platform>17</android.platform>
 		<android-support.version>11</android-support.version>
 
 		<android-maven.version>3.5.0</android-maven.version>
-	</properties>	
+	</properties>
 
 	<dependencyManagement>
 		<dependencies>
@@ -102,10 +115,9 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<build>
 		<finalName>${project.artifactId}</finalName>
-		<sourceDirectory>src</sourceDirectory>
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -116,19 +128,53 @@
 						<source>${java.version}</source>
 						<target>${java.version}</target>
 					</configuration>
-				</plugin>			
-			
+				</plugin>
+
 				<plugin>
 					<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 					<artifactId>android-maven-plugin</artifactId>
 					<version>${android-maven.version}</version>
 					<configuration>
-					<sdk>
-						<platform>17</platform>
-					</sdk>
+						<sdk>
+							<platform>17</platform>
+						</sdk>
 					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<version>2.9</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>${reports.version}</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+						    <report>index</report>
+						    <report>summary</report>
+						    <report>license</report>
+						    <report>project-team</report>
+						    <report>scm</report>
+						    <report>issue-tracking</report>
+							<report>dependency-management</report>
+							<report>dependencies</report>							
+							<report>dependency-convergence</report>							
+							<report>plugin-management</report>
+							<report>plugins</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+
 </project>
