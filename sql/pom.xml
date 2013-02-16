@@ -2,7 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<packaging>jar</packaging>
 	<artifactId>amazonfreenotify-sql</artifactId>
 	<name>AmazonAppNotifier-SQL</name>
 	<url>http://www.skylark95.com/</url>
@@ -27,8 +26,12 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<configuration>
-					<projectnatures/>
-					<buildcommands/>
+					<projectnatures>
+					    <projectnature>org.eclipse.m2e.core.maven2Nature</projectnature>
+					</projectnatures>
+					<buildcommands>
+					    <buildcommand>org.eclipse.m2e.core.maven2Builder</buildcommand>
+					</buildcommands>
 				</configuration>
 			</plugin>
 		</plugins>

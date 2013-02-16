@@ -60,31 +60,46 @@
 			<plugin>
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 				<artifactId>android-maven-plugin</artifactId>
+				<configuration>
+					<androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
+					<resourceDirectory>${project.basedir}/res</resourceDirectory>
+					<genDirectory>${project.basedir}/gen</genDirectory>
+					<sdk>
+						<platform>17</platform>
+					</sdk>
+					<undeployBeforeDeploy>true</undeployBeforeDeploy>
+				</configuration>
 				<extensions>true</extensions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<configuration>
 					<projectnatures>
+						<projectnature>org.sonar.ide.eclipse.core.sonarNature</projectnature>
 						<projectnature>com.android.ide.eclipse.adt.AndroidNature</projectnature>
 						<projectnature>org.eclipse.jdt.core.javanature</projectnature>
+						<projectnature>org.eclipse.m2e.core.maven2Nature</projectnature>
 					</projectnatures>
 					<buildcommands>
 						<buildcommand>com.android.ide.eclipse.adt.ResourceManagerBuilder</buildcommand>
 						<buildcommand>com.android.ide.eclipse.adt.PreCompilerBuilder</buildcommand>
 						<buildcommand>org.eclipse.jdt.core.javabuilder</buildcommand>
 						<buildcommand>com.android.ide.eclipse.adt.ApkBuilder</buildcommand>
+						<buildcommand>org.eclipse.m2e.core.maven2Builder</buildcommand>
 					</buildcommands>
 					<classpathContainers>
 						<classpathContainer>com.android.ide.eclipse.adt.ANDROID_FRAMEWORK</classpathContainer>
 						<classpathContainer>com.android.ide.eclipse.adt.LIBRARIES</classpathContainer>
 					</classpathContainers>
-					<buildOutputDirectory>bin/classes</buildOutputDirectory>
 				</configuration>
 			</plugin>
 		</plugins>

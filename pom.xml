@@ -123,22 +123,13 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.0</version>
-					<configuration>
-						<source>${java.version}</source>
-						<target>${java.version}</target>
-					</configuration>
+					<version>3.0</version>					
 				</plugin>
 
 				<plugin>
 					<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 					<artifactId>android-maven-plugin</artifactId>
 					<version>${android-maven.version}</version>
-					<configuration>
-						<sdk>
-							<platform>17</platform>
-						</sdk>
-					</configuration>
 				</plugin>
 
 				<plugin>
