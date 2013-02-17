@@ -49,8 +49,8 @@
 			<artifactId>jackson-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.commonsware.cwac</groupId>
-			<artifactId>wakeful</artifactId>
+			<groupId>com.commonsware</groupId>
+			<artifactId>cwac-wakeful</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

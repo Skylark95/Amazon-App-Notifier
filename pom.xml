@@ -109,8 +109,8 @@
 				<version>2.1.3</version>
 			</dependency>
 			<dependency>
-				<groupId>com.commonsware.cwac</groupId>
-				<artifactId>wakeful</artifactId>
+				<groupId>com.commonsware</groupId>
+				<artifactId>cwac-wakeful</artifactId>
 				<version>0.6.2</version>
 			</dependency>
 		</dependencies>
