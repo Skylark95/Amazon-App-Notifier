@@ -78,7 +78,7 @@
 					<source>${java.version}</source>
 					<target>${java.version}</target>
 					<showDeprecation>true</showDeprecation>
-      				<showWarnings>true</showWarnings>
+					<showWarnings>true</showWarnings>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -108,7 +108,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<configuration>
-				    <consoleOutput>true</consoleOutput>
+					<consoleOutput>true</consoleOutput>
 					<configLocation>checkstyle.xml</configLocation>
 				</configuration>
 				<executions>
@@ -119,7 +119,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
@@ -135,7 +135,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
@@ -152,6 +152,11 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
