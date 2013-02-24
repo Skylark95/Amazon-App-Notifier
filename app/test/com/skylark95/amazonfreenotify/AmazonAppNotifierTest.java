@@ -2,13 +2,19 @@ package com.skylark95.amazonfreenotify;
 
 import static com.xtremelabs.robolectric.Robolectric.*;
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import android.app.AlarmManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.actionbarsherlock.ActionBarSherlock;
@@ -16,48 +22,71 @@ import com.actionbarsherlock.ActionBarSherlockRobolectric;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.skylark95.amazonfreenotify.service.TestAppNotificationService;
 import com.skylark95.amazonfreenotify.settings.Preferences;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
+import com.xtremelabs.robolectric.shadows.ShadowAlarmManager;
+import com.xtremelabs.robolectric.shadows.ShadowAlarmManager.ScheduledAlarm;
 import com.xtremelabs.robolectric.shadows.ShadowFragmentActivity;
 import com.xtremelabs.robolectric.shadows.ShadowIntent;
 
 @RunWith(RobolectricTestRunner.class)
 public class AmazonAppNotifierTest {
 	
-	private class ActionBarActivityTester extends AmazonAppNotifier {
+	private static final String IS_FIRST_START = "_is_first_start";
+	private static final String TAB_POSITION = "tab_position";
+
+	private static class ActionBarActivityTester extends AmazonAppNotifier {
 		
 		private ActionBar actionBar;
+		private MenuInflater menuInflater;
 
-		public ActionBarActivityTester(ActionBar actionBar) {
+		public ActionBarActivityTester(ActionBar actionBar, MenuInflater menuInflater) {
 			this.actionBar = actionBar;
+			this.menuInflater = menuInflater;
 		}
 
 		@Override
 		public ActionBar getSupportActionBar() {
 			return actionBar;
+		}
+
+		@Override
+		public MenuInflater getSupportMenuInflater() {
+			return menuInflater;
 		}		
+		
+		
 		
 	}
 	
 	private SherlockFragmentActivity activity;
 	private SherlockFragmentActivity actionBarActivity;
 	private ActionBar mockActionBar;
+	private MenuInflater mockMenuInflater;
+	private Tab mockTab;
 
 	@Before
     public void setUp() {
 		ActionBarSherlock.registerImplementation(ActionBarSherlockRobolectric.class);
 		mockActionBar = mock(ActionBar.class);
-		actionBarActivity = new ActionBarActivityTester(mockActionBar);
+		mockMenuInflater = mock(MenuInflater.class);
+		
+		mockTab = mock(Tab.class);
+		when(mockActionBar.newTab()).thenReturn(mockTab);
+		when(mockActionBar.getTabAt(anyInt())).thenReturn(mockTab);
+		when(mockActionBar.getSelectedTab()).thenReturn(mockTab);
+		when(mockTab.setText(anyString())).thenReturn(mockTab);		
+		
+		actionBarActivity = new ActionBarActivityTester(mockActionBar, mockMenuInflater);
 		activity = new AmazonAppNotifier();		
 	}
 	
 	@Test
 	public void createsTabsWhenOnCreateIsCalled() {
-		Tab mockTab = mock(Tab.class);
-		when(mockActionBar.newTab()).thenReturn(mockTab);
-		
 		Tab mockSettingsTab = mock(Tab.class);
 		Tab mockAboutTab = mock(Tab.class);
 		Tab mockDonateTab = mock(Tab.class);
@@ -74,6 +103,87 @@ public class AmazonAppNotifierTest {
 		verify(mockActionBar).addTab(mockSettingsTab);
 		verify(mockActionBar).addTab(mockAboutTab);
 		verify(mockActionBar).addTab(mockDonateTab);		
+	}
+	
+	@Test
+	public void doesScheduleAlarmsOnFirstStart() {
+		ShadowFragmentActivity shadowFragmentActivity = shadowOf(actionBarActivity);
+		shadowFragmentActivity.callOnCreate(null);
+		
+		AlarmManager alarmManager = (AlarmManager) shadowFragmentActivity.getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+		ShadowAlarmManager shadowAlarmManager = shadowOf(alarmManager);
+		ScheduledAlarm nextScheduledAlarm = shadowAlarmManager.getNextScheduledAlarm();
+		assertNotNull(nextScheduledAlarm);
+	}
+	
+	@Test
+	public void doesNotScheduleAlarmsIfNotFirstStart() {
+		ShadowFragmentActivity shadowFragmentActivity = shadowOf(actionBarActivity);
+		SharedPreferences pref = shadowFragmentActivity.getSharedPreferences(IS_FIRST_START, Context.MODE_PRIVATE);		
+		Editor editor = pref.edit();
+		editor.putBoolean(IS_FIRST_START, false);
+		editor.commit();
+		
+		shadowFragmentActivity.callOnCreate(null);
+		
+		AlarmManager alarmManager = (AlarmManager) shadowFragmentActivity.getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+		ShadowAlarmManager shadowAlarmManager = shadowOf(alarmManager);
+		ScheduledAlarm nextScheduledAlarm = shadowAlarmManager.getNextScheduledAlarm();
+		assertNull(nextScheduledAlarm);
+	}
+	
+	@Test
+	public void doesRestoreSavedTabIfBundleNotNull() {
+		ShadowFragmentActivity shadowFragmentActivity = shadowOf(actionBarActivity);
+		Tab mockTab1 = mock(Tab.class);
+		when(mockActionBar.getTabAt(1)).thenReturn(mockTab1);
+		Bundle bundle = new Bundle();
+		bundle.putInt(TAB_POSITION, 1);		
+		
+		shadowFragmentActivity.callOnCreate(bundle);
+		verify(mockActionBar).getTabAt(1);
+		verify(mockTab1).select();
+	}
+	
+	@Test
+	public void doesNotRestoreSavedTabIfBundleNull() {
+		ShadowFragmentActivity shadowFragmentActivity = shadowOf(actionBarActivity);
+		Tab mockTab1 = mock(Tab.class);
+		when(mockActionBar.getTabAt(anyInt())).thenReturn(mockTab1);
+		
+		shadowFragmentActivity.callOnCreate(null);
+		verify(mockActionBar, never()).getTabAt(anyInt());
+		verify(mockTab1, never()).select();
+	}
+	
+	@Test
+	public void doesSaveTabStateWhenCallingOnSaveInstanceState() {
+		ShadowFragmentActivity shadowFragmentActivity = shadowOf(actionBarActivity);
+		when(mockTab.getPosition()).thenReturn(2);
+		Bundle bundle = new Bundle();
+		
+		shadowFragmentActivity.callOnSaveInstanceState(bundle);		
+		assertEquals(2, bundle.getInt(TAB_POSITION));
+	}
+	
+	@Test
+	public void doesInflateMenuWhenCallingOnCreateOptionsMenu() {
+		Menu mockMenu = mock(Menu.class);
+		
+		actionBarActivity.onCreateOptionsMenu(mockMenu);
+		verify(mockMenuInflater).inflate(R.menu.activity_main, mockMenu);
+	}
+	
+	@Test
+	public void menuDoesShowDonateTab() {
+		MenuItem mockDonateMenu = mock(MenuItem.class);        
+		Tab mockDonateTab = mock(Tab.class);
+        when(mockDonateMenu.getItemId()).thenReturn(R.id.menu_donate);
+        when(mockActionBar.getTabAt(2)).thenReturn(mockDonateTab);
+        when(mockActionBar.getTabCount()).thenReturn(3);
+        
+		actionBarActivity.onOptionsItemSelected(mockDonateMenu);		
+		verify(mockDonateTab).select();
 	}
 	
 	@Test
