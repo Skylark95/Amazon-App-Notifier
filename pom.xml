@@ -132,6 +132,13 @@
 		        <version>4.8.2</version>
 		        <scope>test</scope>
 		    </dependency>
+			<!-- Needed for robolectric to avoid shadow warnings -->
+			<dependency>
+				<groupId>com.google.android.maps</groupId>
+				<artifactId>maps</artifactId>
+				<version>17_r1</version>
+				<scope>provided</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
