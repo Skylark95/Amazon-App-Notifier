@@ -186,11 +186,22 @@
 					<formats>
 						<format>xml</format>
 					</formats>
+					<instrumentation>
+						<excludes>
+							<exclude>com/actionbarsherlock/**/*.class</exclude>
+							<exclude>apt/tutorial/**/*.class</exclude>
+							<exclude>android/support/**/*.class</exclude>
+							<exclude>**/R.class</exclude>
+							<exclude>**/R$*.class</exclude>
+							<exclude>**/BuildConfig.class</exclude>
+						</excludes>
+					</instrumentation>
 				</configuration>
 				<executions>
 					<execution>
 						<phase>package</phase>
 						<goals>
+							<goal>clean</goal>
 							<goal>cobertura</goal>
 						</goals>
 					</execution>
@@ -211,6 +222,7 @@
 						<id>html</id>
 						<reports>
 							<report>javadoc</report>
+							<report>test-javadoc</report>
 						</reports>
 					</reportSet>
 				</reportSets>
@@ -228,10 +240,10 @@
 				<version>${jxr.version}</version>
 				<configuration>
 					<linkJavadoc>true</linkJavadoc>
-					<includes>
-						<include>**com/skylark95/**/*.java</include>
-					</includes>
 					<excludes>
+					    <exclude>com/actionbarsherlock/**/*.java</exclude>
+						<exclude>apt/tutorial/**/*.java</exclude>
+						<exclude>android/support/**/*.java</exclude>
 						<exclude>**/R.java</exclude>
 						<exclude>**/BuildConfig.java</exclude>
 					</excludes>
