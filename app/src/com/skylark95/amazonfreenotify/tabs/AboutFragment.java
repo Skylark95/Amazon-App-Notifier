@@ -1,7 +1,5 @@
 package com.skylark95.amazonfreenotify.tabs;
 
-import java.io.IOException;
-
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -62,11 +60,7 @@ public class AboutFragment extends SherlockFragment {
 	private void setHtmlText(View view) {
 		Log.v(TAG, "Creating about_html view");
 		TextView aboutTextView = (TextView) view.findViewById(R.id.about_html);			
-		try {
-			HtmlUtil.createHtmlView(getSherlockActivity(), aboutTextView, getString(R.string.html_about));
-		} catch (IOException e) {
-			Log.e(TAG, "Could not read html file", e);
-		}
+		HtmlUtil.createHtmlView(getSherlockActivity(), aboutTextView, getString(R.string.html_about));
 	}
 
 	private void setVersionText(View view) {

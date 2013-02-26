@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class SettingsFragmentTest {
 
 	private SherlockFragment fragment;
 	private SherlockFragmentActivity activity;
+	private View view;
 
 	private SharedPreferences pref;
 
@@ -41,12 +43,13 @@ public class SettingsFragmentTest {
 		fragment = new SettingsFragment();
 		startFragment(fragment);
 		activity = fragment.getSherlockActivity();
+		view = fragment.getView();
 		pref = PreferenceManager.getDefaultSharedPreferences(activity);
 	}
 
 	@Test
 	public void changeSettingsButtonDoesLaunchSettings() {
-		Button changeSettingsButton = (Button) fragment.getView().findViewById(R.id.change_settings_button);
+		Button changeSettingsButton = (Button) view.findViewById(R.id.change_settings_button);
 		changeSettingsButton.performClick();
 
 		ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
@@ -58,7 +61,7 @@ public class SettingsFragmentTest {
 
 	@Test
 	public void testNotificationButtonDoesStartTestNotificationService() {
-		Button testNotificationButton = (Button) fragment.getView().findViewById(R.id.test_notification_button);
+		Button testNotificationButton = (Button) view.findViewById(R.id.test_notification_button);
 		testNotificationButton.performClick();
 
 		ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
@@ -70,7 +73,7 @@ public class SettingsFragmentTest {
 
 	@Test
 	public void onResumeUpdatesNotificationSoundText() {
-		TextView notificationSoundText = (TextView) fragment.getView().findViewById(R.id.notification_sound_label);
+		TextView notificationSoundText = (TextView) view.findViewById(R.id.notification_sound_label);
 		notificationSoundText.setText(TEMP_TEXT);
 
 		fragment.onResume();
@@ -82,7 +85,7 @@ public class SettingsFragmentTest {
 
 	@Test
 	public void onResumeUpdatesNotificationDaysText() {
-		TextView notificationDaysText = (TextView) fragment.getView().findViewById(R.id.notification_days_label);
+		TextView notificationDaysText = (TextView) view.findViewById(R.id.notification_days_label);
 		notificationDaysText.setText(TEMP_TEXT);
 
 		fragment.onResume();
@@ -94,7 +97,7 @@ public class SettingsFragmentTest {
 
 	@Test
 	public void onResumeUpdatesNotificationTimeText() {
-		TextView notificationTimeText = (TextView) fragment.getView().findViewById(R.id.notification_time_label);
+		TextView notificationTimeText = (TextView) view.findViewById(R.id.notification_time_label);
 		notificationTimeText.setText(TEMP_TEXT);
 
 		fragment.onResume();
@@ -106,7 +109,7 @@ public class SettingsFragmentTest {
 
 	@Test
 	public void onResumeUpdatesNotifyForGamesText() {
-		TextView notifyForGamesText = (TextView) fragment.getView().findViewById(R.id.notifiy_for_games);
+		TextView notifyForGamesText = (TextView) view.findViewById(R.id.notifiy_for_games);
 		notifyForGamesText.setText(TEMP_TEXT);
 
 		fragment.onResume();
@@ -118,7 +121,7 @@ public class SettingsFragmentTest {
 
 	@Test
 	public void onResumeUpdatesExpandedNotificationText() {
-		TextView expandableNotificationText = (TextView) fragment.getView().findViewById(R.id.expandable_notification);
+		TextView expandableNotificationText = (TextView) view.findViewById(R.id.expandable_notification);
 		expandableNotificationText.setText(TEMP_TEXT);
 
 		fragment.onResume();
@@ -130,7 +133,7 @@ public class SettingsFragmentTest {
 
 	@Test
 	public void onResumeUpdatesVibrateText() {
-		TextView vibrateText = (TextView) fragment.getView().findViewById(R.id.vibrate_label);
+		TextView vibrateText = (TextView) view.findViewById(R.id.vibrate_label);
 		vibrateText.setText(TEMP_TEXT);
 
 		fragment.onResume();
@@ -142,7 +145,7 @@ public class SettingsFragmentTest {
 	
 	@Test
 	public void onResumeUpdatesPlayNotificationSoundText() {
-		TextView playNotificationSoundText = (TextView) fragment.getView().findViewById(R.id.play_notification_sound_label);
+		TextView playNotificationSoundText = (TextView) view.findViewById(R.id.play_notification_sound_label);
 		playNotificationSoundText.setText(TEMP_TEXT);
 
 		fragment.onResume();
@@ -154,7 +157,7 @@ public class SettingsFragmentTest {
 	
 	@Test
 	public void onResumeUpdatesShowOnBootText() {
-		TextView showOnBootText = (TextView) fragment.getView().findViewById(R.id.show_on_boot_label);
+		TextView showOnBootText = (TextView) view.findViewById(R.id.show_on_boot_label);
 		showOnBootText.setText(TEMP_TEXT);
 
 		fragment.onResume();
@@ -166,7 +169,7 @@ public class SettingsFragmentTest {
 
 	@Test
 	public void onResumeUpdatesShowNamePriceText() {
-		TextView showNamePriceText = (TextView) fragment.getView().findViewById(R.id.show_name_price_label);
+		TextView showNamePriceText = (TextView) view.findViewById(R.id.show_name_price_label);
 		showNamePriceText.setText(TEMP_TEXT);
 
 		fragment.onResume();
@@ -178,7 +181,7 @@ public class SettingsFragmentTest {
 	
 	@Test
 	public void onResumeUpdatesNotificationsEnabledGreenText() {
-		TextView notificationsEnabledText = (TextView) fragment.getView().findViewById(R.id.notifications_enabled_label);
+		TextView notificationsEnabledText = (TextView) view.findViewById(R.id.notifications_enabled_label);
 		notificationsEnabledText.setText(TEMP_TEXT);
 
 		fragment.onResume();
@@ -192,7 +195,7 @@ public class SettingsFragmentTest {
 	
 	@Test
 	public void onResumeUpdatesNotificationsEnabledRedText() {
-		TextView notificationsEnabledText = (TextView) fragment.getView().findViewById(R.id.notifications_enabled_label);
+		TextView notificationsEnabledText = (TextView) view.findViewById(R.id.notifications_enabled_label);
 		notificationsEnabledText.setText(TEMP_TEXT);
 
 		pref.edit().putBoolean(Preferences.PREF_ENABLED, false).commit();		
