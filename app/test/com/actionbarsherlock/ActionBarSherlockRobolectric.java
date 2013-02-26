@@ -15,6 +15,11 @@ import com.xtremelabs.robolectric.Robolectric;
  */
 @ActionBarSherlock.Implementation(api = 0)
 public class ActionBarSherlockRobolectric extends ActionBarSherlockNative {
+	
+	public static void registerImplementation() {
+		ActionBarSherlock.registerImplementation(ActionBarSherlockRobolectric.class);
+	}
+	
     public ActionBarSherlockRobolectric(Activity activity, int flags) {
         super(activity, flags);
     }

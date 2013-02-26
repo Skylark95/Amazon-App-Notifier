@@ -17,7 +17,6 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.actionbarsherlock.ActionBarSherlock;
 import com.actionbarsherlock.ActionBarSherlockRobolectric;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.ActionBar.Tab;
@@ -39,12 +38,28 @@ public class AmazonAppNotifierTest {
 	private static final String IS_FIRST_START = "_is_first_start";
 	private static final String TAB_POSITION = "tab_position";
 
-	private static class ActionBarActivityTester extends AmazonAppNotifier {
+	private static class AmazonAppNotifierTestWrapper extends AmazonAppNotifier {
 		
 		private ActionBar actionBar;
 		private MenuInflater menuInflater;
+		
+		public AmazonAppNotifierTestWrapper() {
+			this(buildMockActionBar(), mock(MenuInflater.class));
+		}
 
-		public ActionBarActivityTester(ActionBar actionBar, MenuInflater menuInflater) {
+		private static ActionBar buildMockActionBar() {
+			ActionBar mockActionBar = mock(ActionBar.class);
+			
+			Tab mockTab = mock(Tab.class);
+			when(mockActionBar.newTab()).thenReturn(mockTab);
+			when(mockActionBar.getTabAt(anyInt())).thenReturn(mockTab);
+			when(mockActionBar.getSelectedTab()).thenReturn(mockTab);
+			when(mockTab.setText(anyString())).thenReturn(mockTab);	
+			return mockActionBar;
+		}
+
+		public AmazonAppNotifierTestWrapper(ActionBar actionBar, MenuInflater menuInflater) {
+			ActionBarSherlockRobolectric.registerImplementation();
 			this.actionBar = actionBar;
 			this.menuInflater = menuInflater;
 		}
@@ -58,31 +73,20 @@ public class AmazonAppNotifierTest {
 		public MenuInflater getSupportMenuInflater() {
 			return menuInflater;
 		}		
-		
-		
-		
+				
 	}
 	
 	private SherlockFragmentActivity activity;
-	private SherlockFragmentActivity actionBarActivity;
 	private ActionBar mockActionBar;
 	private MenuInflater mockMenuInflater;
 	private Tab mockTab;
 
 	@Before
     public void setUp() {
-		ActionBarSherlock.registerImplementation(ActionBarSherlockRobolectric.class);
-		mockActionBar = mock(ActionBar.class);
-		mockMenuInflater = mock(MenuInflater.class);
-		
-		mockTab = mock(Tab.class);
-		when(mockActionBar.newTab()).thenReturn(mockTab);
-		when(mockActionBar.getTabAt(anyInt())).thenReturn(mockTab);
-		when(mockActionBar.getSelectedTab()).thenReturn(mockTab);
-		when(mockTab.setText(anyString())).thenReturn(mockTab);		
-		
-		actionBarActivity = new ActionBarActivityTester(mockActionBar, mockMenuInflater);
-		activity = new AmazonAppNotifier();		
+		activity = new AmazonAppNotifierTestWrapper();
+		mockActionBar = activity.getSupportActionBar();
+		mockMenuInflater = activity.getSupportMenuInflater();		
+		mockTab = mockActionBar.newTab();				
 	}
 	
 	@Test
@@ -90,14 +94,14 @@ public class AmazonAppNotifierTest {
 		Tab mockSettingsTab = mock(Tab.class);
 		Tab mockAboutTab = mock(Tab.class);
 		Tab mockDonateTab = mock(Tab.class);
-		String settingsTitle = actionBarActivity.getString(R.string.settings_tab_title);
-		String aboutTitle = actionBarActivity.getString(R.string.about_tab_title);
-		String donateTitle = actionBarActivity.getString(R.string.donate_tab_title);				
+		String settingsTitle = activity.getString(R.string.settings_tab_title);
+		String aboutTitle = activity.getString(R.string.about_tab_title);
+		String donateTitle = activity.getString(R.string.donate_tab_title);				
 		when(mockTab.setText(settingsTitle)).thenReturn(mockSettingsTab);
 		when(mockTab.setText(aboutTitle)).thenReturn(mockAboutTab);
 		when(mockTab.setText(donateTitle)).thenReturn(mockDonateTab);
 		
-		ShadowFragmentActivity shadowFragmentActivity = shadowOf(actionBarActivity);
+		ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
 		shadowFragmentActivity.callOnCreate(null);
 		
 		verify(mockActionBar).addTab(mockSettingsTab);
@@ -107,7 +111,7 @@ public class AmazonAppNotifierTest {
 	
 	@Test
 	public void doesScheduleAlarmsOnFirstStart() {
-		ShadowFragmentActivity shadowFragmentActivity = shadowOf(actionBarActivity);
+		ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
 		shadowFragmentActivity.callOnCreate(null);
 		
 		AlarmManager alarmManager = (AlarmManager) shadowFragmentActivity.getApplicationContext().getSystemService(Context.ALARM_SERVICE);
@@ -118,7 +122,7 @@ public class AmazonAppNotifierTest {
 	
 	@Test
 	public void doesNotScheduleAlarmsIfNotFirstStart() {
-		ShadowFragmentActivity shadowFragmentActivity = shadowOf(actionBarActivity);
+		ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
 		SharedPreferences pref = shadowFragmentActivity.getSharedPreferences(IS_FIRST_START, Context.MODE_PRIVATE);		
 		Editor editor = pref.edit();
 		editor.putBoolean(IS_FIRST_START, false);
@@ -134,7 +138,7 @@ public class AmazonAppNotifierTest {
 	
 	@Test
 	public void doesRestoreSavedTabIfBundleNotNull() {
-		ShadowFragmentActivity shadowFragmentActivity = shadowOf(actionBarActivity);
+		ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
 		Tab mockTab1 = mock(Tab.class);
 		when(mockActionBar.getTabAt(1)).thenReturn(mockTab1);
 		Bundle bundle = new Bundle();
@@ -147,7 +151,7 @@ public class AmazonAppNotifierTest {
 	
 	@Test
 	public void doesNotRestoreSavedTabIfBundleNull() {
-		ShadowFragmentActivity shadowFragmentActivity = shadowOf(actionBarActivity);
+		ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
 		Tab mockTab1 = mock(Tab.class);
 		when(mockActionBar.getTabAt(anyInt())).thenReturn(mockTab1);
 		
@@ -158,7 +162,7 @@ public class AmazonAppNotifierTest {
 	
 	@Test
 	public void doesSaveTabStateWhenCallingOnSaveInstanceState() {
-		ShadowFragmentActivity shadowFragmentActivity = shadowOf(actionBarActivity);
+		ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
 		when(mockTab.getPosition()).thenReturn(2);
 		Bundle bundle = new Bundle();
 		
@@ -170,7 +174,7 @@ public class AmazonAppNotifierTest {
 	public void doesInflateMenuWhenCallingOnCreateOptionsMenu() {
 		Menu mockMenu = mock(Menu.class);
 		
-		actionBarActivity.onCreateOptionsMenu(mockMenu);
+		activity.onCreateOptionsMenu(mockMenu);
 		verify(mockMenuInflater).inflate(R.menu.activity_main, mockMenu);
 	}
 	
@@ -182,7 +186,7 @@ public class AmazonAppNotifierTest {
         when(mockActionBar.getTabAt(2)).thenReturn(mockDonateTab);
         when(mockActionBar.getTabCount()).thenReturn(3);
         
-		actionBarActivity.onOptionsItemSelected(mockDonateMenu);		
+		activity.onOptionsItemSelected(mockDonateMenu);		
 		verify(mockDonateTab).select();
 	}
 	
@@ -221,7 +225,6 @@ public class AmazonAppNotifierTest {
         ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
         Fragment changelogDialog = shadowFragmentActivity.getSupportFragmentManager().findFragmentByTag("changelog");
         
-        assertNotNull(changelogDialog);
         assertEquals(changelogDialog.getArguments().getInt("title"), R.string.changelog_title);
         assertEquals(changelogDialog.getArguments().getInt("html"), R.string.html_changelog);
 	}
@@ -235,7 +238,6 @@ public class AmazonAppNotifierTest {
         ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
         Fragment ukUsersDialog = shadowFragmentActivity.getSupportFragmentManager().findFragmentByTag("ukusers");
         
-        assertNotNull(ukUsersDialog);
         assertEquals(ukUsersDialog.getArguments().getInt("title"), R.string.uk_users_title);
         assertEquals(ukUsersDialog.getArguments().getInt("html"), R.string.html_uk_users);
 	}
