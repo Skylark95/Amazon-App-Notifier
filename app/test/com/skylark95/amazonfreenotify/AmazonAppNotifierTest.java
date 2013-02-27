@@ -241,5 +241,14 @@ public class AmazonAppNotifierTest {
         assertEquals(ukUsersDialog.getArguments().getInt("title"), R.string.uk_users_title);
         assertEquals(ukUsersDialog.getArguments().getInt("html"), R.string.html_uk_users);
 	}
+	
+	@Test
+	public void menuDoesCallSuperForDefault() {
+		MenuItem mockDefaultMenu = mock(MenuItem.class);        
+        when(mockDefaultMenu.getItemId()).thenReturn(0);
+        
+        boolean result = activity.onOptionsItemSelected(mockDefaultMenu);
+        assertEquals(new SherlockFragmentActivity().onOptionsItemSelected(mockDefaultMenu), result);
+	}
 
 }

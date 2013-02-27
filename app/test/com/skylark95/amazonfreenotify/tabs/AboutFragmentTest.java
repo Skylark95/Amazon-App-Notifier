@@ -8,9 +8,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -55,6 +59,17 @@ public class AboutFragmentTest {
         
         assertEquals(ukUsersDialog.getArguments().getInt("title"), R.string.uk_users_title);
         assertEquals(ukUsersDialog.getArguments().getInt("html"), R.string.html_uk_users);
+	}
+	
+	@Test
+	public void doesSetVersionText() throws NameNotFoundException {
+		TextView appVersionText = (TextView) view.findViewById(R.id.about_app_version);
+		
+		PackageManager manager = activity.getPackageManager();
+		PackageInfo info = manager.getPackageInfo(activity.getPackageName(), 0);
+		String expected = activity.getString(R.string.app_version_label) + " " + info.versionName;
+		
+		assertEquals(expected, appVersionText.getText());
 	}
 
 }

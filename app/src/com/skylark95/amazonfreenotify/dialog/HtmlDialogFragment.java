@@ -36,8 +36,9 @@ public class HtmlDialogFragment extends SherlockDialogFragment {
 		super.onCreate(savedInstanceState);
 	}
 
+	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		String html = getSherlockActivity().getResources().getString(getArguments().getInt(KEY_HTML));
+		String html = getSherlockActivity().getString(getArguments().getInt(KEY_HTML));
 		TextView textView = new TextView(getSherlockActivity());
 		textView.setTextSize(TEXT_SIZE);
 		textView.setPadding(PADDING, PADDING, PADDING, PADDING);
