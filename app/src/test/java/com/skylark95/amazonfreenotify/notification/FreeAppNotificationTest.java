@@ -8,21 +8,20 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.net.Uri;
+import android.preference.PreferenceManager;
+import android.support.v4.app.NotificationCompat.Builder;
+
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.skylark95.amazonfreenotify.R;
 import com.skylark95.amazonfreenotify.settings.Preferences;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import com.xtremelabs.robolectric.shadows.ShadowNotificationManager;
-
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
-import android.preference.PreferenceManager;
-import android.support.v4.app.NotificationCompat.Builder;
 
 @RunWith(RobolectricTestRunner.class)
 public class FreeAppNotificationTest {
@@ -119,6 +118,15 @@ public class FreeAppNotificationTest {
 		pref.edit().putString(Preferences.PREF_NOTIFICATION_SOUND, notificationUri).commit();
 		Builder builder = freeAppNotification.getBaseBuilder(mockPendingIntent);
 		assertEquals(Uri.parse(notificationUri), builder.build().sound);
+	}
+	
+	@Test
+	public void baseBuilderDoesSetSoundNotSetSoundIfNoSoundPref() {
+		String notificationUri = "notificationUri";
+		pref.edit().putString(Preferences.PREF_NOTIFICATION_SOUND, notificationUri)
+		.putBoolean(Preferences.PREF_PLAY_NOTIFICATION_SOUND, false).commit();
+		Builder builder = freeAppNotification.getBaseBuilder(mockPendingIntent);
+		assertNull(builder.build().sound);
 	}
 	
 	@Test
