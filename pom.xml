@@ -62,11 +62,11 @@
 		<checkstyle.version>2.9.1</checkstyle.version>
 		<cobertura.version>2.5.2</cobertura.version>
 
-		<android.version>4.2_r1</android.version>
+		<android.version>4.2.2_r2</android.version>
 		<android.platform>17</android.platform>
-		<android-support.version>11</android-support.version>
+		<android-support.version>12</android-support.version>
 
-		<android-maven.version>3.5.0</android-maven.version>
+		<android-maven.version>3.5.1</android-maven.version>
 	</properties>
 
 	<dependencyManagement>
@@ -136,7 +136,7 @@
 			<dependency>
 				<groupId>com.google.android.maps</groupId>
 				<artifactId>maps</artifactId>
-				<version>17_r1</version>
+				<version>17_r2</version>
 				<scope>provided</scope>
 			</dependency>
 		</dependencies>
