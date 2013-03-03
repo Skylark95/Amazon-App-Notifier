@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.skylark95.amazonfreenotify.R;
@@ -75,6 +74,12 @@ public class SimpleAppNotificationTest {
 		buildWithCustomTitle();
 		Notification notification = freeAppNotification.buildNotification();
 		assertEquals(contentTitle + '\n' + contentText, notification.tickerText);
+	}
+	
+	@Test
+	public void shouldShowNotificationIsTrue() {
+		buildWithSimpleTitle();
+		assertTrue(freeAppNotification.shouldShowNotification());
 	}
 
 	private void buildWithSimpleTitle() {

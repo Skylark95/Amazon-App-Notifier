@@ -105,6 +105,7 @@ public class AppDataNotification extends FreeAppNotification {
 	}
 
 	private boolean isAppGame() {
+		Log.i(TAG, "APP CATEGORY = " + freeAppData.getAppCategory());
 		return CATEGORY_GAMES.equals(freeAppData.getAppCategory());
 	}
 

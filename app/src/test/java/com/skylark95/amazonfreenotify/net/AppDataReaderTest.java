@@ -20,12 +20,15 @@ import com.xtremelabs.robolectric.RobolectricTestRunner;
 public class AppDataReaderTest {
 
 	@Test
-	public void appDataReaderMapsValuesCorrectly() throws IOException {
+	public void appDataReaderMapsValuesCorrectly() {
 		File file = new File("src/test/resources/testAppData.html");
-		URL url = file.toURI().toURL();
-		AppDataResponse appData = AppDataReader.downloadAppData(url.toString());
-		
-		assertEquals(getJsonString(file), buildJsonString(appData));		
+		try {
+			URL url = file.toURI().toURL();
+			AppDataResponse appData = AppDataReader.downloadAppData(url.toString());		
+			assertEquals(getJsonString(file), buildJsonString(appData));
+		} catch (IOException e) {
+			fail(e.getMessage());			
+		} 
 	}
 
 	private String getJsonString(File file) throws FileNotFoundException {

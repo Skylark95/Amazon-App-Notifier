@@ -38,7 +38,10 @@ public abstract class FreeAppNotification {
 	
 	public void showNotificationIfNecessary() {
 		if (shouldShowNotification()) {
+			Log.i(TAG, "Showing Notification");
 			showNotification();
+		} else {
+			Log.i(TAG, "NOT Showing Notification");
 		}
 	}
 	
