@@ -15,9 +15,9 @@ import com.skylark95.amazonfreenotify.alarm.FreeAppNotificationListener;
 import com.skylark95.amazonfreenotify.settings.FirstStartPreferences;
 import com.skylark95.amazonfreenotify.settings.Preferences;
 import com.skylark95.amazonfreenotify.tabs.AboutFragment;
+import com.skylark95.amazonfreenotify.tabs.ButtonMenuActions;
 import com.skylark95.amazonfreenotify.tabs.DonateFragment;
 import com.skylark95.amazonfreenotify.tabs.SettingsFragment;
-import com.skylark95.amazonfreenotify.util.ButtonMenuActions;
 import com.skylark95.amazonfreenotify.util.Logger;
 
 /**
@@ -26,9 +26,6 @@ import com.skylark95.amazonfreenotify.util.Logger;
  * @author Derek
  */
 public class AmazonAppNotifier extends SherlockFragmentActivity {
-	
-	private ViewPager viewPager;
-	private TabsAdapter tabsAdapter;
 	
 	private static final String TAB_KEY = "tab_position";	
 	private static final String TAG = Logger.getTag(AmazonAppNotifier.class);
@@ -52,8 +49,8 @@ public class AmazonAppNotifier extends SherlockFragmentActivity {
 	private void buildTabs(Bundle savedInstanceState) {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		viewPager = (ViewPager) findViewById(R.id.pager);
-		tabsAdapter = new TabsAdapter(this, viewPager);		
+		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+		TabsAdapter tabsAdapter = new TabsAdapter(this, viewPager);		
 		tabsAdapter.addTab(actionBar.newTab().setText(getString(R.string.settings_tab_title)), SettingsFragment.class, null);
 		tabsAdapter.addTab(actionBar.newTab().setText(getString(R.string.about_tab_title)), AboutFragment.class, null);
 		tabsAdapter.addTab(actionBar.newTab().setText(getString(R.string.donate_tab_title)), DonateFragment.class, null);

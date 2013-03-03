@@ -1,4 +1,4 @@
-package com.skylark95.amazonfreenotify.util;
+package com.skylark95.amazonfreenotify.tabs;
 
 import android.content.Context;
 import android.content.Intent;

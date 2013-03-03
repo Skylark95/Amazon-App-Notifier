@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.skylark95.amazonfreenotify.R;
 import com.skylark95.amazonfreenotify.settings.Preferences;
-import com.skylark95.amazonfreenotify.util.ButtonMenuActions;
 import com.skylark95.amazonfreenotify.util.Logger;
 import com.skylark95.amazonfreenotify.util.SettingsUtils;
 
@@ -70,7 +69,7 @@ public class SettingsFragment extends SherlockFragment {
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getSherlockActivity());
 
 		setNotificationsEnabledText(view, pref);
-		setNotificationTimeText(view, pref);
+		setNotificationTimeText(view);
 		setNotificationDaysText(view);
 		setNotificationSoundText(view);
 		setShowNamePriceText(view, pref);
@@ -96,7 +95,7 @@ public class SettingsFragment extends SherlockFragment {
 		notificationDaysText.setText(getSherlockActivity().getString(R.string.notification_days_label) + " " + days);
 	}
 
-	private void setNotificationTimeText(View view, SharedPreferences pref) {
+	private void setNotificationTimeText(View view) {
 		TextView noificationTimeText = (TextView) view.findViewById(R.id.notification_time_label);
 		String time = SettingsUtils.getTimeDisplayValue(getSherlockActivity());
 		

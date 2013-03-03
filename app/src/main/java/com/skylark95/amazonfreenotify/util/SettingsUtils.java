@@ -16,7 +16,6 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 
-import com.skylark95.amazonfreenotify.settings.DayOfWeek;
 import com.skylark95.amazonfreenotify.settings.PrefNotificationDays;
 import com.skylark95.amazonfreenotify.settings.Preferences;
 

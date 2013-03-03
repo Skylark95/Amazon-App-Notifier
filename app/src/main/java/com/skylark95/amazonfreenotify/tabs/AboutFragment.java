@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.skylark95.amazonfreenotify.R;
-import com.skylark95.amazonfreenotify.util.ButtonMenuActions;
 import com.skylark95.amazonfreenotify.util.HtmlUtil;
 import com.skylark95.amazonfreenotify.util.Logger;
 
