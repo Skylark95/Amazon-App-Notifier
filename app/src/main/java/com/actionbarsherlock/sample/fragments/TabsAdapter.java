@@ -1,6 +1,7 @@
 package com.actionbarsherlock.sample.fragments;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -36,15 +37,15 @@ public class TabsAdapter extends FragmentPagerAdapter implements ActionBar.TabLi
 	private final Context mContext;
 	private final ActionBar mActionBar;
 	private final ViewPager mViewPager;
-	private final ArrayList<TabInfo> mTabs = new ArrayList<TabInfo>();
+	private final List<TabInfo> mTabs = new ArrayList<TabInfo>();
 
 	static final class TabInfo {
 		private final Class<?> clss;
 		private final Bundle args;
 
-		TabInfo(Class<?> _class, Bundle _args) {
-			clss = _class;
-			args = _args;
+		TabInfo(Class<?> clss, Bundle args) {
+			this.clss = clss;
+			this.args = args;
 		}
 	}
 
