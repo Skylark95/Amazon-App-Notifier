@@ -13,10 +13,9 @@ import android.util.Log;
 import com.skylark95.amazonfreenotify.R;
 import com.skylark95.amazonfreenotify.beans.AppDataResponse;
 import com.skylark95.amazonfreenotify.net.AppDataReader;
-import com.skylark95.amazonfreenotify.net.AppDataReaderImpl;
+import com.skylark95.amazonfreenotify.net.NetworkUtils;
 import com.skylark95.amazonfreenotify.settings.Preferences;
 import com.skylark95.amazonfreenotify.util.Logger;
-import com.skylark95.amazonfreenotify.util.NetworkUtils;
 
 public final class FreeAppNotificationFactory {
 	

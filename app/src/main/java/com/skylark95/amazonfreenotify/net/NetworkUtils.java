@@ -1,4 +1,4 @@
-package com.skylark95.amazonfreenotify.util;
+package com.skylark95.amazonfreenotify.net;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

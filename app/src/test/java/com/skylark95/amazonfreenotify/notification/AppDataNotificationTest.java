@@ -26,6 +26,7 @@ import com.skylark95.amazonfreenotify.beans.FreeAppData;
 import com.skylark95.amazonfreenotify.net.AppDataReader;
 import com.skylark95.amazonfreenotify.net.AppDataReaderImpl;
 import com.skylark95.amazonfreenotify.settings.Preferences;
+import com.skylark95.amazonfreenotify.util.TestUtils;
 import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import com.xtremelabs.robolectric.shadows.ShadowNotification;
@@ -173,14 +174,7 @@ public class AppDataNotificationTest {
 	}
 
 	private void populateFreeAppData() {
-		File file = new File("src/test/resources/testAppData.html");		
-		try {
-			URL url = file.toURI().toURL();
-			AppDataReader appDataReader = new AppDataReaderImpl();
-			freeAppData = appDataReader.downloadAppData(url.toString()).getFreeAppData();
-		} catch (IOException e) {
-			fail(e.getMessage());
-		}
+		freeAppData = TestUtils.readTestAppData().getFreeAppData();
 	}
 
 	private void setSdkInt(int i) {
