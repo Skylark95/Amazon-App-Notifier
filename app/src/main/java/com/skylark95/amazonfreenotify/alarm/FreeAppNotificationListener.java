@@ -9,8 +9,8 @@ import android.util.Log;
 
 import com.commonsware.cwac.wakeful.WakefulIntentService;
 import com.skylark95.amazonfreenotify.service.FreeAppNotificationService;
+import com.skylark95.amazonfreenotify.settings.SettingsUtils;
 import com.skylark95.amazonfreenotify.util.Logger;
-import com.skylark95.amazonfreenotify.util.SettingsUtils;
 
 public class FreeAppNotificationListener implements WakefulIntentService.AlarmListener {
 

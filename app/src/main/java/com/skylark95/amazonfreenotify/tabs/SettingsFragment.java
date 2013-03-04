@@ -15,8 +15,8 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.skylark95.amazonfreenotify.R;
 import com.skylark95.amazonfreenotify.settings.Preferences;
+import com.skylark95.amazonfreenotify.settings.SettingsUtils;
 import com.skylark95.amazonfreenotify.util.Logger;
-import com.skylark95.amazonfreenotify.util.SettingsUtils;
 
 public class SettingsFragment extends SherlockFragment {
 

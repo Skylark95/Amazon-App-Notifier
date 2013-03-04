@@ -16,7 +16,6 @@ import com.commonsware.cwac.wakeful.WakefulIntentService;
 import com.skylark95.amazonfreenotify.R;
 import com.skylark95.amazonfreenotify.alarm.FreeAppNotificationListener;
 import com.skylark95.amazonfreenotify.util.Logger;
-import com.skylark95.amazonfreenotify.util.SettingsUtils;
 
 public class Preferences extends SherlockPreferenceActivity implements OnSharedPreferenceChangeListener {
 	

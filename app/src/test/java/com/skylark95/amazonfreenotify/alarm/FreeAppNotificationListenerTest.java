@@ -16,7 +16,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.commonsware.cwac.wakeful.AlarmReceiver;
 import com.commonsware.cwac.wakeful.WakefulIntentService;
 import com.skylark95.amazonfreenotify.service.FreeAppNotificationService;
-import com.skylark95.amazonfreenotify.util.SettingsUtils;
+import com.skylark95.amazonfreenotify.settings.SettingsUtils;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import com.xtremelabs.robolectric.shadows.ShadowAlarmManager;
 import com.xtremelabs.robolectric.shadows.ShadowAlarmManager.ScheduledAlarm;

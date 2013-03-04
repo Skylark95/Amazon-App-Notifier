@@ -21,7 +21,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.skylark95.amazonfreenotify.R;
 import com.skylark95.amazonfreenotify.service.TestAppNotificationService;
 import com.skylark95.amazonfreenotify.settings.Preferences;
-import com.skylark95.amazonfreenotify.util.SettingsUtils;
+import com.skylark95.amazonfreenotify.settings.SettingsUtils;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import com.xtremelabs.robolectric.shadows.ShadowFragmentActivity;
 import com.xtremelabs.robolectric.shadows.ShadowIntent;

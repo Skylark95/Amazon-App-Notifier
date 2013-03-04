@@ -1,4 +1,4 @@
-package com.skylark95.amazonfreenotify.util;
+package com.skylark95.amazonfreenotify.settings;
 
 import java.util.ArrayList;
 import java.util.Arrays;

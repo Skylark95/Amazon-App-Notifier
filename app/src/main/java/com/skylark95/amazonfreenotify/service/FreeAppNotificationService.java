@@ -7,8 +7,8 @@ import com.commonsware.cwac.wakeful.WakefulIntentService;
 import com.skylark95.amazonfreenotify.net.AppDataReaderImpl;
 import com.skylark95.amazonfreenotify.notification.FreeAppNotification;
 import com.skylark95.amazonfreenotify.notification.FreeAppNotificationFactory;
+import com.skylark95.amazonfreenotify.settings.SettingsUtils;
 import com.skylark95.amazonfreenotify.util.Logger;
-import com.skylark95.amazonfreenotify.util.SettingsUtils;
 
 public class FreeAppNotificationService extends WakefulIntentService {
 	
