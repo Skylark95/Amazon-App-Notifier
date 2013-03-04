@@ -13,6 +13,7 @@ import android.util.Log;
 import com.skylark95.amazonfreenotify.R;
 import com.skylark95.amazonfreenotify.beans.AppDataResponse;
 import com.skylark95.amazonfreenotify.net.AppDataReader;
+import com.skylark95.amazonfreenotify.net.AppDataReaderImpl;
 import com.skylark95.amazonfreenotify.settings.Preferences;
 import com.skylark95.amazonfreenotify.util.Logger;
 import com.skylark95.amazonfreenotify.util.NetworkUtils;
@@ -24,20 +25,20 @@ public final class FreeAppNotificationFactory {
 	private FreeAppNotificationFactory() {
 	}
 
-	public static FreeAppNotification buildNotification(Context context) {
+	public static FreeAppNotification buildNotification(Context context, AppDataReader reader) {
 		Log.v(TAG, "ENTER - buildNotification()");
 		PendingIntent appStore = getAppStoreIntent(context);
-		FreeAppNotification notification = build(context, appStore);
+		FreeAppNotification notification = build(context, appStore, reader);
 		Log.v(TAG, "EXIT - buildNotification()");
 		
 		return notification;
 	}
 
-	private static FreeAppNotification build(Context context, PendingIntent appStore) {
+	private static FreeAppNotification build(Context context, PendingIntent appStore, AppDataReader reader) {
 		FreeAppNotification notification;
 		if (NetworkUtils.isDeviceOnline(context)) {
 			Log.v(TAG, "Building Online Notification");
-			notification = buildOnlineNotification(context, appStore);			
+			notification = buildOnlineNotification(context, appStore, reader);			
 		} else {
 			Log.v(TAG, "Building Offline Notification");
 			notification = buildOfflineNotification(context, appStore);
@@ -45,12 +46,12 @@ public final class FreeAppNotificationFactory {
 		return notification;
 	}
 
-	private static FreeAppNotification buildOnlineNotification(Context context, PendingIntent appStore) {
+	private static FreeAppNotification buildOnlineNotification(Context context, PendingIntent appStore, AppDataReader reader) {
 		FreeAppNotification notification;
 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
 		if (pref.getBoolean(Preferences.PREF_SHOW_NAME_PRICE, true)) {
 			Log.v(TAG, "AppData Notification");
-			notification = buildAppDataNotification(context, appStore);
+			notification = buildAppDataNotification(context, appStore, reader);
 		} else {
 			Log.v(TAG, "Simple Notification");
 			notification = buildSimpleNotification(context, appStore);
@@ -58,11 +59,11 @@ public final class FreeAppNotificationFactory {
 		return notification;
 	}
 
-	private static FreeAppNotification buildAppDataNotification(Context context, PendingIntent appStore) {
+	private static FreeAppNotification buildAppDataNotification(Context context, PendingIntent appStore, AppDataReader reader) {
 		FreeAppNotification notification;
 		AppDataResponse response = null;
 		try {
-			response = AppDataReader.downloadAppData(context.getString(R.string.app_data_url));
+			response = reader.downloadAppData(context.getString(R.string.app_data_url));
 			if (appStore != null) {
 				Log.d(TAG, "AppData Notification - AppStore OK");
 				notification = new AppDataNotification(context, appStore, response.getFreeAppData());

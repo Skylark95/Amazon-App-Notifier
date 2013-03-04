@@ -24,6 +24,7 @@ import android.support.v4.app.NotificationCompat.Builder;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.skylark95.amazonfreenotify.beans.FreeAppData;
 import com.skylark95.amazonfreenotify.net.AppDataReader;
+import com.skylark95.amazonfreenotify.net.AppDataReaderImpl;
 import com.skylark95.amazonfreenotify.settings.Preferences;
 import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
@@ -175,7 +176,8 @@ public class AppDataNotificationTest {
 		File file = new File("src/test/resources/testAppData.html");		
 		try {
 			URL url = file.toURI().toURL();
-			freeAppData = AppDataReader.downloadAppData(url.toString()).getFreeAppData();
+			AppDataReader appDataReader = new AppDataReaderImpl();
+			freeAppData = appDataReader.downloadAppData(url.toString()).getFreeAppData();
 		} catch (IOException e) {
 			fail(e.getMessage());
 		}

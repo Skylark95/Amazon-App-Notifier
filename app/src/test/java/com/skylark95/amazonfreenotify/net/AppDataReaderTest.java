@@ -24,7 +24,8 @@ public class AppDataReaderTest {
 		File file = new File("src/test/resources/testAppData.html");
 		try {
 			URL url = file.toURI().toURL();
-			AppDataResponse appData = AppDataReader.downloadAppData(url.toString());		
+			AppDataReader appDataReader = new AppDataReaderImpl();
+			AppDataResponse appData = appDataReader.downloadAppData(url.toString());		
 			assertEquals(getJsonString(file), buildJsonString(appData));
 		} catch (IOException e) {
 			fail(e.getMessage());			
