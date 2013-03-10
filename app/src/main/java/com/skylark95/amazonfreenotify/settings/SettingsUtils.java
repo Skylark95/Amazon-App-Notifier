@@ -95,7 +95,7 @@ public final class SettingsUtils {
 		if (ringtoneStr != null) {
 			Uri ringtoneUri = Uri.parse(ringtoneStr);
 			Ringtone ringtone = RingtoneManager.getRingtone(context, ringtoneUri);
-			ringtoneName = ringtone.getTitle(context);
+			ringtoneName = ringtone == null ? "Not Selected" : ringtone.getTitle(context);
 		} else {
 			ringtoneName = "Not Selected";
 		}
