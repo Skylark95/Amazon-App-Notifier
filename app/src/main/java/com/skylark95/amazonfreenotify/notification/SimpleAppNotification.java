@@ -50,6 +50,7 @@ public class SimpleAppNotification extends FreeAppNotification {
 
 	@Override
 	protected boolean shouldShowNotification() {
+		Log.v(TAG, "shouldShowNotification = true");
 		return true;
 	}
 	

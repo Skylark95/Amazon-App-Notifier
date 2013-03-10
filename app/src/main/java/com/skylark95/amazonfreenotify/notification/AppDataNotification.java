@@ -94,12 +94,12 @@ public class AppDataNotification extends FreeAppNotification {
 		boolean retVal;
 		
 		if (isShowGames()) {
-			Log.v(TAG, "shouldShowNotification = true");
 			retVal = true;
-		} else {
-			Log.v(TAG, "shouldShowNotification = false");
+		} else {			
 			retVal = !isAppGame();
 		}
+		
+		Log.v(TAG, "shouldShowNotification = " + retVal);
 		
 		return retVal;
 	}
