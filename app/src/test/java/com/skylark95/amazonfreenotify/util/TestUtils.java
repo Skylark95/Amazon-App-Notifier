@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import android.content.Context;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -14,6 +16,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.skylark95.amazonfreenotify.beans.AppDataResponse;
 import com.skylark95.amazonfreenotify.net.AppDataReader;
 import com.skylark95.amazonfreenotify.net.AppDataReaderImpl;
+import com.skylark95.amazonfreenotify.settings.PrefNotificationDays;
 
 public final class TestUtils {
 		
@@ -45,6 +48,18 @@ public final class TestUtils {
 			fail(e.getMessage());			
 		} 
 		return retVal;
+	}
+	
+	public static void allDaysChecked(Context context, boolean checked) {
+		PreferenceManager.getDefaultSharedPreferences(context).edit()
+			.putBoolean(PrefNotificationDays.PREF_NOTIFICATION_DAYS_SUNDAY, checked)
+			.putBoolean(PrefNotificationDays.PREF_NOTIFICATION_DAYS_MONDAY, checked)
+			.putBoolean(PrefNotificationDays.PREF_NOTIFICATION_DAYS_TUESDAY, checked)
+			.putBoolean(PrefNotificationDays.PREF_NOTIFICATION_DAYS_WEDNESDAY, checked)
+			.putBoolean(PrefNotificationDays.PREF_NOTIFICATION_DAYS_THURSDAY, checked)
+			.putBoolean(PrefNotificationDays.PREF_NOTIFICATION_DAYS_FRIDAY, checked)
+			.putBoolean(PrefNotificationDays.PREF_NOTIFICATION_DAYS_SATURDAY, checked)
+			.commit();		
 	}
 
 }
