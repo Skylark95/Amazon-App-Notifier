@@ -21,7 +21,6 @@ import android.preference.PreferenceScreen;
 
 import com.actionbarsherlock.ActionBarSherlockRobolectric;
 import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockPreferenceActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.commonsware.cwac.wakeful.WakefulIntentService;
 import com.skylark95.amazonfreenotify.R;
@@ -29,7 +28,6 @@ import com.skylark95.amazonfreenotify.alarm.FreeAppNotificationListener;
 import com.skylark95.amazonfreenotify.util.TestUtils;
 import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
-import com.xtremelabs.robolectric.res.PreferenceLoader;
 import com.xtremelabs.robolectric.shadows.ShadowAlarmManager;
 import com.xtremelabs.robolectric.shadows.ShadowAlarmManager.ScheduledAlarm;
 import com.xtremelabs.robolectric.shadows.ShadowPreferenceActivity;
@@ -87,9 +85,7 @@ public class PreferencesTest {
 
 		public Map<String, Preference> getMockPrefs() {
 			return mockPrefs;
-		}
-		
-		
+		}		
 		
 	}
 
