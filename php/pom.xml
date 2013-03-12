@@ -5,6 +5,7 @@
 
 	<artifactId>amazonfreenotify-php</artifactId>
 	<name>AmazonAppNotifier-PHP</name>
+	<packaging>php</packaging>
 	<url>http://www.skylark95.com/</url>
 
 	<scm>
@@ -12,13 +13,22 @@
 		<connection>scm:git:git://github.com/Skylark95/Amazon-App-Notifier.git</connection>
 		<developerConnection>scm:git:git@github.com:Skylark95/Amazon-App-Notifier.git</developerConnection>
 	</scm>
-	
+
 	<parent>
 		<groupId>com.skylark95</groupId>
 		<artifactId>amazonfreenotify-parent</artifactId>
 		<version>2.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>de.phpunit</groupId>
+			<artifactId>PHPUnit</artifactId>
+			<type>phar</type>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<finalName>${project.name}</finalName>
@@ -28,19 +38,73 @@
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<configuration>
 					<projectnatures>
-					    <projectnature>org.eclipse.php.core.PHPNature</projectnature>
-					    <projectnature>org.eclipse.wst.common.project.facet.core.nature</projectnature>
-					    <projectnature>org.eclipse.m2e.core.maven2Nature</projectnature>
+						<projectnature>org.eclipse.php.core.PHPNature</projectnature>
+						<projectnature>org.eclipse.wst.common.project.facet.core.nature</projectnature>
+						<projectnature>org.eclipse.m2e.core.maven2Nature</projectnature>
 					</projectnatures>
 					<buildcommands>
-					    <buildcommand>org.eclipse.wst.common.project.facet.core.builder</buildcommand>
-					    <buildcommand>org.eclipse.wst.validation.validationbuilder</buildcommand>
-					    <buildcommand>org.eclipse.dltk.core.scriptbuilder</buildcommand>
-					    <buildcommand>org.eclipse.m2e.core.maven2Builder</buildcommand>
+						<buildcommand>org.eclipse.wst.common.project.facet.core.builder</buildcommand>
+						<buildcommand>org.eclipse.wst.validation.validationbuilder</buildcommand>
+						<buildcommand>org.eclipse.dltk.core.scriptbuilder</buildcommand>
+						<buildcommand>org.eclipse.m2e.core.maven2Builder</buildcommand>
 					</buildcommands>
 				</configuration>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-plugin-plugin
+										</artifactId>
+										<versionRange>
+											[3.2,)
+										</versionRange>
+										<goals>
+											<goal>descriptor</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.phpmaven</groupId>
+				<artifactId>maven-php-plugin</artifactId>
+				<version>${phpmaven.plugin.version}</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>phpdocumentor</report>
+							<report>phpunit-coverage</report>
+							<report>phpunit</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
 
 </project>
