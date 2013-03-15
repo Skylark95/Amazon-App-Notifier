@@ -26,7 +26,7 @@ class AppDataParserTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	public function testLiveDataEqualsExpectedAppDeveloper() {		
-		$this->assertEquals(EXPECTED_APP_TITLE, $this->appData[APP_TITLE]);
+		$this->assertEquals(EXPECTED_APP_DEVELOPER, $this->appData[APP_DEVELOPER]);
 	}
 	
 	public function testLiveDataEqualsExpectedAppListPrice() {		
