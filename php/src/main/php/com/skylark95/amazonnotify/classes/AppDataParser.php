@@ -33,10 +33,10 @@ class AppDataParser {
 	
 	private static function getAppTitle($html) {
 		$retVal = 'Name Not Available';
-		$text = $html->find('span[id=btAsinTitle]', 0)->plaintext;
+		$text = $html->find('span[id=btAsinTitle]', 0);
 		
-		if ($text != null) {
-			$retVal = trim($text);
+		if ($text !== null) {
+			$retVal = trim($text->plaintext);
 		}
 		
 		return $retVal;
@@ -44,10 +44,10 @@ class AppDataParser {
 	
 	private static function getAppListPrice($html) {
 		$retVal = 'N/A';		
-		$text = $html->find('span[id=listPriceValue]', 0)->plaintext;
+		$text = $html->find('span[id=listPriceValue]', 0);
 		
-		if ($text != null) {
-			$retVal = trim($text);
+		if ($text !== null) {
+			$retVal = trim($text->plaintext);
 		}
 		
 		return $retVal;
@@ -58,11 +58,11 @@ class AppDataParser {
 		static $searchKey = 'Developed By:';
 
 		$bucket = AppDataParser::getBucketByName($html, 'Technical Details');
-		if ($bucket == null) return $retVal;
+		if ($bucket === null) return $retVal;
 		
 		foreach($bucket->find('li') as $li) {			
-			$key = $li->find('b', 0)->plaintext;
-			if ($key == $searchKey) {
+			$key = $li->find('strong', 0);
+			if ($key !== null && $key->plaintext === $searchKey) {
 				$text = str_replace($searchKey, '', $li->plaintext);
 				$retVal = trim($text);
 				break;
@@ -72,20 +72,30 @@ class AppDataParser {
 		return $retVal;
 	}
 	
-	private static function getAppCategory($html) {		
+	private static function getAppCategory($html) {
+		$retVal = 'No Category';
 		$bucket = AppDataParser::getBucketByName($html, 'Look for Similar Items by Category');
-		if ($bucket == null) return 'No Category';
+		if ($bucket === null) return $retVal;
 		
-		$text = $bucket->find('a', 1)->plaintext;
-		return $text;		
+		$text = $bucket->find('a', 1);
+		if ($text !== null) {
+			$retVal = $text->plaintext;
+		}
+		
+		return $retVal;		
 	}
 	
 	private static function getAppDescription($html) {
+		$retVal = 'Description Not Available';
 		$bucket = AppDataParser::getBucketByName($html, 'Product Description');
-		if ($bucket == null) return 'Description Not Available';
+		if ($bucket === null) return $retVal;
 		
-		$text = $bucket->find('div[class=aplus]', 0)->plaintext;
-		return trim($text);
+		$text = $bucket->find('div[class=aplus]', 0);
+		if ($text !== null) {
+			$retVal = trim($text->plaintext);
+		}
+		
+		return $retVal;
 	}
 	
 	private static function getBucketByName($html, $name) {
@@ -94,10 +104,10 @@ class AppDataParser {
 		foreach ($html->find('.bucket') as $bucket) {
 			$header1 = $bucket->find('h2', 0);
 			$header2 = $bucket->find('div[class=h2]', 0);
-			if ($header1 != null) $header1 = $header1->plaintext;
-			if ($header2 != null) $header2 = $header2->plaintext;
+			$header1text = $header1 === null ? '' : $header1->plaintext;
+			$header2text = $header2 === null ? '' : $header2->plaintext;
 	
-			if ($header1 == $name || $header2 == $name) {
+			if ($header1text === $name || $header2text === $name) {
 				$retVal = $bucket;
 				break;
 			}
