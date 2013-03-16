@@ -1,16 +1,14 @@
 <?php
 
-require 'libs/simple_html_dom.php';
-require_once 'config/AppData.php';
-
-define("AMAZON_DOMAIN", "http://www.amazon.com");
-define("AMAZON_APPSTORE_URL", "http://www.amazon.com/mobile-apps/b?ie=UTF8&node=2350149011");
-
 class AppDataParser {
 	
-	private function __construct() { }
+	private $html;
+	
+	public function __construct($html) {
+		$this->html = $html;
+	}
 
-	public static function parseToArray() {	
+	public function parseToArray() {	
 		$appUrl = AppDataParser::getAppUrl();
 		$html = file_get_html($appUrl);
 		
@@ -25,15 +23,9 @@ class AppDataParser {
 		return $appData;
 	}
 	
-	private static function getAppUrl() {		
-		$html = file_get_html(AMAZON_APPSTORE_URL);		
-		$url = $html->find('div[class=app-info-name]', 0)->find('a', 0)->href;
-		return AMAZON_DOMAIN . $url;
-	}
-	
-	private static function getAppTitle($html) {
-		$retVal = 'Name Not Available';
-		$text = $html->find('span[id=btAsinTitle]', 0);
+	public function getAppTitle() {
+		$retVal = DEFAULT_APP_TITLE;
+		$text = $this->html->find('span[id=btAsinTitle]', 0);
 		
 		if ($text !== null) {
 			$retVal = trim($text->plaintext);
@@ -42,9 +34,9 @@ class AppDataParser {
 		return $retVal;
 	}
 	
-	private static function getAppListPrice($html) {
-		$retVal = 'N/A';		
-		$text = $html->find('span[id=listPriceValue]', 0);
+	public function getAppListPrice() {
+		$retVal = DEFAULT_APP_LIST_PRICE;		
+		$text = $this->html->find('span[id=listPriceValue]', 0);
 		
 		if ($text !== null) {
 			$retVal = trim($text->plaintext);
@@ -53,11 +45,11 @@ class AppDataParser {
 		return $retVal;
 	}
 	
-	private static function getAppDeveloper($html) {
-		$retVal = 'N/A';		
+	public function getAppDeveloper() {
+		$retVal = DEFAULT_APP_DEVELOPER;		
 		static $searchKey = 'Developed By:';
 
-		$bucket = AppDataParser::getBucketByName($html, 'Technical Details');
+		$bucket = AppDataParser::getBucketByName('Technical Details');
 		if ($bucket === null) return $retVal;
 		
 		foreach($bucket->find('li') as $li) {			
@@ -72,9 +64,9 @@ class AppDataParser {
 		return $retVal;
 	}
 	
-	private static function getAppCategory($html) {
-		$retVal = 'No Category';
-		$bucket = AppDataParser::getBucketByName($html, 'Look for Similar Items by Category');
+	public function getAppCategory() {
+		$retVal = DEFAULT_APP_CATEGORY;
+		$bucket = AppDataParser::getBucketByName('Look for Similar Items by Category');
 		if ($bucket === null) return $retVal;
 		
 		$text = $bucket->find('a', 1);
@@ -85,9 +77,9 @@ class AppDataParser {
 		return $retVal;		
 	}
 	
-	private static function getAppDescription($html) {
-		$retVal = 'Description Not Available';
-		$bucket = AppDataParser::getBucketByName($html, 'Product Description');
+	public function getAppDescription() {
+		$retVal = DEFAULT_APP_DESCRIPTION;
+		$bucket = AppDataParser::getBucketByName('Product Description');
 		if ($bucket === null) return $retVal;
 		
 		$text = $bucket->find('div[class=aplus]', 0);
@@ -98,10 +90,10 @@ class AppDataParser {
 		return $retVal;
 	}
 	
-	private static function getBucketByName($html, $name) {
+	private function getBucketByName($name) {
 		$retVal = null;
 		
-		foreach ($html->find('.bucket') as $bucket) {
+		foreach ($this->html->find('.bucket') as $bucket) {
 			$header1 = $bucket->find('h2', 0);
 			$header2 = $bucket->find('div[class=h2]', 0);
 			$header1text = $header1 === null ? '' : $header1->plaintext;

@@ -27,6 +27,6 @@ local.properties
 .settings/
 
 # PHP
-DB.php
+DBConfig.php
 .buildpath
 libs/
