@@ -13,7 +13,7 @@ require_once 'com/skylark95/amazonnotify/classes/parser/Parser.php';
 
 /**
  * This test class requires updating the constants with today's 
- * app of the day values before running or else the tests will fail. *
+ * app of the day values before running or else the tests will fail.
  */
 class ParserTest extends PHPUnit_Framework_TestCase {
 	

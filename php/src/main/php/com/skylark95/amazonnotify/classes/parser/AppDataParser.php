@@ -7,21 +7,6 @@ class AppDataParser {
 	public function __construct($html) {
 		$this->html = $html;
 	}
-
-	public function parseToArray() {	
-		$appUrl = AppDataParser::getAppUrl();
-		$html = file_get_html($appUrl);
-		
-		$appData = array();
-		$appData[APP_URL] = $appUrl;
-		$appData[APP_TITLE] = AppDataParser::getAppTitle($html);
-		$appData[APP_DEVELOPER] = AppDataParser::getAppDeveloper($html);
-		$appData[APP_LIST_PRICE] = AppDataParser::getAppListPrice($html);
-		$appData[APP_CATEGORY] = AppDataParser::getAppCategory($html);
-		$appData[APP_DESCRIPTION] = AppDataParser::getAppDescription($html);
-		
-		return $appData;
-	}
 	
 	public function getAppTitle() {
 		$retVal = DEFAULT_APP_TITLE;
