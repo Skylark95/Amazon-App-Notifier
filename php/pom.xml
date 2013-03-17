@@ -50,6 +50,19 @@
 					</buildcommands>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.phpmaven</groupId>
+				<artifactId>maven-php-project</artifactId>				
+				<configuration>
+					<executableConfig>
+						<includePath>
+							<path>${project.basedir}/src/main/php/com/skylark95/amazonnotify</path>
+							<path>${project.basedir}/src/test/php/com/skylark95/amazonnotify</path>
+							<path>${project.basedir}/src/test/resources</path>
+						</includePath>
+					</executableConfig>
+				</configuration>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -63,15 +76,9 @@
 							<pluginExecutions>
 								<pluginExecution>
 									<pluginExecutionFilter>
-										<groupId>
-											org.apache.maven.plugins
-										</groupId>
-										<artifactId>
-											maven-plugin-plugin
-										</artifactId>
-										<versionRange>
-											[3.2,)
-										</versionRange>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-plugin-plugin</artifactId>
+										<versionRange>[3.2,)</versionRange>
 										<goals>
 											<goal>descriptor</goal>
 										</goals>

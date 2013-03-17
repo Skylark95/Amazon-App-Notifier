@@ -1,6 +1,7 @@
 <?php
 
-require_once 'ParserException.php';
+require_once 'classes/parser/ParserException.php';
+require_once 'libs/simple_html_dom.php';
 
 class AppStoreParser {
 	
@@ -20,7 +21,7 @@ class AppStoreParser {
 		}
 		
 		$anchor = $appInfoName->find('a', 0);
-		if ($appInfoName === null) {
+		if ($anchor === null) {
 			throw new ParserException('AppStoreParser: Could not find url');
 		}
 		

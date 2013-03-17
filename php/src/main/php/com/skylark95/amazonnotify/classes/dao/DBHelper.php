@@ -11,7 +11,7 @@ class DBHelper {
 	public static function insertTodaysAppData($appData) {
 		$con = DBHelper::getCon();
 		
-		mysql_select_db("skylarkn_amazonnotify_dev", $con);
+		mysql_select_db(DB_NAME, $con);
 
 		$appUrl = mysql_real_escape_string($appData[APP_URL]);
 		$appTitle = mysql_real_escape_string($appData[APP_TITLE]);

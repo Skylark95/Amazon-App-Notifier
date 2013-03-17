@@ -1,7 +1,9 @@
 <?php
 
-require_once 'AppDataParser.php';
-require_once 'AppStoreParser.php';
+require_once 'classes/parser/AppDataParser.php';
+require_once 'classes/parser/AppStoreParser.php';
+require_once 'libs/simple_html_dom.php';
+require_once 'config.php';
 
 class Parser {
 	

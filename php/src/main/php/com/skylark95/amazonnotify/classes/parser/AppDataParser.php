@@ -1,10 +1,16 @@
 <?php
 
+require_once 'libs/simple_html_dom.php';
+require_once 'config.php';
+
 class AppDataParser {
 	
 	private $html;
 	
 	public function __construct($html) {
+		if ($html === null) {
+			throw new InvalidArgumentException('AppDataParser: $html cannot be null');
+		}
 		$this->html = $html;
 	}
 	
