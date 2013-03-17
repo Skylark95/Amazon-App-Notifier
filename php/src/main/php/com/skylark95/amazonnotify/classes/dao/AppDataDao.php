@@ -2,6 +2,7 @@
 
 require_once 'classes/dao/DataAccessException.php';
 require_once 'classes/dao/DBConfig.php';
+require_once 'config.php';
 
 class AppDataDao {
 	

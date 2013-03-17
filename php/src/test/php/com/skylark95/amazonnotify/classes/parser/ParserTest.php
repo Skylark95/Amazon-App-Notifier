@@ -1,19 +1,12 @@
 <?php
 
-define('TEST_DATE', '2013-03-16');
-define('STARTS_WITH_APP_URL', 'http://www.amazon.com/gp/product/B008I3RARW/');
-define('EXPECTED_APP_TITLE', 'Race Rally 3D - Racing Car Arcade Fun');
-define('EXPECTED_APP_DEVELOPER', 'Sulaba Inc');
-define('EXPECTED_APP_LIST_PRICE', '$4.99');
-define('EXPECTED_APP_CATEGORY', 'Games');
-define('STARTS_WITH_APP_DESCRIPTION', 'The Race Rally is the best 3d arcade racing game features day or night rainy mode with lights on or off and six different camera views');
-
+require_once 'classes/parser/ParserTestConfig.php';
 require_once 'classes/parser/Parser.php';
 require_once 'config.php';
 
 /**
- * This test class requires updating the constants with today's 
- * app of the day values before running
+ * This test class requires updating the constants in ParserTestConfig.php  
+ * with today's app of the day values before running
  */
 class ParserTest extends PHPUnit_Framework_TestCase {
 	
@@ -27,7 +20,7 @@ class ParserTest extends PHPUnit_Framework_TestCase {
 	protected function setUp() {
 		$today = date("Y-m-d");
 		if (TEST_DATE != $today) {
-			$this->markTestSkipped("Cannot run test: Update TEST_DATE first.");
+			$this->markTestSkipped("Cannot run test: Update ParserTestConfig.php first.");
 		}
 	}
 	
