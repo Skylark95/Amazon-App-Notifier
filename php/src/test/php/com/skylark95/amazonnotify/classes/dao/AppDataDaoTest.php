@@ -4,6 +4,27 @@ require_once 'classes/dao/AppDataDao.php';
 require_once 'classes/dao/DataAccessException.php';
 require_once 'config.php';
 
+class MysqliMock {
+	
+	public $errno;
+	public $error;
+	public $affected_rows;
+	
+	public function real_escape_string($arg) {		
+	}
+	
+	public function query($arg) {		
+	}
+	
+}
+
+class Mysqli_resultMock {
+	
+	public function fetch_assoc() {
+	}
+	
+}
+
 class AppDataDaoTest extends PHPUnit_Framework_TestCase {
 	
 	/**
@@ -18,7 +39,7 @@ class AppDataDaoTest extends PHPUnit_Framework_TestCase {
 		$appCategory = $appData[APP_CATEGORY];
 		$appDescription = $appData[APP_DESCRIPTION];
 		
-		$mockMysqli = $this->getMock('mysqli', array('query', 'real_escape_string'));
+		$mockMysqli = $this->getMock('MysqliMock', array('query', 'real_escape_string'));
 	
 		$mockMysqli->expects($this->exactly(6))
 				->method('real_escape_string')
@@ -56,7 +77,7 @@ class AppDataDaoTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function throwDataAccessExceptionIfInsertTodaysAppDataFails() {
 		$appData = $this->getAppData();
-		$mockMysqli = $this->getMock('mysqli', array('query', 'real_escape_string'));
+		$mockMysqli = $this->getMock('MysqliMock', array('query', 'real_escape_string'));
 		
 		$mockMysqli->expects($this->exactly(6))
 				->method('real_escape_string')
@@ -77,8 +98,8 @@ class AppDataDaoTest extends PHPUnit_Framework_TestCase {
 	 * @test
 	 */
 	public function verifySelectAppDataForDate() {
-		$mockMysqli = $this->getMock('mysqli', array('query'));
-		$mockMysqli_result = $this->getMock('mysqli_result', array('fetch_assoc'));
+		$mockMysqli = $this->getMock('MysqliMock', array('query'));
+		$mockMysqli_result = $this->getMock('Mysqli_resultMock', array('fetch_assoc'));
 		
 		$appData = $this->getAppData();
 		$mockMysqli_result->expects($this->once())
@@ -99,6 +120,7 @@ class AppDataDaoTest extends PHPUnit_Framework_TestCase {
 								app_description
 							  FROM free_app_of_day
 							  WHERE app_date = '$date'"));
+				
 		
 		$mockMysqli->affected_rows = 1;
 		
@@ -113,7 +135,7 @@ class AppDataDaoTest extends PHPUnit_Framework_TestCase {
 	 * @expectedExceptionMessage AppDataDao: No rows found for 2013-03-17 
 	 */
 	public function selectAppDataForDateWhenNoRecordsThrowsException() {
-		$mockMysqli = $this->getMock('mysqli', array('query'));
+		$mockMysqli = $this->getMock('MysqliMock', array('query'));
 		
 		$date = '2013-03-17';
 		$mockMysqli->expects($this->once())
@@ -132,7 +154,7 @@ class AppDataDaoTest extends PHPUnit_Framework_TestCase {
 	 * @expectedExceptionMessage AppDataDao: Failed to select: (1) Another Error
 	 */
 	public function selectAppDataForDateWhenFailedThrowsException() {
-		$mockMysqli = $this->getMock('mysqli', array('query'));
+		$mockMysqli = $this->getMock('MysqliMock', array('query'));
 		
 		$date = '2013-03-17';
 		$mockMysqli->expects($this->once())
