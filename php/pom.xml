@@ -3,9 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<groupId>com.skylark95</groupId>
 	<artifactId>amazonfreenotify-php</artifactId>
-	<name>AmazonAppNotifier-PHP</name>
 	<packaging>php</packaging>
+	
+	<name>AmazonAppNotifier-PHP</name>
+	<description>Open source rewrite of Amazon App Notifier</description>
 	<url>http://www.skylark95.com/</url>
 
 	<scm>
@@ -15,16 +18,50 @@
 	</scm>
 
 	<parent>
-		<groupId>com.skylark95</groupId>
-		<artifactId>amazonfreenotify-parent</artifactId>
-		<version>2.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
-	</parent>
+        <groupId>org.phpmaven</groupId>
+        <artifactId>php-parent-pom</artifactId>
+        <version>2.0.2</version>
+    </parent>
 
+	<developers>
+		<developer>
+			<name>Derek</name>
+			<email>skylark95atc@gmail.com</email>
+			<id>skylark95</id>
+			<url>http://www.skylark95.com/</url>
+			<timezone>-6</timezone>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>GPL v3</name>
+			<url>http://www.gnu.org/licenses/gpl.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/Skylark95/Amazon-App-Notifier/issues</url>
+	</issueManagement>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<phpmaven.release.number>2.0.2</phpmaven.release.number>
+        <phpunit.version>3.6.10</phpunit.version>
+	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>de.phpunit</groupId>
 			<artifactId>PHPUnit</artifactId>
+			<version>${phpunit.version}</version>
 			<type>phar</type>
 			<scope>test</scope>
 		</dependency>
