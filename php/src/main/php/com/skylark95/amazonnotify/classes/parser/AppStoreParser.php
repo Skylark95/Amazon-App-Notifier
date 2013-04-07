@@ -10,6 +10,8 @@ class AppStoreParser {
 	public function __construct($html) {
 		if ($html === null) {
 			throw new InvalidArgumentException('AppStoreParser: $html cannot be null');
+		} else if (!$html) {
+			throw new ParserException('AppStoreParser: An error occoured loading the page');
 		}
 		$this->html = $html;
 	}

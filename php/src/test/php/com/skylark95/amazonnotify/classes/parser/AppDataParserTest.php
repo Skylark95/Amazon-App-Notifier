@@ -1,6 +1,7 @@
 <?php
 
 require_once 'classes/parser/AppDataParser.php';
+require_once 'classes/parser/ParserException.php';
 require_once 'libs/simple_html_dom.php';
 
 class AppDataParserTest extends PHPUnit_Framework_TestCase {
@@ -18,6 +19,15 @@ class AppDataParserTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function appStoreParserThrowsExceptionIfNullHtml() {
 		new AppDataParser(null);
+	}
+	
+	/**
+	 * @test
+	 * @expectedException ParserException
+	 * @expectedExceptionMessage AppDataParser: An error occoured loading the page
+	 */
+	public function appStoreParserThrowsExceptionIfFalseHtml() {
+		new AppDataParser(false);
 	}
 
 	/**

@@ -18,6 +18,15 @@ class AppStoreParserTest extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * @test
+	 * @expectedException ParserException
+	 * @expectedExceptionMessage AppStoreParser: An error occoured loading the page
+	 */
+	public function appStoreParserThrowsParserExceptionIfFalseHmtl() {
+		new AppStoreParser(false);
+	}
+	
+	/**
+	 * @test
 	 */
 	public function canGetAppOfTheDayUrl() {
 		$htmlStr = file_get_contents('AppStoreParserTestResource.html', true);

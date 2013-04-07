@@ -1,6 +1,7 @@
 <?php
 
 require_once 'libs/simple_html_dom.php';
+require_once 'classes/parser/ParserException.php';
 require_once 'config.php';
 
 class AppDataParser {
@@ -10,6 +11,8 @@ class AppDataParser {
 	public function __construct($html) {
 		if ($html === null) {
 			throw new InvalidArgumentException('AppDataParser: $html cannot be null');
+		} else if (!$html) {
+			throw new ParserException('AppDataParser: An error occoured loading the page');
 		}
 		$this->html = $html;
 	}
