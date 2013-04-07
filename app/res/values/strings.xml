@@ -76,7 +76,7 @@
 
     <!-- Donate Tab -->
     <string name="donate_tab_title">Donate</string>
-    <string name="donate_description_text">This app is and always will be free without ads.  If you would like to support it\'s development send a donation!</string>
+    <string name="donate_description_text">This app is and always will be free without ads.  If you would like to support it\'s development send a donation!\n\nNote: Donations are currently not enabled in the beta.  You can however click the Donate button to purchase the old paid app ;)</string>
     <string name="donations_prompt">Select an amount</string>
     <string name="donate_button">Donate</string>
 
@@ -87,4 +87,7 @@
         <item>$5</item>
         <item>$10</item>
     </string-array>
+    
+    <!-- v1 deprecated -->
+    <bool name="using_emulator">false</bool>
 </resources>

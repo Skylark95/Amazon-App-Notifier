@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.skylark95.amazonfreenotify"
     android:versionCode="7"
-    android:versionName="2.0-dev" >
+    android:versionName="2.0-SNAPSHOT" >
 
     <uses-sdk
         android:minSdkVersion="7"

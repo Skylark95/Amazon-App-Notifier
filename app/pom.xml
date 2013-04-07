@@ -147,6 +147,9 @@
 					<sdk>
 						<platform>17</platform>
 					</sdk>
+					<zipalign>
+						<skip>false</skip>
+					</zipalign>
 					<undeployBeforeDeploy>true</undeployBeforeDeploy>
 				</configuration>
 				<extensions>true</extensions>
@@ -353,7 +356,7 @@
 				<artifactId>cobertura-maven-plugin</artifactId>
 				<version>${cobertura.version}</version>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
@@ -361,15 +364,15 @@
 				<reportSets>
 					<reportSet>
 						<reports>
-						    <report>index</report>
-						    <report>summary</report>
-						    <report>license</report>
-						    <report>project-team</report>
-						    <report>scm</report>
-						    <report>issue-tracking</report>
+							<report>index</report>
+							<report>summary</report>
+							<report>license</report>
+							<report>project-team</report>
+							<report>scm</report>
+							<report>issue-tracking</report>
 							<report>dependency-management</report>
-							<report>dependencies</report>							
-							<report>dependency-convergence</report>							
+							<report>dependencies</report>
+							<report>dependency-convergence</report>
 							<report>plugin-management</report>
 							<report>plugins</report>
 						</reports>
@@ -380,5 +383,54 @@
 		</plugins>
 	</reporting>
 
-
+	<profiles>
+		<profile>
+			<id>sign</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-jarsigner-plugin</artifactId>
+						<version>1.2</version>
+						<executions>
+							<execution>
+								<id>signing</id>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<phase>package</phase>
+								<inherited>true</inherited>
+								<configuration>
+									<archiveDirectory></archiveDirectory>
+									<includes>
+										<include>target/*.apk</include>
+									</includes>
+									<keystore>${android.keystorepath}</keystore>
+									<storepass>${android.storepasword}</storepass>
+									<keypass>${android.keypassword}</keypass>
+									<alias>${android.keyalias}</alias>
+									<arguments>
+										<argument>-sigalg</argument>
+										<argument>MD5withRSA</argument>
+										<argument>-digestalg</argument>
+										<argument>SHA1</argument>
+									</arguments>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+						<artifactId>android-maven-plugin</artifactId>
+						<inherited>true</inherited>
+						<configuration>
+							<sign>
+								<debug>false</debug>
+							</sign>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

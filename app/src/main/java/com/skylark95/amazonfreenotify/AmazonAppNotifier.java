@@ -1,5 +1,6 @@
 package com.skylark95.amazonfreenotify;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -10,9 +11,8 @@ import com.actionbarsherlock.sample.fragments.TabsAdapter;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.commonsware.cwac.wakeful.WakefulIntentService;
-import com.skylark95.amazonfreenotify.alarm.FreeAppNotificationListener;
 import com.skylark95.amazonfreenotify.settings.FirstStartPreferences;
+import com.skylark95.amazonfreenotify.settings.FirstStartPreferences.FirstStartTask;
 import com.skylark95.amazonfreenotify.settings.Preferences;
 import com.skylark95.amazonfreenotify.tabs.AboutFragment;
 import com.skylark95.amazonfreenotify.tabs.ButtonMenuActions;
@@ -35,16 +35,24 @@ public class AmazonAppNotifier extends SherlockFragmentActivity {
 		super.onCreate(savedInstanceState);
 		Log.v(TAG, "ENTER - onCreate()");
 		Preferences.setDefaultValues(this);
-		setContentView(R.layout.activity_amazon_app_notifier);
-		buildTabs(savedInstanceState);
-		
 		if (FirstStartPreferences.isFirstStart(this)) {
-			Log.v(TAG, "Schedule alarms for first time");
-			WakefulIntentService.scheduleAlarms(new FreeAppNotificationListener(), this);
-		}		
-		
+            new FirstStartTask(this).execute();
+        }
+		setContentView(R.layout.activity_amazon_app_notifier);
+		buildTabs(savedInstanceState);		
 		Log.v(TAG, "EXIT - onCreate()");
 	}
+	
+	public void reload() {
+	    Intent intent = getIntent();
+	    overridePendingTransition(0, 0);
+	    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+	    finish();
+	    
+	    overridePendingTransition(0, 0);
+	    startActivity(intent);
+	}
+
 
 	private void buildTabs(Bundle savedInstanceState) {
 		ActionBar actionBar = getSupportActionBar();
