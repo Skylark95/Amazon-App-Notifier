@@ -6,6 +6,7 @@
 	<groupId>com.skylark95</groupId>
 	<artifactId>amazonfreenotify-php</artifactId>
 	<packaging>php</packaging>
+	<version>2.0-BETA</version>
 	
 	<name>AmazonAppNotifier-PHP</name>
 	<description>Open source rewrite of Amazon App Notifier</description>
@@ -73,6 +74,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
 				<configuration>
 					<projectnatures>
 						<projectnature>org.eclipse.php.core.PHPNature</projectnature>
