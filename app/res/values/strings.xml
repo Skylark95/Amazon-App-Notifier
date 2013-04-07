@@ -6,7 +6,7 @@
     <!-- Notification -->
     <string name="app_store_package">com.amazon.venezia</string>
     <string name="app_store_download_url">http://www.amazon.com/amazonappstoreapp</string>
-    <string name="app_data_url">http://android.skylark95.com/amazonnotify/v2/dev/getAppData.php</string>
+    <string name="app_data_url">http://android.skylark95.com/amazonnotify/v2/getAppData.php?mode=default&amp;app=2.0-BETA</string>
     
     <string name="notification_simple_title">Amazon Free App Notifier</string>
     <string name="notification_simple_text">Click to launch the Amazon Appstore</string>
