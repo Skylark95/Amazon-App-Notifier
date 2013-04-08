@@ -37,6 +37,7 @@ public class AmazonAppNotifierTest {
 	
 	private static final String IS_FIRST_START = "_is_first_start";
 	private static final String TAB_POSITION = "tab_position";
+	private static final String CHANGELOG_KEY = "show_changelog";
 
 	private static class AmazonAppNotifierTestWrapper extends AmazonAppNotifier {
 		

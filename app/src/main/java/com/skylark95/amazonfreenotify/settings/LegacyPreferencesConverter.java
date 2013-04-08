@@ -31,20 +31,24 @@ public final class LegacyPreferencesConverter {
     }
     
     public void convert(Context context) {
-        read(context);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+        convert(context, pref);
+    }
+    
+    public void convert(Context context, SharedPreferences pref) {
+        read(context, pref);
         delete(context);
     }
    
         
-    private void delete(Context context) {
-        FileManager.deleteStartupLegacyFile(context);
+    private void delete(Context context) {        
         FileManager.deleteTimeAndDayLegacyFile(context);
         FileManager.deleteCheckboxesLegacyFile(context);
         FileManager.deleteNotificationSoundLegacyFile(context);
+        FileManager.deleteStartupLegacyFile(context);
     }
 
-    private void read(Context context) {
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+    private void read(Context context, SharedPreferences pref) {        
         readTimeAndDay(context, pref);
         readCheckboxes(context, pref);
         readNotificationSound(context, pref);

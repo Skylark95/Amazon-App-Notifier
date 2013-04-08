@@ -1,17 +1,13 @@
 package com.skylark95.amazonfreenotify.notification;
 
-import static com.xtremelabs.robolectric.Robolectric.*;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import static com.xtremelabs.robolectric.Robolectric.shadowOf;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -21,17 +17,19 @@ import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
-import android.text.Html;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.skylark95.amazonfreenotify.beans.FreeAppData;
-import com.skylark95.amazonfreenotify.net.AppDataReader;
-import com.skylark95.amazonfreenotify.net.AppDataReaderImpl;
 import com.skylark95.amazonfreenotify.settings.Preferences;
 import com.skylark95.amazonfreenotify.util.TestUtils;
 import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import com.xtremelabs.robolectric.shadows.ShadowNotification;
+
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 @RunWith(RobolectricTestRunner.class)
 public class AppDataNotificationTest {

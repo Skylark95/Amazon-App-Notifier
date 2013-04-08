@@ -88,6 +88,4 @@
         <item>$10</item>
     </string-array>
     
-    <!-- v1 deprecated -->
-    <bool name="using_emulator">false</bool>
 </resources>

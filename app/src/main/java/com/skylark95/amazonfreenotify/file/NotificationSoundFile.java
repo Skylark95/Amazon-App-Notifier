@@ -1,12 +1,11 @@
 package com.skylark95.amazonfreenotify.file;
 
-import java.io.Serializable;
-
 import android.content.Context;
+import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 
-import com.skylark95.amazonfreenotify.R;
+import java.io.Serializable;
 
 /**
  * Contains values used to save ringtone settings.
@@ -27,13 +26,11 @@ public class NotificationSoundFile implements Serializable {
 	}
 
 	private void loadDefaults(Context context) {
-		if (!context.getResources().getBoolean(R.bool.using_emulator)) {
-			Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-			ringtoneTitle = RingtoneManager.getRingtone(context, uri).getTitle(context);
-			ringtoneUri = uri.toString();
-		} else {
-			ringtoneTitle = "Default Ringtone";
-			ringtoneUri = "URI";
+		Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+		Ringtone ringtone = RingtoneManager.getRingtone(context, uri);
+		if (ringtone != null) {
+    		ringtoneTitle = ringtone.getTitle(context);
+    		ringtoneUri = uri.toString();
 		}
 
 	}

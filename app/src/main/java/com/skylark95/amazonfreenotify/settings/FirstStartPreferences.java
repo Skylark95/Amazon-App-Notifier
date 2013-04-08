@@ -12,11 +12,12 @@ import android.util.Log;
 import com.commonsware.cwac.wakeful.WakefulIntentService;
 import com.skylark95.amazonfreenotify.AmazonAppNotifier;
 import com.skylark95.amazonfreenotify.alarm.FreeAppNotificationListener;
+import com.skylark95.amazonfreenotify.tabs.ButtonMenuActions;
 import com.skylark95.amazonfreenotify.util.Logger;
 
 public final class FirstStartPreferences {
 
-    private static final String PREF_IS_FIRST_START = "_is_first_start";
+    public static final String PREF_IS_FIRST_START = "_is_first_start";
 
     private static final String TAG = Logger.getTag(FirstStartPreferences.class);
 
@@ -24,8 +25,7 @@ public final class FirstStartPreferences {
     }
 
     public static boolean isFirstStart(Context context) {
-        SharedPreferences pref = context.getSharedPreferences(PREF_IS_FIRST_START,
-                Context.MODE_PRIVATE);
+        SharedPreferences pref = context.getSharedPreferences(PREF_IS_FIRST_START, Context.MODE_PRIVATE);
         boolean firstStart = pref.getBoolean(PREF_IS_FIRST_START, true);
 
         if (firstStart) {
@@ -110,9 +110,8 @@ public final class FirstStartPreferences {
         protected void onPostExecute(Void unused) {
             String message = "Restarting... ";
             Log.i(TAG, message);
-            progressDialog.setMessage(message);
-            context.reload();
             progressDialog.dismiss();
+            context.reloadAndShowChangeLog();
         }
 
     }

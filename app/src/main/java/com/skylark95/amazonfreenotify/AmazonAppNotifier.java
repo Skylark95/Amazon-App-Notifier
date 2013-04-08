@@ -27,28 +27,43 @@ import com.skylark95.amazonfreenotify.util.Logger;
  */
 public class AmazonAppNotifier extends SherlockFragmentActivity {
 	
-	private static final String TAB_KEY = "tab_position";	
+	private static final String TAB_KEY = "tab_position";
+	private static final String CHANGELOG_KEY = "show_changelog";
 	private static final String TAG = Logger.getTag(AmazonAppNotifier.class);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Log.v(TAG, "ENTER - onCreate()");
+		
+		// Only set if not called before
 		Preferences.setDefaultValues(this);
+		
+		// First Start Setup		
 		if (FirstStartPreferences.isFirstStart(this)) {
             new FirstStartTask(this).execute();
         }
+		
+		// Build View
 		setContentView(R.layout.activity_amazon_app_notifier);
-		buildTabs(savedInstanceState);		
+		buildTabs(savedInstanceState);
+		
+		// First Start Changelog
+		Bundle extras = getIntent() != null ? getIntent().getExtras() : null;
+        if (extras != null && extras.getBoolean(CHANGELOG_KEY)) {
+            ButtonMenuActions.showChangelog(getSupportFragmentManager());
+            getIntent().removeExtra(CHANGELOG_KEY);
+        }
+		
 		Log.v(TAG, "EXIT - onCreate()");
 	}
 	
-	public void reload() {
+	public void reloadAndShowChangeLog() {
 	    Intent intent = getIntent();
 	    overridePendingTransition(0, 0);
 	    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-	    finish();
-	    
+	    intent.putExtra(CHANGELOG_KEY, true);	    
+	    finish();	    
 	    overridePendingTransition(0, 0);
 	    startActivity(intent);
 	}
