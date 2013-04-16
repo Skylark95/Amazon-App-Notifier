@@ -5,7 +5,7 @@
 
 	<groupId>com.skylark95</groupId>
 	<artifactId>amazonfreenotify-app</artifactId>
-	<version>2.0-BETA</version>
+	<version>2.0.1-SNAPSHOT</version>
 	<packaging>apk</packaging>
 
 	<name>AmazonAppNotifier-App</name>
@@ -198,13 +198,6 @@
 					<consoleOutput>true</consoleOutput>
 					<configLocation>checkstyle.xml</configLocation>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 
 			<plugin>
@@ -215,13 +208,6 @@
 					<excludeFilterFile>findbugs-exclude.xml</excludeFilterFile>
 					<failOnError>false</failOnError>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 
 			<plugin>
@@ -233,14 +219,6 @@
 					<targetJdk>1.6</targetJdk>
 					<failOnViolation>false</failOnViolation>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>check</goal>
-							<goal>cpd-check</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 
 			<plugin>
@@ -268,15 +246,6 @@
 						</excludes>
 					</instrumentation>
 				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>clean</goal>
-							<goal>cobertura</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 
 		</plugins>
@@ -405,10 +374,10 @@
 									<includes>
 										<include>target/*.apk</include>
 									</includes>
-									<keystore>${android.keystorepath}</keystore>
-									<storepass>${android.storepasword}</storepass>
-									<keypass>${android.keypassword}</keypass>
-									<alias>${android.keyalias}</alias>
+									<keystore>${android.sign.keystore}</keystore>
+									<storepass>${android.sign.storepass}</storepass>
+									<keypass>${android.sign.keypass}</keypass>
+									<alias>${android.sign.alias}</alias>
 									<arguments>
 										<argument>-sigalg</argument>
 										<argument>MD5withRSA</argument>
