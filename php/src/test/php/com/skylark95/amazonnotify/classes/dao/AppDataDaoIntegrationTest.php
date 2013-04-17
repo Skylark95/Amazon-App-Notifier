@@ -31,11 +31,13 @@ class AppDataDaoIntegrationTest extends PHPUnit_Framework_TestCase {
 	
 	private $conn;
 	private $appData;
+	private $appDate;
 	
 	protected function setUp() {
 		$this->conn = AppDataDao::connect();
+		$this->appDate = date("Y-m-d");
 		$this->appData = array(
-				APP_DATE => '2013-04-06',
+				APP_DATE => $this->appDate,
 				APP_URL =>  'http://www.amazon.com/gp/product/B00B4KBIZG/',
 				APP_TITLE => 'Shape Buster',
 				APP_DEVELOPER => 'Game Pill',
@@ -58,14 +60,19 @@ class AppDataDaoIntegrationTest extends PHPUnit_Framework_TestCase {
 	
 	/**
 	 * @test
-	 * @expectedException DataAccessException
-	 * @expectedExceptionMessage AppDataDao: Failed to insert: (1062) Duplicate entry '2013-04-06' for key 'PRIMARY'
 	 */
 	public function doesNotAllowMultipleInserts() {
 		$this->deleteAppIfExists();
 		$dao = new AppDataDao($this->conn);
 		$dao->insertTodaysAppData($this->appData);
-		$dao->insertTodaysAppData($this->appData);
+		
+		try {
+			$dao->insertTodaysAppData($this->appData);
+			$this->fail("Expected DataAccessException");
+		} catch(DataAccessException $e) {
+			$expected = "AppDataDao: Failed to insert: (1062) Duplicate entry '$this->appDate' for key 'PRIMARY'";
+			$this->assertEquals($expected, $e->getMessage());
+		}
 	}
 	
 	/**
@@ -79,8 +86,7 @@ class AppDataDaoIntegrationTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	private function deleteAppIfExists() {
-		$appDate = $this->appData[APP_DATE];
-		$this->conn->query("DELETE FROM free_app_of_day WHERE app_date = '$appDate'");
+		$this->conn->query("DELETE FROM free_app_of_day WHERE app_date = '$this->appDate'");
 	}
 	
 }
