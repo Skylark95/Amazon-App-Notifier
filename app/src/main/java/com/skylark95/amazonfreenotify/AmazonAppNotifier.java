@@ -66,8 +66,10 @@ public class AmazonAppNotifier extends SherlockFragmentActivity {
         }
 		
 		// Build View
-		setContentView(R.layout.activity_amazon_app_notifier);
-		buildTabs(savedInstanceState);
+		ViewPager viewPager = new ViewPager(this);
+		viewPager.setId(R.id.pager);
+		setContentView(viewPager);
+		buildTabs(savedInstanceState, viewPager);
 		
 		// First Start Changelog
 		Bundle extras = getIntent() != null ? getIntent().getExtras() : null;
@@ -90,10 +92,9 @@ public class AmazonAppNotifier extends SherlockFragmentActivity {
 	}
 
 
-	private void buildTabs(Bundle savedInstanceState) {
+	private void buildTabs(Bundle savedInstanceState, ViewPager viewPager) {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 		TabsAdapter tabsAdapter = new TabsAdapter(this, viewPager);		
 		tabsAdapter.addTab(actionBar.newTab().setText(getString(R.string.settings_tab_title)), SettingsFragment.class, null);
 		tabsAdapter.addTab(actionBar.newTab().setText(getString(R.string.about_tab_title)), AboutFragment.class, null);
