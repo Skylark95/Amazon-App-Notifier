@@ -10,7 +10,7 @@ Will also be available to download from [F-Droid](https://f-droid.org/) once out
 
 About
 -----
-**Version**: 2.0-BETA
+**Version**: 2.0.1-BETA
 
 Amazon App Notifier is a free and open source notification manager for providing notifications for the free app of the day on the [Amazon Appstore](http://www.amazon.com/mobile-apps/b?ie=UTF8&node=2350149011).
 
@@ -79,6 +79,13 @@ add more features but make no guarantees on the amount of time it will take for 
 
 Changelog
 ---------
+<b>Version 2.0.1-BETA - 4/18/2013</b><br/>
+	If the device does not have an internet connection on boot, wait for a maximum of 5 minutes for a connection before timing out and displaying device offline notification<br/>
+	<br/>
+	Change notification text on offline notification to "No Internet Connection"<br/>
+	<br/>
+	Hopefully fixed force close bug that occurred on some Android 2.1 devices<br/>
+	<br/>
 <b>Version 2.0-BETA - 4/8/2013</b><br/>
 	Early beta release of newly rewritten app due to recent changes on Amazon breaking notifications for previous versions<br/>
 	<br/>
