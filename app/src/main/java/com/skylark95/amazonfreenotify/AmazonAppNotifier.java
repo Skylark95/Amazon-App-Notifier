@@ -32,6 +32,7 @@ import com.actionbarsherlock.sample.fragments.TabsAdapter;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.skylark95.amazonfreenotify.settings.AppVersionPreferences;
 import com.skylark95.amazonfreenotify.settings.FirstStartPreferences;
 import com.skylark95.amazonfreenotify.settings.FirstStartPreferences.FirstStartTask;
 import com.skylark95.amazonfreenotify.settings.Preferences;
@@ -60,32 +61,25 @@ public class AmazonAppNotifier extends SherlockFragmentActivity {
 		// Only set if not called before
 		Preferences.setDefaultValues(this);
 		
-		// First Start Setup		
-		if (FirstStartPreferences.isFirstStart(this)) {
-            new FirstStartTask(this).execute();
-        }
-		
 		// Build View
 		ViewPager viewPager = new ViewPager(this);
 		viewPager.setId(R.id.pager);
 		setContentView(viewPager);
 		buildTabs(savedInstanceState, viewPager);
 		
-		// First Start Changelog
-		Bundle extras = getIntent() != null ? getIntent().getExtras() : null;
-        if (extras != null && extras.getBoolean(CHANGELOG_KEY)) {
+		// First Start Setup      
+        if (FirstStartPreferences.isFirstStart(this)) {
+            new FirstStartTask(this).execute();
+        } else if (AppVersionPreferences.isAppUpdate(this)) {
             ButtonMenuActions.showChangelog(getSupportFragmentManager());
-            getIntent().removeExtra(CHANGELOG_KEY);
         }
 		
 		Log.v(TAG, "EXIT - onCreate()");
 	}
 	
-	public void reloadAndShowChangeLog() {
+	public void reload() {
 	    Intent intent = getIntent();
-	    overridePendingTransition(0, 0);
-	    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-	    intent.putExtra(CHANGELOG_KEY, true);	    
+	    overridePendingTransition(0, 0);	    
 	    finish();	    
 	    overridePendingTransition(0, 0);
 	    startActivity(intent);

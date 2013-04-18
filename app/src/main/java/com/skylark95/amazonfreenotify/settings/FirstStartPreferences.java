@@ -131,7 +131,7 @@ public final class FirstStartPreferences {
             String message = "Restarting... ";
             Log.i(TAG, message);
             progressDialog.dismiss();
-            context.reloadAndShowChangeLog();
+            context.reload();
         }
 
     }

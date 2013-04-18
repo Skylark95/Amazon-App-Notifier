@@ -35,6 +35,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 import com.skylark95.amazonfreenotify.R;
+import com.skylark95.amazonfreenotify.settings.AppVersionPreferences;
 import com.skylark95.amazonfreenotify.util.HtmlUtil;
 import com.skylark95.amazonfreenotify.util.Logger;
 
@@ -85,23 +86,7 @@ public class AboutFragment extends SherlockFragment {
 
 	private void setVersionText(View view) {
 		TextView versionTextView = (TextView) view.findViewById(R.id.about_app_version);
-		versionTextView.setText(getString(R.string.app_version_label) + " " + getVersion());
+		versionTextView.setText(getString(R.string.app_version_label) + " " + AppVersionPreferences.getVersion(getSherlockActivity()));
 	}
-	
-	private String getVersion() {
-		Log.v(TAG, "Getting application version");
-		String result = "";
-        try {
-            PackageManager manager = getSherlockActivity().getPackageManager();
-            PackageInfo info = manager.getPackageInfo(getSherlockActivity().getPackageName(), 0);
-
-            result = info.versionName;
-        } catch (NameNotFoundException e) {
-            Log.w(TAG, "WARNING Unable to get application version: " + e.getMessage());
-            result = "N/A";
-        }
-
-        return result;
-    }
 
 }
