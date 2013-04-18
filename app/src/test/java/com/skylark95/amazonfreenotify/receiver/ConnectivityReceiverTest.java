@@ -1,13 +1,35 @@
+/*
+ * This file is part of Amazon App Notifier
+ *
+ * Copyright 2013 Derek <derek@skylark95.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Amazon App Notifier is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Amazon App Notifier. if not, If not, see <http://www.gnu.org/licenses/>.
+ *
+ *
+ */
+
 package com.skylark95.amazonfreenotify.receiver;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import android.content.BroadcastReceiver;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 
 import com.skylark95.amazonfreenotify.settings.OnBootPreferences;
 import com.skylark95.amazonfreenotify.settings.Preferences;
-import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 
 import org.junit.Before;
@@ -16,13 +38,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(RobolectricTestRunner.class)
-public class ConnectivityReceiverTest extends AbstractNotifyOnBootTest {
+public class ConnectivityReceiverTest extends NotifyOnBootIntentFilterTest {
 
     
     @Before
     public void setUp() {        
-        receiver = new ConnectivityReceiver();
-        finishSetup();
+        super.setUp();
         OnBootPreferences.setOnBoot(activity, true);
     }
     
@@ -83,10 +104,33 @@ public class ConnectivityReceiverTest extends AbstractNotifyOnBootTest {
         whenOnRecieveIsCalled();
         assertFalse(OnBootPreferences.isOnBoot(activity));
     }
+    
+    @Test
+    public void onReceiveDoesNotEnableConnectivityReceiverIfConnected() {
+        givenAMatchingAction();
+        givenConnectionStatusIs(true);
+        whenOnRecieveIsCalled();
+        thenConnectivityReceiverIs(PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
+    }  
+    
+    @Test
+    public void onReceiveDoesCancelTimeoutAlarm() {
+        givenAMatchingAction();
+        givenConnectionStatusIs(true);
+        OnBootNotificationHandler.scheduleTimeout(activity);
+        thenTimeoutRecieverIs(true);
+        whenOnRecieveIsCalled();
+        thenTimeoutRecieverIs(false);
+    }
 
     @Override
     protected void givenAMatchingAction() {
         when(mockIntent.getAction()).thenReturn(ConnectivityManager.CONNECTIVITY_ACTION);        
+    }
+
+    @Override
+    protected BroadcastReceiver registerReceiverUnderTest() {
+        return new ConnectivityReceiver();
     }
 
 }

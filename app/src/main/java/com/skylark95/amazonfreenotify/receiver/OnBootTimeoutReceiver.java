@@ -26,24 +26,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.skylark95.amazonfreenotify.settings.OnBootPreferences;
 import com.skylark95.amazonfreenotify.util.Logger;
 
-public class NotifyOnBootReceiver extends BroadcastReceiver {
-	
-	private static final String TAG = Logger.getTag(NotifyOnBootReceiver.class);
+public class OnBootTimeoutReceiver extends BroadcastReceiver {
+    
+    private static final String TAG = Logger.getTag(OnBootTimeoutReceiver.class);
 
-	@Override
-	public void onReceive(Context context, Intent intent) {
-		if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-			Log.d(TAG, Intent.ACTION_BOOT_COMPLETED);
-			OnBootPreferences.setOnBoot(context, true);
-			OnBootNotificationHandler.handleOnBootNotification(context);
-		}
-	}
-
-	
-	
-	
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        Log.d(TAG, "onReceive");
+        OnBootNotificationHandler.timeoutNotification(context);
+    }
 
 }

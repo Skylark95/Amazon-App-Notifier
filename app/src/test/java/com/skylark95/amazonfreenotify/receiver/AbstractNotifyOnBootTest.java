@@ -25,6 +25,7 @@ import static com.xtremelabs.robolectric.Robolectric.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import android.app.AlarmManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -41,10 +42,13 @@ import com.skylark95.amazonfreenotify.settings.Preferences;
 import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.res.RobolectricPackageManager;
 import com.xtremelabs.robolectric.res.RobolectricPackageManager.ComponentState;
+import com.xtremelabs.robolectric.shadows.ShadowAlarmManager;
+import com.xtremelabs.robolectric.shadows.ShadowAlarmManager.ScheduledAlarm;
 import com.xtremelabs.robolectric.shadows.ShadowFragmentActivity;
 import com.xtremelabs.robolectric.shadows.ShadowIntent;
 import com.xtremelabs.robolectric.shadows.ShadowNetworkInfo;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public abstract class AbstractNotifyOnBootTest {
@@ -54,7 +58,9 @@ public abstract class AbstractNotifyOnBootTest {
     protected Intent mockIntent;
     protected SharedPreferences pref;
     
-    protected void finishSetup() {
+    @Before
+    public void setUp() {
+        receiver = registerReceiverUnderTest();
         activity = new SherlockFragmentActivity();
         mockIntent = mock(Intent.class);
         pref = PreferenceManager.getDefaultSharedPreferences(activity);
@@ -85,40 +91,9 @@ public abstract class AbstractNotifyOnBootTest {
         thenTheServiceIsNotStarted();
     }
     
-    @Test
-    public void onReceiveDoesNotStartNotificationServiceIfNotMatchingAction() {     
-        givenConnectionStatusIs(true);
-        whenOnRecieveIsCalled();
-        thenTheServiceIsNotStarted();
-    }
-
-    @Test
-    public void onReceiveDoesNotStartNotificationServiceIfNotConnectedAndOnlineNotification() {
-        givenAMatchingAction();
-        givenConnectionStatusIs(false);
-        pref.edit()
-            .putBoolean(Preferences.PREF_SHOW_ON_BOOT, true)
-            .putBoolean(Preferences.PREF_SHOW_NAME_PRICE, true)
-            .commit();          
-        
-        whenOnRecieveIsCalled();
-        thenTheServiceIsNotStarted();
-    }
-    
-    @Test
-    public void onReceiveDoesStartNotificationServiceIfNotConnectedAndOfflineNotification() {
-        givenAMatchingAction();
-        givenConnectionStatusIs(false);
-        pref.edit()
-            .putBoolean(Preferences.PREF_SHOW_ON_BOOT, true)
-            .putBoolean(Preferences.PREF_SHOW_NAME_PRICE, false)
-            .commit();      
-        
-        whenOnRecieveIsCalled();
-        thenTheServiceIsStarted();
-    }
-    
     protected abstract void givenAMatchingAction();
+    
+    protected abstract BroadcastReceiver registerReceiverUnderTest();
 
     protected void givenConnectionStatusIs(boolean isConnected) {
         ConnectivityManager connMgr = (ConnectivityManager) Robolectric.application.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -127,13 +102,16 @@ public abstract class AbstractNotifyOnBootTest {
         shadowNetworkInfo.setConnectionStatus(isConnected);
     }
     
-    protected void thenConnectivityReceiverIs(boolean b) {
+    protected void thenConnectivityReceiverIs(int enabledState) {
         ComponentName componentName = new ComponentName(activity, ConnectivityReceiver.class);
         RobolectricPackageManager packageManager = (RobolectricPackageManager) activity.getPackageManager();
         ComponentState componentState = packageManager.getComponentState(componentName);
-        if (b){
+        if (enabledState == PackageManager.COMPONENT_ENABLED_STATE_ENABLED){
             assertEquals(componentState.flags, PackageManager.DONT_KILL_APP);
             assertEquals(componentState.newState, PackageManager.COMPONENT_ENABLED_STATE_ENABLED);
+        } else if (enabledState == PackageManager.COMPONENT_ENABLED_STATE_DISABLED) {
+            assertEquals(componentState.flags, PackageManager.DONT_KILL_APP);
+            assertEquals(componentState.newState, PackageManager.COMPONENT_ENABLED_STATE_DISABLED);  
         } else {
             assertNull(componentState);
         }
@@ -152,6 +130,21 @@ public abstract class AbstractNotifyOnBootTest {
         Intent startedService = shadowFragmentActivity.getNextStartedService();
         
         assertNull(startedService);
+    }
+    
+    protected void thenTimeoutRecieverIs(boolean b) {
+        AlarmManager alarmManager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
+        ShadowAlarmManager shadowAlarmManager = shadowOf(alarmManager);
+        ScheduledAlarm nextScheduledAlarm = shadowAlarmManager.getNextScheduledAlarm();
+        
+        if (b) {
+            assertNotNull(nextScheduledAlarm);
+            assertEquals(AlarmManager.ELAPSED_REALTIME_WAKEUP, nextScheduledAlarm.type);
+            assertEquals(ConnectivityReceiver.TIMEOUT, nextScheduledAlarm.triggerAtTime);            
+        } else {
+            assertNull(nextScheduledAlarm);
+        }
+            
     }
 
     protected void whenOnRecieveIsCalled() {

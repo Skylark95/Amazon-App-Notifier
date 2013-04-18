@@ -34,7 +34,7 @@ import com.skylark95.amazonfreenotify.util.Logger;
 
 public class ConnectivityReceiver extends BroadcastReceiver {
     
-    private static final long TIMEOUT = 300000L;
+    public static final long TIMEOUT = 300000L;
     private static final String TAG = Logger.getTag(ConnectivityReceiver.class);
 
     @Override
@@ -42,8 +42,9 @@ public class ConnectivityReceiver extends BroadcastReceiver {
         if (ConnectivityManager.CONNECTIVITY_ACTION.equals(intent.getAction())) {
             Log.d(TAG, ConnectivityManager.CONNECTIVITY_ACTION);
             setEnabled(context, false);
+            OnBootNotificationHandler.cancelTimeout(context);
             if (SystemClock.elapsedRealtime() < TIMEOUT) {
-                OnBootNotificationHandler.handleNotification(context);
+                OnBootNotificationHandler.handleOnBootNotification(context);
             } else {
                 Log.w(TAG, "ConnectivityReceiver has timed out");
             }

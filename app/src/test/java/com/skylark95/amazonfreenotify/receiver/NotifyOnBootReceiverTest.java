@@ -24,24 +24,19 @@ package com.skylark95.amazonfreenotify.receiver;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 
 import com.skylark95.amazonfreenotify.settings.OnBootPreferences;
 import com.skylark95.amazonfreenotify.settings.Preferences;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(RobolectricTestRunner.class)
-public class NotifyOnBootReceiverTest extends AbstractNotifyOnBootTest {
-
-	@Before
-	public void setUp() {
-		receiver = new NotifyOnBootReceiver();
-		finishSetup();
-	}
+public class NotifyOnBootReceiverTest extends NotifyOnBootIntentFilterTest {
 	
 	@Test
 	public void onReceiveDoesSetOnBootPrefFlagIfOnBootNormal() {
@@ -78,20 +73,18 @@ public class NotifyOnBootReceiverTest extends AbstractNotifyOnBootTest {
         givenAMatchingAction();
         givenConnectionStatusIs(true);
         whenOnRecieveIsCalled();
-        thenConnectivityReceiverIs(false);
-    }   
-    
-    @Test
-    public void onReceiveDoesEnableConnectivityReceiverIfOnBootNormal() {
-        givenAMatchingAction();
-        givenConnectionStatusIs(false);
-        whenOnRecieveIsCalled();
-        thenConnectivityReceiverIs(true);
-    }   
+        thenConnectivityReceiverIs(PackageManager.COMPONENT_ENABLED_STATE_DEFAULT);
+    }  
+     
 
     @Override
     protected void givenAMatchingAction() {
         when(mockIntent.getAction()).thenReturn(Intent.ACTION_BOOT_COMPLETED);
+    }
+
+    @Override
+    protected BroadcastReceiver registerReceiverUnderTest() {
+        return new NotifyOnBootReceiver();
     }    
 
 }

@@ -70,6 +70,8 @@
 		  </intent-filter>
 		</receiver>
 		
+        <receiver android:name="com.skylark95.amazonfreenotify.receiver.OnBootTimeoutReceiver" />
+		
     </application>
 
 </manifest>
