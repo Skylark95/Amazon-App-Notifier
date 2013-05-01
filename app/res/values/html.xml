@@ -31,6 +31,15 @@
 		<body>
 			Please send feature requests or bug reports to derek@skylark95.com or submit them on GitHub project page<br/>
 			<br/>
+			<b>Version 2.1-BETA - TODO</b><br/>
+				Changed App name and icon at the request of Amazon.  If you can design a better icon email me ;)<br/>
+				<br/>
+				Enabled in-app donations<br/>
+				<br/>
+				TODO: Added help button and help screen<br/>
+				<br/>
+				TODO: Added button to rate this app<br/>
+				<br/>
 			<b>Version 2.0.1-BETA - 4/18/2013</b><br/>
 				If the device does not have an internet connection on boot, wait for a maximum of 5 minutes for a connection before timing out and displaying device offline notification<br/>
 				<br/>

@@ -144,6 +144,7 @@
 					<androidManifestFile>${project.basedir}/AndroidManifest.xml</androidManifestFile>
 					<resourceDirectory>${project.basedir}/res</resourceDirectory>
 					<genDirectory>${project.basedir}/gen</genDirectory>
+					<genDirectoryAidl>${project.basedir}/gen</genDirectoryAidl>
 					<sdk>
 						<platform>17</platform>
 					</sdk>

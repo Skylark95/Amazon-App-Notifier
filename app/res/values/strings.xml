@@ -77,16 +77,11 @@
 
     <!-- Donate Tab -->
     <string name="donate_tab_title">Donate</string>
-    <string name="donate_description_text">This app is and always will be free without ads.  If you would like to support it\'s development send a donation!\n\nNote: Donations are currently not enabled in the beta.  You can however click the Donate button to purchase the old paid app ;)</string>
+    <string name="donate_description_text">This app is and always will be free without ads.  If you would like to support it\'s development send a donation!</string>
     <string name="donations_prompt">Select an amount</string>
     <string name="donate_button">Donate</string>
-
-    <string-array name="donation_amounts">
-        <item>$1</item>
-        <item>$2</item>
-        <item>$3</item>
-        <item>$5</item>
-        <item>$10</item>
-    </string-array>
+    
+    <string name="donate_thank_you_dialog">Thanks for Donating!  Hope you continue to enjoy the app!</string>
+    <string name="google_play_no_billing">The Google Play Billing Service is not available on this device</string>    
     
 </resources>

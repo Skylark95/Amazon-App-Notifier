@@ -24,8 +24,7 @@
             android:id="@+id/donation_amounts_spinner"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight=".50"
-            android:entries="@array/donation_amounts" />
+            android:layout_weight=".50" />
 
         <Button
             android:id="@+id/donate_button"

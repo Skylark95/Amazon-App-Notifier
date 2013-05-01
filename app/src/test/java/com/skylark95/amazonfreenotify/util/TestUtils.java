@@ -1,5 +1,5 @@
 /*
- * This file is part of Amazon App Notifier
+ * This file is part of Amazon App Notifier (Free App Notifier for Amazon)
  *
  * Copyright 2013 Derek <derek@skylark95.com>
  *
@@ -23,13 +23,10 @@ package com.skylark95.amazonfreenotify.util;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-
 import android.content.Context;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
@@ -38,6 +35,10 @@ import com.skylark95.amazonfreenotify.beans.AppDataResponse;
 import com.skylark95.amazonfreenotify.net.AppDataReader;
 import com.skylark95.amazonfreenotify.net.AppDataReaderImpl;
 import com.skylark95.amazonfreenotify.settings.PrefNotificationDays;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
 public final class TestUtils {
 		
@@ -51,11 +52,15 @@ public final class TestUtils {
 	 * 
 	 * @see http://stackoverflow.com/questions/11333354/how-can-i-test-fragments-with-robolectric
 	 */
-	public static void startFragment(Fragment fragment) {
-		FragmentManager fragmentManager = new SherlockFragmentActivity().getSupportFragmentManager();
+	public static void startFragment(Fragment fragment, FragmentActivity activity) {
+	    FragmentManager fragmentManager = activity.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(fragment, null);
         fragmentTransaction.commit();
+	}
+	
+	public static void startFragment(Fragment fragment) {
+		startFragment(fragment, new SherlockFragmentActivity());
 	}
 	
 	public static AppDataResponse readTestAppData() {
