@@ -126,8 +126,9 @@ public class GoogleDonation implements Donation {
     public void shutdown() {
         // very important:
         Log.d(TAG, "Destroying helper.");
-        if (helper != null)
+        if (helper != null) {
             helper.dispose();
+        }
         helper = null;
     }
 

@@ -1,5 +1,5 @@
 /*
- * This file is part of Amazon App Notifier
+ * This file is part of Amazon App Notifier (Free App Notifier for Amazon)
  *
  * Copyright 2013 Derek <derek@skylark95.com>
  *
@@ -21,9 +21,6 @@
 
 package com.skylark95.amazonfreenotify.tabs;
 
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;

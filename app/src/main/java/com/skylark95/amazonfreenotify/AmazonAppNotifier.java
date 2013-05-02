@@ -164,8 +164,7 @@ public class AmazonAppNotifier extends SherlockFragmentActivity {
         if (iabHelper != null && iabHelper.handleActivityResult(requestCode, resultCode, data)) {
             Log.d(TAG, "onActivityResult handled by IABUtil.");
             iabHelper = null;
-        }
-        else {
+        } else {
             // not handled, so handle it ourselves (here's where you'd
             // perform any handling of activity results not related to in-app
             // billing...

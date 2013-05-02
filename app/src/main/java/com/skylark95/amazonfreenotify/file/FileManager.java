@@ -1,5 +1,5 @@
 /*
- * This file is part of Amazon App Notifier
+ * This file is part of Amazon App Notifier (Free App Notifier for Amazon)
  *
  * Copyright 2013 Derek <derek@skylark95.com>
  *
@@ -39,11 +39,11 @@ import android.util.Log;
 @Deprecated
 public class FileManager {
 
-	public final static String TIME_AND_DATE_FILENAME = "TimeAndDay.ser";
-	public final static String NOTIFICATION_SOUND_FILENAME = "NotificationSound.ser";
-	public final static String CHECKBOXES_FILENAME = "Checkbox.ser";
-	public final static String STARTUP_FILENAME = "Startup.ser";
-	private final static String CLASS_NAME = FileManager.class.getSimpleName();
+	public static final String TIME_AND_DATE_FILENAME = "TimeAndDay.ser";
+	public static final String NOTIFICATION_SOUND_FILENAME = "NotificationSound.ser";
+	public static final String CHECKBOXES_FILENAME = "Checkbox.ser";
+	public static final String STARTUP_FILENAME = "Startup.ser";
+	private static final String CLASS_NAME = FileManager.class.getSimpleName();
 
 	/**
 	 * Read settings for {@link TimeAndDayFile}.

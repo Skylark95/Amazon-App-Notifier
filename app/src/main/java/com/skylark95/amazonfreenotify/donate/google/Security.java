@@ -36,11 +36,14 @@ import java.security.spec.X509EncodedKeySpec;
  * make it harder for an attacker to replace the code with stubs that treat all
  * purchases as verified.
  */
-public class Security {
+public final class Security {
     private static final String TAG = "IABUtil/Security";
 
     private static final String KEY_FACTORY_ALGORITHM = "RSA";
     private static final String SIGNATURE_ALGORITHM = "SHA1withRSA";
+    
+    private Security() {
+    }
 
     /**
      * Verifies that the data was signed with the given signature, and returns

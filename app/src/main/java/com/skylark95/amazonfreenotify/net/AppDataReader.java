@@ -1,5 +1,5 @@
 /*
- * This file is part of Amazon App Notifier
+ * This file is part of Amazon App Notifier (Free App Notifier for Amazon)
  *
  * Copyright 2013 Derek <derek@skylark95.com>
  *
@@ -27,6 +27,6 @@ import com.skylark95.amazonfreenotify.beans.AppDataResponse;
 
 public interface AppDataReader {
 	
-	public AppDataResponse downloadAppData(String appDataUrl) throws IOException;
+	AppDataResponse downloadAppData(String appDataUrl) throws IOException;
 
 }

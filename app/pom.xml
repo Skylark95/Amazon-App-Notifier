@@ -10,7 +10,7 @@
 
 	<name>AmazonAppNotifier-App</name>
 	<url>http://www.skylark95.com/</url>
-	<description>Open source rewrite of Amazon App Notifier</description>
+	<description>Open source rewrite of Amazon App Notifier (Free App Notifier For Amazon)</description>
 
 	<scm>
 		<url>https://github.com/Skylark95/Amazon-App-Notifier/</url>
@@ -53,14 +53,14 @@
 		<jxr.version>2.3</jxr.version>
 		<pmd.version>2.7.1</pmd.version>
 		<reports.version>2.6</reports.version>
-		<findbugs.version>2.5.2</findbugs.version>
-		<checkstyle.version>2.9.1</checkstyle.version>
+		<findbugs.version>2.5.2</findbugs.version>		
 		<cobertura.version>2.5.2</cobertura.version>
-
+		<checkstyle.version>2.9.1</checkstyle.version>
+		
 		<android.version>4.2.2_r2</android.version>
 		<android.platform>17</android.platform>
 		<android-support.version>12</android-support.version>
-		<android-maven.version>3.5.1</android-maven.version>
+		<android-maven.version>3.5.1</android-maven.version>		
 	</properties>
 
 	<dependencies>
@@ -196,6 +196,7 @@
 				<configuration>
 					<consoleOutput>true</consoleOutput>
 					<configLocation>checkstyle.xml</configLocation>
+					<excludes>**/Base64.java,**/IabHelper.java</excludes>
 				</configuration>
 			</plugin>
 
