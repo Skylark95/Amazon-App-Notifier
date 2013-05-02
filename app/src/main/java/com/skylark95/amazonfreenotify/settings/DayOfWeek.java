@@ -21,6 +21,7 @@
 
 package com.skylark95.amazonfreenotify.settings;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -103,9 +104,11 @@ public enum DayOfWeek {
 		return abbrDays;
 	}
 		
-	private static class WeekOrder implements Comparator<DayOfWeek> {
+	private static class WeekOrder implements Comparator<DayOfWeek>, Serializable {
 
-		@Override
+        private static final long serialVersionUID = 1706498867719736366L;
+
+        @Override
 		public int compare(DayOfWeek lhs, DayOfWeek rhs) {
 			return lhs.getNum().compareTo(rhs.getNum());
 		}

@@ -316,16 +316,6 @@ public class IabHelper {
             OnIabPurchaseFinishedListener listener, String extraData) {
         launchPurchaseFlow(act, sku, ITEM_TYPE_INAPP, requestCode, listener, extraData); 
     }
-    
-    public void launchSubscriptionPurchaseFlow(Activity act, String sku, int requestCode, 
-            OnIabPurchaseFinishedListener listener) {
-        launchSubscriptionPurchaseFlow(act, sku, requestCode, listener, "");
-    }
-    
-    public void launchSubscriptionPurchaseFlow(Activity act, String sku, int requestCode, 
-            OnIabPurchaseFinishedListener listener, String extraData) {
-        launchPurchaseFlow(act, sku, ITEM_TYPE_SUBS, requestCode, listener, extraData); 
-    }
 
     /**
      * Initiate the UI flow for an in-app purchase. Call this method to initiate an in-app purchase,
@@ -354,7 +344,8 @@ public class IabHelper {
         if (itemType.equals(ITEM_TYPE_SUBS) && !mSubscriptionsSupported) {
             IabResult r = new IabResult(IABHELPER_SUBSCRIPTIONS_NOT_AVAILABLE, 
                     "Subscriptions are not available.");
-            if (listener != null) listener.onIabPurchaseFinished(r, null);
+            flagEndAsync();
+            if (listener != null) listener.onIabPurchaseFinished(r, null);            
             return;
         }
 
@@ -366,7 +357,8 @@ public class IabHelper {
                 logError("Unable to buy item, Error response: " + getResponseDesc(response));
 
                 result = new IabResult(response, "Unable to buy item");
-                if (listener != null) listener.onIabPurchaseFinished(result, null);
+                flagEndAsync();
+                if (listener != null) listener.onIabPurchaseFinished(result, null);                
                 return;
             }
 

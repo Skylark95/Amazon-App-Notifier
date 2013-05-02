@@ -31,8 +31,7 @@ public class IabResult {
         mResponse = response;
         if (message == null || message.trim().length() == 0) {
             mMessage = IabHelper.getResponseDesc(response);
-        }
-        else {
+        } else {
             mMessage = message + " (response: " + IabHelper.getResponseDesc(response) + ")";
         }
     }

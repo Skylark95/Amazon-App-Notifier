@@ -3,9 +3,12 @@
         <Package name="~.*actionbarsherlock.*" />
     </Match>
     <Match>
+        <Package name="~.*google.*" />
+    </Match>
+    <Match>
         <Class name="~.*\.R\$.*"/>
     </Match>
     <Match>
-    <Class name="~.*\.Manifest\$.*"/>
+    	<Class name="~.*\.Manifest\$.*"/>
     </Match>
 </FindBugsFilter>

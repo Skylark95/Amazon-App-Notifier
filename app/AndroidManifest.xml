@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.skylark95.amazonfreenotify"
-    android:versionCode="10"
-    android:versionName="2.1-SNAPSHOT" >
+    android:versionCode="11"
+    android:versionName="2.1-SNAPSHOT-11" >
 
     <uses-sdk
         android:minSdkVersion="7"
