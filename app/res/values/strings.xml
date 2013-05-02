@@ -81,7 +81,12 @@
     <string name="donations_prompt">Select an amount</string>
     <string name="donate_button">Donate</string>
     
+    <!-- Donate Dialog -->
     <string name="donate_thank_you_dialog">Thanks for Donating!  Hope you continue to enjoy the app!</string>
-    <string name="google_play_no_billing">The Google Play Billing Service is not available on this device</string>    
+    <string name="google_play_no_billing">The Google Play Billing Service is not available on this device</string>   
+    
+    <!-- Menu -->
+    <string name="menu_help_text">Help</string>
+    <string name="menu_rate_text">Rate</string>
     
 </resources>

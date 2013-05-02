@@ -45,7 +45,7 @@ import com.skylark95.amazonfreenotify.tabs.SettingsFragment;
 import com.skylark95.amazonfreenotify.util.Logger;
 
 /**
- * Main Activity for Amazon App Notifier
+ * Main Activity for Amazon App Notifier (Free App Notifier For Amazon)
  * 
  * @author Derek
  */
