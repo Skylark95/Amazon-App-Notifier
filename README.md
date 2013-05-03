@@ -1,5 +1,5 @@
-Amazon App Notifier
-===================
+Amazon App Notifier (Free App Notifier For Amazon)
+==================================================
 
 Download
 --------
@@ -10,9 +10,9 @@ Will also be available to download from [F-Droid](https://f-droid.org/) once out
 
 About
 -----
-**Version**: 2.0.1-BETA
+**Version**: 2.1-BETA
 
-Amazon App Notifier is a free and open source notification manager for providing notifications for the free app of the day on the [Amazon Appstore](http://www.amazon.com/mobile-apps/b?ie=UTF8&node=2350149011).
+Free App Notifier For Amazon is a free and open source notification manager for providing notifications for the free app of the day on the [Amazon Appstore](http://www.amazon.com/mobile-apps/b?ie=UTF8&node=2350149011).
 
 Developer: Derek (Skylark95)<br/>
 Contact: [derek@skylark95.com](mailto:derek@skylark95.com)<br/>
@@ -33,12 +33,16 @@ Donations
 ---------
 Donations are always appreciated for supporting development of this app.
 
-Donations are currently not enabled in the app but you can donate $1 now by purchasing the old version of this app below:<br/>
-[https://play.google.com/store/apps/details?id=com.skylark95.amazonnotify](https://play.google.com/store/apps/details?id=com.skylark95.amazonnotify)
+Donations of $1, $2, $3, $5 and $10 can be submitted though the app as of version 2.1-BETA
+
+PayPal will also be utilized once out of beta.
 
 Help & How To
 -------------
-Consider this section on my TODO list.
+Can be accessed though the app by pressing the question mark as of version 2.1-BETA
+
+Help is also available on the [wiki](https://github.com/Skylark95/Amazon-App-Notifier/wiki/Help-and-How-To)
+
 
 Code Statistics
 ---------------
@@ -67,18 +71,23 @@ Please email me ([derek@skylark95.com](mailto:derek@skylark95.com)) if you find 
 
 Planned updates
 ---------------
-These are updates I have planned for the future.
+As I work full time and writing Android apps is just a hobby of mine, I'll try my best to add more features but make no guarantees on the amount of time it will take for updates
 
-As I work full time and writing Android apps just a hobby of mine I try my best to<br/>
-add more features but make no guarantees on the amount of time it will take for updates
+To see any ideas that I have come up with but have not implemented yet, please see the [issues section](https://github.com/Skylark95/Amazon-App-Notifier/issues) on the Github project page and look for items tagged [enhancement](https://github.com/Skylark95/Amazon-App-Notifier/issues?labels=enhancement).
 
-* If device is offline try notification again a few times (Planned fix for showing device offline when starting the phone)
-* Options to filter by more categories
-* Some potential suggestions I receive from users
+You can also request features by emailing me ([derek@skylark95.com](mailto:derek@skylark95.com)) or creating a [new issue](https://github.com/Skylark95/Amazon-App-Notifier/issues/new) with the tag *enhancement*.
 
-
-Changelog
----------
+Recent Changes
+--------------
+<b>Version 2.1-BETA - TODO</b><br/>
+    Changed App name and icon at the request of Amazon.  If you can design a better icon email me ;)<br/>
+    <br/>
+    Enabled in-app donations<br/>
+    <br/>
+    Added help button and help screen<br/>
+    <br/>
+    Added button to rate this app<br/>
+	<br/>
 <b>Version 2.0.1-BETA - 4/18/2013</b><br/>
 	If the device does not have an internet connection on boot, wait for a maximum of 5 minutes for a connection before timing out and displaying device offline notification<br/>
 	<br/>
@@ -99,28 +108,6 @@ Changelog
 	App developer section of notification sometimes shows private policy after the developer name<br/>
 	<br/>
 	Please email me (derek@skylark95.com) if you find any bugs or report them on the GitHub project page<br/>
-	<br/>
-<b>Version 1.0.4 - 9/22/2012</b><br/>
-	Small bug fix affecting free version<br/>
-	<br/>
-<b>Version 1.0.3 - 9/21/2012</b><br/>
-	If Appstore not found on phone, clicking notification redirects to download page<br/>
-	<br/>
-	Fix startup crash on some phones<br/>
-	<br/>
-<b>Version 1.0.2 - 9/21/2012</b><br/>
-	Added Option to disable vibrate<br/>
-	<br/>
-<b>Version 1.0.1 - 08/13/2012</b><br/>	
-	Fixed notifications not appearing on some phones (4.0 ICS, 4.1 Jelly Bean)<br/>
-	<br/>
-	Increased timeout for reading app name and price to 30 seconds (Less error downloading data messages on a slow connection)<br/>
-	<br/>
-	Fixed notification so when clicked on it launches the appstore on the main store page instead of the last open view (Get to downloading your free app faster!)<br/>
-	<br/>
-	 Works great on my new Nexus 7! :)<br/>
-	<br/>
-<b>Version 1.0 - 05/16/2012</b><br/>
-	Initial release
-	<br/>
+
+**For the full changelog, see the [wiki](https://github.com/Skylark95/Amazon-App-Notifier/wiki/Changelog)**
 
