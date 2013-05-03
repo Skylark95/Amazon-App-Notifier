@@ -1,12 +1,13 @@
-Amazon App Notifier (Free App Notifier For Amazon)
-==================================================
+Amazon App Notifier
+===================
+### *Free App Notifier For Amazon* ###
+
 
 Download
 --------
 The app is available on [Google Play](https://play.google.com/store/apps/details?id=com.skylark95.amazonfreenotify).
 
 Will also be available to download from [F-Droid](https://f-droid.org/) once out of beta status
-
 
 About
 -----
@@ -43,11 +44,9 @@ Can be accessed though the app by pressing the question mark as of version 2.1-B
 
 Help is also available on the [wiki](https://github.com/Skylark95/Amazon-App-Notifier/wiki/Help-and-How-To)
 
-
 Code Statistics
 ---------------
 See page at [Ohloh.net](http://www.ohloh.net/p/Amazon-App-Notifier)
-
 
 Open Source Tools
 -----------------
