@@ -66,7 +66,7 @@ Bug Reports
 I'll be honest and say this beta release was put together somewhat quickly due to the previous version breaking...
 
 If you find bugs that my current scope of testing didn't seem to catch<br/>
-Please email me ([derek@skylark95.com](mailto:derek@skylark95.com)) if you find any bugs or report them on the GitHub project page
+Please email me ([derek@skylark95.com](mailto:derek@skylark95.com)) if you find any bugs or [report them](https://github.com/Skylark95/Amazon-App-Notifier/issues/new?labels=bug) on the GitHub project page
 
 Planned updates
 ---------------
