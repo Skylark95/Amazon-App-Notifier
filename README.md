@@ -74,7 +74,7 @@ As I work full time and writing Android apps is just a hobby of mine, I'll try m
 
 To see any ideas that I have come up with but have not implemented yet, please see the [issues section](https://github.com/Skylark95/Amazon-App-Notifier/issues) on the Github project page and look for items tagged [enhancement](https://github.com/Skylark95/Amazon-App-Notifier/issues?labels=enhancement).
 
-You can also request features by emailing me ([derek@skylark95.com](mailto:derek@skylark95.com)) or creating a [new issue](https://github.com/Skylark95/Amazon-App-Notifier/issues/new) with the tag *enhancement*.
+You can also request features by emailing me ([derek@skylark95.com](mailto:derek@skylark95.com)) or creating a [new enhancement](https://github.com/Skylark95/Amazon-App-Notifier/issues/new?labels=enhancement).
 
 Recent Changes
 --------------
