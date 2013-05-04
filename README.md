@@ -24,7 +24,7 @@ Permissions
 This app requires the following permissions.  Permissions labeled with *"optional"* can be changed in settings to no longer be used.
 
 * **Full Network Access**: *Optional*, Used for downloading app data for the free app of the day
-* **Google Play Billing Service**: Will be used in the future for accepting donations
+* **Google Play Billing Service**: Used for accepting donations
 * **View Network Connections**: *Optional*, Needed to see if device is offline before downloading app data.
 * **Run At Startup**: *Optional*, will show notification at startup
 * **Control Vibration**: *Optional*, vibrate when notification fires
