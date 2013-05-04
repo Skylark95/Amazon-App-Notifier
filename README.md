@@ -78,14 +78,16 @@ You can also request features by emailing me ([derek@skylark95.com](mailto:derek
 
 Recent Changes
 --------------
-<b>Version 2.1-BETA - TODO</b><br/>
-    Changed App name and icon at the request of Amazon.  If you can design a better icon email me ;)<br/>
-    <br/>
-    Enabled in-app donations<br/>
-    <br/>
-    Added help button and help screen<br/>
-    <br/>
-    Added button to rate this app<br/>
+<b>Version 2.1-BETA - 5/4/2013</b><br/>
+	Changed App icon at the request of Amazon.  If you can design a better icon email me ;)<br/>
+	<br/>
+	Changed App name at the request of Amazon.  Will move in you app drawer as name is now Free App Notifier<br/>
+	<br/>
+	Enabled in-app donations<br/>
+	<br/>
+	Added help button and help screen<br/>
+	<br/>
+	Added button to rate this app<br/>
 	<br/>
 <b>Version 2.0.1-BETA - 4/18/2013</b><br/>
 	If the device does not have an internet connection on boot, wait for a maximum of 5 minutes for a connection before timing out and displaying device offline notification<br/>
