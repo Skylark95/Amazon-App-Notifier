@@ -31,8 +31,10 @@
 		<body>
 			Please send feature requests or bug reports to derek@skylark95.com or submit them on GitHub project page<br/>
 			<br/>
-			<b>Version 2.1-BETA - TODO</b><br/>
-				Changed App name and icon at the request of Amazon.  If you can design a better icon email me ;)<br/>
+			<b>Version 2.1-BETA - 5/4/2013</b><br/>
+				Changed App icon at the request of Amazon.  If you can design a better icon email me ;)<br/>
+				<br/>
+				Changed App name at the request of Amazon.  Will move in you app drawer as name is now Free App Notifier<br/>
 				<br/>
 				Enabled in-app donations<br/>
 				<br/>
@@ -115,6 +117,44 @@
 		    <b>Sky</b>
 		</body>
 		</html>
+        ]]>
+    </string>
+    <string name="html_help_text">
+        <![CDATA[
+		<b>Changing Settings</b>
+		<p>Settings for this app can be access by pressing the <em>change settings</em> button on the settings tab as well as be accessed though the menu.</p>
+		
+		<p>The settings are organized in 2 sections: <em>Basic Settings</em> and <em>Advanced Settings</em>.  
+		<em>Basic Settings</em> covers the essentials for the app, while <em>Advanced Settings</em> allows you 
+		to fine tune more specific options.  Descriptions and current values for each setting can be found in the settings menu.</p>
+		
+		<b>Notification Update Time</b>
+		<p>The Free App of the day on the Amazon App Store is updated around 12am PST (2am CST).  The data populated in the notification is 
+		stored in a database on a shared server and is updated at this time.</p>
+		
+		<p>If Amazon pulls the Free app of the day and replaces it with another app, the notification may inaccurately 
+		report what the free app of the day is (Although this doesn\'t happen too often).</p>
+		
+		<b>Testing the notification</b>
+		<p>The notification can be tested with the settings you applied at any time by pressing the <em>test notification</em> button on the settings tab</p>
+		
+		<b>Installing Amazon Appstore</b>
+		<p>If you do not have the Amazon Appstore installed on your device, pressing the <em>test notification</em> button on the settings tab 
+		will give you a notification that prompts you to download the Amazon Appstore.  Pressing this notification will then take you to a page 
+		where you can download the Appstore to your device.</p>
+		
+		<p>The download page will give instructions on how to install the app, but for reference, those instructions are:<p>
+		<p>1. Open Settings and navigate to the Unknown sources option (under Applications or Security depending on your device).</p>
+		<p>2. Tap the checkbox and then tap OK on the confirmation popup.</p>
+		
+		<p>Depending on your device, you may need to locate where files are downloaded to and select the downloaded APK file to install the Appstore</p>
+		
+		<b>Outside the US</b>
+		<p>Currently this app only provides information that is accurate for the US version of the Amazon Appstore. This is 
+		because I need to pull the information for the free app of the day from sources outside the Appstore and currently 
+		this option is only avalible in the US.</p>
+		
+		<p>For more detail, press the <em>UK Users</em> button on the about tab</p> 
         ]]>
     </string>
     

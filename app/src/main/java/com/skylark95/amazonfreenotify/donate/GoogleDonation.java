@@ -124,11 +124,12 @@ public class GoogleDonation implements Donation {
     // We're being destroyed. It's important to dispose of the helper here!
     @Override
     public void shutdown() {
-        // very important:
-        Log.d(TAG, "Destroying helper.");
-        if (helper != null) {
+        // very important:        
+        if (helper != null && iabAvailable) {
+            Log.d(TAG, "Destroying helper.");
             helper.dispose();
         }
+        iabAvailable = false;
         helper = null;
     }
 

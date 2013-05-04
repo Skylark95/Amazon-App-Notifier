@@ -1,5 +1,5 @@
 /*
- * This file is part of Amazon App Notifier
+ * This file is part of Amazon App Notifier (Free App Notifier for Amazon)
  *
  * Copyright 2013 Derek <derek@skylark95.com>
  *
@@ -35,6 +35,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
@@ -45,6 +46,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.skylark95.amazonfreenotify.activity.HelpActivity;
 import com.skylark95.amazonfreenotify.service.TestAppNotificationService;
 import com.skylark95.amazonfreenotify.settings.Preferences;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
@@ -213,55 +215,44 @@ public class AmazonAppNotifierTest {
 	
 	@Test
 	public void menuDoesLaunchSettings() {
-		MenuItem mockChangeSettingsMenu = mock(MenuItem.class);        
-        when(mockChangeSettingsMenu.getItemId()).thenReturn(R.id.menu_change_settings);
-		
-		activity.onOptionsItemSelected(mockChangeSettingsMenu);		
-		ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
-		Intent startedIntent = shadowFragmentActivity.getNextStartedActivity();
-		ShadowIntent shadowIntent = shadowOf(startedIntent);
-		
-		assertEquals(shadowIntent.getComponent().getClassName(), Preferences.class.getName());
+	    whenTheMenuIsPressed(R.id.menu_change_settings);
+	    thenTheActivityIsLaunched(Preferences.class);
 	}
 	
 	@Test
 	public void menuDoesStartTestNotificationService() {
-		MenuItem mockTestNotificationMenu = mock(MenuItem.class);        
-        when(mockTestNotificationMenu.getItemId()).thenReturn(R.id.menu_test_notification);
-        
-        activity.onOptionsItemSelected(mockTestNotificationMenu);
-        ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
-        Intent startedService = shadowFragmentActivity.getNextStartedService();
-        ShadowIntent shadowIntent = shadowOf(startedService);
-        
-        assertEquals(shadowIntent.getComponent().getClassName(), TestAppNotificationService.class.getName());
+	    whenTheMenuIsPressed(R.id.menu_test_notification);
+	    thenTheServiceIsStarted(TestAppNotificationService.class);        
 	}
 	
 	@Test
 	public void menuDoesShowChangelogDialog() {
-		MenuItem mockChangelogMenu = mock(MenuItem.class);        
-        when(mockChangelogMenu.getItemId()).thenReturn(R.id.menu_changelog);
-        
-        activity.onOptionsItemSelected(mockChangelogMenu);
-        ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
-        Fragment changelogDialog = shadowFragmentActivity.getSupportFragmentManager().findFragmentByTag("changelog");
-        
-        assertEquals(changelogDialog.getArguments().getInt("title"), R.string.changelog_title);
-        assertEquals(changelogDialog.getArguments().getInt("html"), R.string.html_changelog);
+	    whenTheMenuIsPressed(R.id.menu_changelog);
+	    thenTheFragmentIsLaunched("changelog", R.string.changelog_title, R.string.html_changelog);
 	}
 	
 	@Test
 	public void menuDoesShowUkUsersDialog() {
-		MenuItem mockUkUsersMenu = mock(MenuItem.class);        
-        when(mockUkUsersMenu.getItemId()).thenReturn(R.id.menu_uk_users);
-        
-        activity.onOptionsItemSelected(mockUkUsersMenu);
-        ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
-        Fragment ukUsersDialog = shadowFragmentActivity.getSupportFragmentManager().findFragmentByTag("ukusers");
-        
-        assertEquals(ukUsersDialog.getArguments().getInt("title"), R.string.uk_users_title);
-        assertEquals(ukUsersDialog.getArguments().getInt("html"), R.string.html_uk_users);
+	    whenTheMenuIsPressed(R.id.menu_uk_users);
+	    thenTheFragmentIsLaunched("ukusers", R.string.uk_users_title, R.string.html_uk_users);        
 	}
+	
+	@Test
+	public void menuDoesShowHelpActivity() {
+	    whenTheMenuIsPressed(R.id.menu_help);	    
+        thenTheActivityIsLaunched(HelpActivity.class);
+	}
+
+    @Test
+    public void menuDoesOpenPlayStore() {
+        whenTheMenuIsPressed(R.id.menu_rate);
+        thenTheActionIs(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.skylark95.amazonfreenotify"));
+        MenuItem mockDefaultMenu = mock(MenuItem.class);        
+        when(mockDefaultMenu.getItemId()).thenReturn(R.id.menu_rate);
+        
+        activity.onOptionsItemSelected(mockDefaultMenu);
+        
+    }
 	
 	@Test
 	public void menuDoesCallSuperForDefault() {
@@ -271,5 +262,43 @@ public class AmazonAppNotifierTest {
         boolean result = activity.onOptionsItemSelected(mockDefaultMenu);
         assertEquals(new SherlockFragmentActivity().onOptionsItemSelected(mockDefaultMenu), result);
 	}
+
+    private void thenTheActionIs(String action, Uri data) {
+        ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
+        Intent startedIntent = shadowFragmentActivity.getNextStartedActivity();
+        ShadowIntent shadowIntent = shadowOf(startedIntent);
+        
+        assertEquals(shadowIntent.getAction(), action);
+        assertEquals(shadowIntent.getData(), data);        
+    }
+
+    private void whenTheMenuIsPressed(int menuId) {
+        MenuItem mockMenuItem = mock(MenuItem.class);        
+        when(mockMenuItem.getItemId()).thenReturn(menuId);        
+        activity.onOptionsItemSelected(mockMenuItem);
+    }
+
+    private void thenTheFragmentIsLaunched(String fragmentTag, int title, int html) {
+        ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
+        Fragment ukUsersDialog = shadowFragmentActivity.getSupportFragmentManager().findFragmentByTag(fragmentTag);
+        
+        assertEquals(ukUsersDialog.getArguments().getInt("title"), title);
+        assertEquals(ukUsersDialog.getArguments().getInt("html"), html);        
+    }
+
+    private void thenTheActivityIsLaunched(Class<?> activityClass) {
+        ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
+        Intent startedIntent = shadowFragmentActivity.getNextStartedActivity();
+        ShadowIntent shadowIntent = shadowOf(startedIntent);        
+        assertEquals(shadowIntent.getComponent().getClassName(), activityClass.getName());
+    }
+
+    private void thenTheServiceIsStarted(Class<?> serviceClass) {
+        ShadowFragmentActivity shadowFragmentActivity = shadowOf(activity);
+        Intent startedService = shadowFragmentActivity.getNextStartedService();
+        ShadowIntent shadowIntent = shadowOf(startedService);
+        
+        assertEquals(shadowIntent.getComponent().getClassName(), serviceClass.getName());        
+    }
 
 }

@@ -243,6 +243,7 @@
 							<exclude>**/R.class</exclude>
 							<exclude>**/R$*.class</exclude>
 							<exclude>**/BuildConfig.class</exclude>
+							<exclude>com/skylark95/amazonfreenotify/donate/google/*.class</exclude>
 						</excludes>
 					</instrumentation>
 				</configuration>

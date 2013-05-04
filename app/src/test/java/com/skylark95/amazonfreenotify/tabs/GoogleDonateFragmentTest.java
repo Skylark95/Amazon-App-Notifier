@@ -151,9 +151,17 @@ public class GoogleDonateFragmentTest extends AbstractDonateTest {
     }
 	
 	@Test
-	public void callingOnDestroyDoesShutdownIabHelper() {
+	public void callingOnDestroyDoesShutdownIabHelperIfSetup() {
+	    givenSetupFinishedSuccessfully();
 	    fragment.onDestroy();
 	    verify(mockIabHelper).dispose();
+	}
+	
+	@Test
+	public void callingOnDestroyDoesNotShutDownIabHelperIfNotSetup() {
+	    givenSetupFinishedWithErrors();
+        fragment.onDestroy();
+        verify(mockIabHelper, never()).dispose();
 	}
 
     private void testDefaultDonationAmount() {

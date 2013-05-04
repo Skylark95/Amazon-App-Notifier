@@ -44,6 +44,14 @@
             android:name="android.support.PARENT_ACTIVITY"
             android:value="com.skylark95.amazonfreenotify.settings.Preferences" />
         </activity>
+        <activity
+            android:name="com.skylark95.amazonfreenotify.activity.HelpActivity"
+            android:label="@string/title_help"
+            android:parentActivityName="com.skylark95.amazonfreenotify.AmazonAppNotifier" >
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.skylark95.amazonfreenotify.AmazonAppNotifier" />
+        </activity>
         
         <service android:name="com.skylark95.amazonfreenotify.service.FreeAppNotificationService" />
         <service android:name="com.skylark95.amazonfreenotify.service.TestAppNotificationService" />
