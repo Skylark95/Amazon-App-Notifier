@@ -71,8 +71,7 @@ public final class AppVersionPreferences {
 
     private static PackageInfo getPackageInfo(Context context) throws NameNotFoundException {
         PackageManager manager = context.getPackageManager();
-        PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
-        return info;
+        return manager.getPackageInfo(context.getPackageName(), 0);
     }
 
 }

@@ -24,17 +24,13 @@ package com.skylark95.amazonfreenotify.settings;
 import static com.xtremelabs.robolectric.Robolectric.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-import static org.junit.Assert.fail;
 
 import android.app.AlarmManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
 
-import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.skylark95.amazonfreenotify.AmazonAppNotifier;
-import com.skylark95.amazonfreenotify.R;
 import com.skylark95.amazonfreenotify.file.CheckboxesFile;
 import com.skylark95.amazonfreenotify.file.DayOfWeek;
 import com.skylark95.amazonfreenotify.file.FileManager;
@@ -42,11 +38,10 @@ import com.skylark95.amazonfreenotify.file.NotificationSoundFile;
 import com.skylark95.amazonfreenotify.file.StartupFile;
 import com.skylark95.amazonfreenotify.file.TimeAndDayFile;
 import com.skylark95.amazonfreenotify.settings.FirstStartPreferences.FirstStartTask;
-import com.sun.org.apache.xpath.internal.FoundIndex;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import com.xtremelabs.robolectric.shadows.ShadowAlarmManager;
-import com.xtremelabs.robolectric.shadows.ShadowFragmentActivity;
 import com.xtremelabs.robolectric.shadows.ShadowAlarmManager.ScheduledAlarm;
+import com.xtremelabs.robolectric.shadows.ShadowFragmentActivity;
 
 import org.junit.Before;
 import org.junit.Test;
