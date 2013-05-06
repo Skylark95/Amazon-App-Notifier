@@ -11,7 +11,7 @@ Will also be available to download from [F-Droid](https://f-droid.org/) once out
 
 About
 -----
-**Version**: 2.1-BETA
+**Version**: 2.1.1-BETA
 
 Free App Notifier For Amazon is a free and open source notification manager for providing notifications for the free app of the day on the [Amazon Appstore](http://www.amazon.com/mobile-apps/b?ie=UTF8&node=2350149011).
 
@@ -78,6 +78,9 @@ You can also request features by emailing me ([derek@skylark95.com](mailto:derek
 
 Recent Changes
 --------------
+<b>Version 2.1.1-BETA - 5/6/2013</b><br/>
+	Some Users reported the new notification icon was hard to see.  How about some different icon colors?  Find them in the settings menu.  Will add label to settings tab later.<br/>
+	<br/>
 <b>Version 2.1-BETA - 5/4/2013</b><br/>
 	Changed App icon at the request of Amazon.  If you can design a better icon email me ;)<br/>
 	<br/>

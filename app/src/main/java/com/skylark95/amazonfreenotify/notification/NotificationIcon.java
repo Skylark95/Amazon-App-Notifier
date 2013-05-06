@@ -33,8 +33,8 @@ public enum NotificationIcon {
                 return notificationIcon;
             }
         }
-        
-        return ORANGE_ICON; //default
+        // default
+        return ORANGE_ICON; 
     }
 
 }
