@@ -18,12 +18,12 @@
         android:title="@string/donate_button"/>
     <item
         android:id="@+id/menu_rate"
-        android:icon="@drawable/rating_important"
+        android:icon="@drawable/ic_menu_rate"
         android:title="@string/menu_rate_text"
         android:showAsAction="ifRoom"/>
     <item
         android:id="@+id/menu_help"
-        android:icon="@drawable/action_help"
+        android:icon="@drawable/ic_menu_help"
         android:title="@string/menu_help_text"
         android:showAsAction="ifRoom"/>    
     

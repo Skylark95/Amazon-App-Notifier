@@ -6,6 +6,8 @@ public enum NotificationIcon {
     
     ORANGE_ICON("orange", R.drawable.ic_stat_notify_orange),
     BLUE_ICON("blue", R.drawable.ic_stat_notify_blue),
+    RED_ICON("red", R.drawable.ic_stat_notify_red),
+    GREEN_ICON("green", R.drawable.ic_stat_notify_green),
     GRAYSCALE_ICON("grayscale", R.drawable.ic_stat_notify_grayscale),
     TRANSPARENT_ICON("transparent", R.drawable.ic_stat_notify_transparent);
     

@@ -109,6 +109,20 @@ public class FreeAppNotificationTest {
 	}
 	
 	@Test
+    public void baseBuilderDoesGreenIcon() {
+        givenNotificationIconIs(NotificationIcon.GREEN_ICON);
+        Builder builder = freeAppNotification.getBaseBuilder(mockPendingIntent);
+        assertEquals(NotificationIcon.GREEN_ICON.getResourceId(), builder.build().icon);
+    }
+	
+	@Test
+    public void baseBuilderDoesRedIcon() {
+        givenNotificationIconIs(NotificationIcon.RED_ICON);
+        Builder builder = freeAppNotification.getBaseBuilder(mockPendingIntent);
+        assertEquals(NotificationIcon.RED_ICON.getResourceId(), builder.build().icon);
+    }
+	
+	@Test
 	public void baseBuilderDoesGrayscaleIcon() {
 	    givenNotificationIconIs(NotificationIcon.GRAYSCALE_ICON);
 	    Builder builder = freeAppNotification.getBaseBuilder(mockPendingIntent);
