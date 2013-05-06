@@ -95,12 +95,34 @@ public class FreeAppNotificationTest {
 	}
 
 	@Test
-	public void baseBuilderDoesSetSmallIcon() {		
+	public void baseBuilderDoesOrangeIcon() {
+	    givenNotificationIconIs(NotificationIcon.ORANGE_ICON);
 		Builder builder = freeAppNotification.getBaseBuilder(mockPendingIntent);
-		assertEquals(R.drawable.notify_icon, builder.build().icon);
+		assertEquals(NotificationIcon.ORANGE_ICON.getResourceId(), builder.build().icon);
 	}
 	
 	@Test
+	public void baseBuilderDoesBlueIcon() {
+	    givenNotificationIconIs(NotificationIcon.BLUE_ICON);
+	    Builder builder = freeAppNotification.getBaseBuilder(mockPendingIntent);
+	    assertEquals(NotificationIcon.BLUE_ICON.getResourceId(), builder.build().icon);
+	}
+	
+	@Test
+	public void baseBuilderDoesGrayscaleIcon() {
+	    givenNotificationIconIs(NotificationIcon.GRAYSCALE_ICON);
+	    Builder builder = freeAppNotification.getBaseBuilder(mockPendingIntent);
+	    assertEquals(NotificationIcon.GRAYSCALE_ICON.getResourceId(), builder.build().icon);
+	}
+	
+	@Test
+	public void baseBuilderDoesTransparentIcon() {
+	    givenNotificationIconIs(NotificationIcon.TRANSPARENT_ICON);
+	    Builder builder = freeAppNotification.getBaseBuilder(mockPendingIntent);
+	    assertEquals(NotificationIcon.TRANSPARENT_ICON.getResourceId(), builder.build().icon);
+	}	
+
+    @Test
 	public void baseBuilderDoesSetContentIntent() {		
 		Builder builder = freeAppNotification.getBaseBuilder(mockPendingIntent);
 		assertEquals(mockPendingIntent, builder.build().contentIntent);
@@ -199,7 +221,11 @@ public class FreeAppNotificationTest {
 		assertNull(shadowManager.getNotification(NOTIFICATION_TAG));
 	}
 
-	private ShadowNotificationManager buildShadowNotificationManager() {
+	private void givenNotificationIconIs(NotificationIcon notificationIcon) {
+        pref.edit().putString(Preferences.PREF_NOTIFY_ICON_COLOR, notificationIcon.getPrefValue()).commit();
+    }
+
+    private ShadowNotificationManager buildShadowNotificationManager() {
 		NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 		return shadowOf(manager);
 	}

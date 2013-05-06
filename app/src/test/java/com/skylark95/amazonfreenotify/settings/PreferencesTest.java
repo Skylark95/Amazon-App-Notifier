@@ -36,6 +36,7 @@ import android.app.AlarmManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
@@ -46,6 +47,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.commonsware.cwac.wakeful.WakefulIntentService;
 import com.skylark95.amazonfreenotify.R;
 import com.skylark95.amazonfreenotify.alarm.FreeAppNotificationListener;
+import com.skylark95.amazonfreenotify.notification.NotificationIcon;
 import com.skylark95.amazonfreenotify.util.TestUtils;
 import com.xtremelabs.robolectric.Robolectric;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
@@ -102,6 +104,7 @@ public class PreferencesTest {
 			mockPrefs.put(Preferences.PREF_ENABLED, mock(Preference.class));
 			mockPrefs.put(Preferences.PREF_NOTIFICATION_DAYS_SCREEN, mock(Preference.class));
 			mockPrefs.put(Preferences.PREF_NOTIFICATION_SOUND, mock(Preference.class));
+			mockPrefs.put(Preferences.PREF_NOTIFY_ICON_COLOR, mock(ListPreference.class));
 		}
 
 		public Map<String, Preference> getMockPrefs() {
@@ -152,6 +155,15 @@ public class PreferencesTest {
 	}
 	
 	@Test
+	public void notifyIconColorSummaryUpdatedWhenOnCreateCalled() {
+	    ListPreference mockListPref = (ListPreference) activity.findPreference(Preferences.PREF_NOTIFY_ICON_COLOR);
+	    when(mockListPref.getEntry()).thenReturn("Orange");
+	    activity.onCreate(null);
+	    String summary = activity.getString(R.string.pref_notify_icon_color_summ);
+	    verify(mockPrefs.get(Preferences.PREF_NOTIFY_ICON_COLOR)).setSummary(String.format(summary, "Orange"));		
+	}
+	
+	@Test
 	public void notificationTimePrefSummaryUpdatedWhenOnSharedPreferenceChangeCalled() {
 		pref.edit().putString(Preferences.PREF_NOTIFICATION_TIME, "21:0").commit();
 		activity.onSharedPreferenceChanged(pref, Preferences.PREF_NOTIFICATION_TIME);
@@ -159,13 +171,14 @@ public class PreferencesTest {
 		verify(mockPrefs.get(Preferences.PREF_NOTIFICATION_TIME)).setSummary(String.format(summary, "9:00 PM"));		
 	}
 	
-	// No idea how to test this with a real value
 	@Test
-	public void notificationSoundPrefSummaryUpdatedWhenOnCreateCalled() {
-		activity.onCreate(null);
-		String summary = activity.getString(R.string.pref_notification_sound_summ);
-		verify(mockPrefs.get(Preferences.PREF_NOTIFICATION_SOUND)).setSummary(String.format(summary, "Not Selected"));		
-	}
+    public void notifyIconColorSummaryUpdatedWhenOnSharedPreferenceChangeCalled() {
+	    ListPreference mockListPref = (ListPreference) activity.findPreference(Preferences.PREF_NOTIFY_ICON_COLOR);
+        when(mockListPref.getEntry()).thenReturn("Blue");
+        activity.onSharedPreferenceChanged(pref, Preferences.PREF_NOTIFY_ICON_COLOR);
+        String summary = activity.getString(R.string.pref_notify_icon_color_summ);
+        verify(mockPrefs.get(Preferences.PREF_NOTIFY_ICON_COLOR)).setSummary(String.format(summary, "Blue"));        
+    }
 	
 	@Test
 	public void notificationSoundPrefSummaryUpdatedWhenOnResumeCalled() {

@@ -75,7 +75,7 @@ public abstract class FreeAppNotification {
 	protected Builder getBaseBuilder(PendingIntent pendingIntent) {	
 		Log.v(TAG, "Base Builder Called");
 		NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
-			.setSmallIcon(R.drawable.notify_icon)
+			.setSmallIcon(getIcon())
 			.setContentIntent(pendingIntent)
 			.setDefaults(getDefaults())
 			.setAutoCancel(true);
@@ -116,6 +116,12 @@ public abstract class FreeAppNotification {
 			uri = Uri.parse(uriStr);
 		}
 		return uri;
+	}
+	
+	private int getIcon() {
+	    SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+	    String value = pref.getString(Preferences.PREF_NOTIFY_ICON_COLOR, NotificationIcon.ORANGE_ICON.getPrefValue());
+	    return NotificationIcon.getNotificationIconForPrefValue(value).getResourceId();	    
 	}
 
 	private boolean isSound() {

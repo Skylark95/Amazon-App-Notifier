@@ -5,7 +5,7 @@
 
 	<groupId>com.skylark95</groupId>
 	<artifactId>amazonfreenotify-app</artifactId>
-	<version>2.1-BETA</version>
+	<version>2.1.1-SNAPSHOT</version>
 	<packaging>apk</packaging>
 
 	<name>AmazonAppNotifier-App</name>
@@ -186,7 +186,6 @@
 						<classpathContainer>com.android.ide.eclipse.adt.ANDROID_FRAMEWORK</classpathContainer>
 						<classpathContainer>com.android.ide.eclipse.adt.LIBRARIES</classpathContainer>
 					</classpathContainers>
-					<addVersionToProjectName>true</addVersionToProjectName>
 				</configuration>
 			</plugin>
 			<plugin>

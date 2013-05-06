@@ -69,6 +69,22 @@
     <string name="pref_notification_days_friday">Friday</string>
     <string name="pref_notification_days_saturday">Saturday</string>
     
+    <string name="pref_notify_icon_color">Notification Icon Color</string>
+    <string name="pref_notify_icon_color_summ">Color of the notification icon\n(Currently %s)</string>
+    <string name="pref_notify_icon_color_default">orange</string>
+    <string-array name="pref_notify_icon_color_entries">
+        <item>Orange</item>
+        <item>Blue</item>
+        <item>Grayscale</item>
+        <item>Transparent</item>
+    </string-array>
+    <string-array name="pref_notify_icon_color_values">
+        <item>orange</item>
+        <item>blue</item>
+        <item>grayscale</item>
+        <item>transparent</item>
+    </string-array>
+    
     <!-- About Tab -->
     <string name="about_tab_title">About</string>
     <string name="app_version_label">Version:</string>

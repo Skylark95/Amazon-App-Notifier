@@ -37,6 +37,15 @@
                 android:targetClass="com.skylark95.amazonfreenotify.settings.PrefNotificationDays" />
         </Preference>
         
+        <ListPreference 
+            android:key="pref_notify_icon_color"
+            android:summary="@string/pref_notify_icon_color_summ"
+            android:title="@string/pref_notify_icon_color"
+            android:dialogTitle="@string/pref_notify_icon_color"
+            android:entries="@array/pref_notify_icon_color_entries"
+            android:entryValues="@array/pref_notify_icon_color_values"
+            android:defaultValue="@string/pref_notify_icon_color_default" />
+                    
     </PreferenceCategory>
     <PreferenceCategory
         android:key="pref_advanced_settings_title"
