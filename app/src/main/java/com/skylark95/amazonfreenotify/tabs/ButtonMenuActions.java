@@ -1,5 +1,5 @@
 /*
- * This file is part of Amazon App Notifier
+ * This file is part of Amazon App Notifier (Free App Notifier for Amazon)
  *
  * Copyright 2013 Derek <derek@skylark95.com>
  *

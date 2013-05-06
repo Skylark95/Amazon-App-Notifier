@@ -1,5 +1,5 @@
 /*
- * This file is part of Amazon App Notifier
+ * This file is part of Amazon App Notifier (Free App Notifier for Amazon)
  *
  * Copyright 2013 Derek <derek@skylark95.com>
  *
@@ -25,10 +25,6 @@ import static com.xtremelabs.robolectric.Robolectric.*;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -39,10 +35,13 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat.Builder;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.skylark95.amazonfreenotify.R;
 import com.skylark95.amazonfreenotify.settings.Preferences;
 import com.xtremelabs.robolectric.RobolectricTestRunner;
 import com.xtremelabs.robolectric.shadows.ShadowNotificationManager;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 @RunWith(RobolectricTestRunner.class)
 public class FreeAppNotificationTest {
