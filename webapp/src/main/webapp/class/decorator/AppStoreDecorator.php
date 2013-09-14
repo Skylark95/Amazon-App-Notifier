@@ -15,10 +15,10 @@ class AppStoreDecorator implements Decorator {
 	}
 	
 	public function decorate($appData) {
-		$appData[AppData::APP_NAME] = $this->getAppName();
+		$appData[AppData::APP_TITLE] = $this->getAppName();
 		$appData[AppData::APP_DEVELOPER] = $this->getAppDeveloper();
 		$appData[AppData::APP_DESCRIPTION] = $this->getAppDescription();
-		$appData[AppData::APP_PRICE] = $this->getAppPrice();
+		$appData[AppData::APP_LIST_PRICE] = $this->getAppPrice();
 		$appData[AppData::APP_URL] = $this->getAppUrl();
 		return $appData;
 	}
