@@ -31,3 +31,7 @@ DBConfig.php
 .buildpath
 .pmd
 libs/
+
+# Dev Server
+*.exe
+mongoose.conf
