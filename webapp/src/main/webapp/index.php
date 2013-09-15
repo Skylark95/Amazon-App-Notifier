@@ -2,7 +2,7 @@
 	require 'class/AmazonAppNotifier.php';
 	require 'class/ConfigProvider.php';	
 	require 'class/CacheProvider.php';
-
+	date_default_timezone_set('GMT');	
 	run();
 	
 	function run() {
@@ -43,8 +43,8 @@
 	
 	function getAppDataCache($cache) {
 		header('Cache-Loaded: true');
-		header('Cache-Created: ' . $cache[CacheData::CREATED]);
-		header('Cache-Expires: ' . $cache[CacheData::EXPIRES]);
+		header('Cache-Created: ' . headerDate($cache[CacheData::CREATED]));
+		header('Cache-Expires: ' . headerDate($cache[CacheData::EXPIRES]));
 		return $cache[CacheData::DATA];
 	}
 	
@@ -53,9 +53,13 @@
 		$appData = $amazonAppNotifier->getAppData($config);
 		$cache = CacheProvider::saveCache($config, $appData);
 		header('Cache-Loaded: false');
-		header('Cache-Created: ' . $cache[CacheData::CREATED]);
-		header('Cache-Expires: ' . $cache[CacheData::EXPIRES]);
+		header('Cache-Created: ' . headerDate($cache[CacheData::CREATED]));
+		header('Cache-Expires: ' . headerDate($cache[CacheData::EXPIRES]));
 		return $appData;
+	}
+	
+	function headerDate($date) {
+		return date('D, d M Y H:i:s T', $date);
 	}
 	
 ?>

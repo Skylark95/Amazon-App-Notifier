@@ -1,0 +1,8 @@
+{
+    "config": {
+        "vendor-dir": "src/test/webapp/vendor"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    }
+}
