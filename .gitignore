@@ -1,4 +1,3 @@
-
 # built application files
 *.apk
 *.ap_
@@ -27,11 +26,14 @@ local.properties
 .settings/
 
 # PHP
-DBConfig.php
 .buildpath
 .pmd
 libs/
+cache/
 
 # Dev Server
 *.exe
-mongoose.conf
+
+#composer
+vendor/
+*.lock
