@@ -2,6 +2,7 @@
 
 abstract class Config {
 	
+	protected $location;
 	protected $appStoreDomain;
 	protected $appStoreUrl;
 	protected $appUrlXPath;
@@ -10,6 +11,10 @@ abstract class Config {
 	protected $appDescriptionXPath;
 	protected $appPriceXPath;
 	protected $appCategoryModule;
+	
+	function getLocation() {
+		return $this->location;
+	}
 	
 	function getAppStoreDomain() {
 		return $this->appStoreDomain;
