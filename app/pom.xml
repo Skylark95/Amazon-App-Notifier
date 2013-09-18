@@ -9,9 +9,16 @@
 	<packaging>apk</packaging>
 
 	<name>AmazonAppNotifier-App</name>
-	<url>http://www.skylark95.com/</url>
+	<url>https://github.com/Skylark95/Amazon-App-Notifier</url>
 	<description>Open source rewrite of Amazon App Notifier (Free App Notifier For Amazon)</description>
 
+	<repositories>
+		<repository>
+			<id>skylark95-releases</id>
+			<url>http://maven.skylark95.com/repo/releases</url>
+		</repository>
+	</repositories>
+	
 	<scm>
 		<url>https://github.com/Skylark95/Amazon-App-Notifier/</url>
 		<connection>scm:git:git://github.com/Skylark95/Amazon-App-Notifier.git</connection>
@@ -50,7 +57,7 @@
 		<java.version>1.6</java.version>
 		<android.version>4.3_r1</android.version>
 		<android.platform>18</android.platform>
-		<android-support.version>18</android-support.version>
+		<android.support.version>18</android.support.version>
 		<android.plugin.version>3.6.0</android.plugin.version>
 		<checkstyle.version>2.10</checkstyle.version>	
 		<cobertura.version>2.6</cobertura.version>		
@@ -68,7 +75,7 @@
 		<dependency>
 			<groupId>android.support</groupId>
 			<artifactId>compatibility-v4</artifactId>
-			<version>${android-support.version}</version>
+			<version>${android.support.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.actionbarsherlock</groupId>
