@@ -1,11 +1,48 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	
 	<groupId>com.skylark95</groupId>
 	<artifactId>amazonfreenotify-webapp</artifactId>
 	<packaging>war</packaging>
 	<version>3.0-SNAPSHOT</version>
+	
 	<name>Amazon App Notifier WebApp</name>
+	<url>http://www.skylark95.com/</url>
+	<description>Open source rewrite of Amazon App Notifier (Free App Notifier For Amazon)</description>
+	
+	<scm>
+		<url>https://github.com/Skylark95/Amazon-App-Notifier/</url>
+		<connection>scm:git:git://github.com/Skylark95/Amazon-App-Notifier.git</connection>
+		<developerConnection>scm:git:git@github.com:Skylark95/Amazon-App-Notifier.git</developerConnection>
+	</scm>
+
+	<developers>
+		<developer>
+			<name>Derek</name>
+			<email>derek@skylark95.com</email>
+			<id>skylark95</id>
+			<url>http://www.skylark95.com/</url>
+			<timezone>-6</timezone>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>GPL v3</name>
+			<url>http://www.gnu.org/licenses/gpl.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/Skylark95/Amazon-App-Notifier/issues</url>
+	</issueManagement>
+	
 	<dependencies>
 	</dependencies>
 	<build>
