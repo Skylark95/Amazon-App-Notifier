@@ -147,6 +147,8 @@
 					<sdk>
 						<platform>${android.platform}</platform>
 					</sdk>
+					<genDirectory>${project.basedir}/gen</genDirectory>
+					<genDirectoryAidl>${project.basedir}/bin</genDirectoryAidl>
 				</configuration>
 			</plugin>
 			<plugin>
