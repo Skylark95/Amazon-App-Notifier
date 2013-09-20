@@ -5,6 +5,7 @@ Eclipse Setup
 1. Install Required Eclipse plugins
 2. Import ActionBarSherlock
 3. Import Amazon-App-Notifier
+4. Running Unit Tests in Eclipse
 
 Required Eclipse Plugins
 ------------------------
