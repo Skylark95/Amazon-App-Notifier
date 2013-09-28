@@ -127,13 +127,6 @@
 			<version>4.8.2</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- Needed for robolectric to avoid shadow warnings -->
-		<dependency>
-			<groupId>com.google.android.maps</groupId>
-			<artifactId>maps</artifactId>
-			<version>18_r2</version>
-			<scope>provided</scope>
-		</dependency>
 	</dependencies>
 	<build>
 		<finalName>${project.name}</finalName>
@@ -148,7 +141,7 @@
 						<platform>${android.platform}</platform>
 					</sdk>
 					<genDirectory>${project.basedir}/gen</genDirectory>
-					<genDirectoryAidl>${project.basedir}/bin</genDirectoryAidl>
+					<genDirectoryAidl>${project.basedir}/bin/classes</genDirectoryAidl>
 				</configuration>
 			</plugin>
 			<plugin>
