@@ -1,6 +1,21 @@
 Changelog
 ---------
 
+#### Version 2.1.2-BETA ####
+  
+  * Rebuild app for Android 4.3
+  * Improve response time of notification for most users through new web interface
+  * Fix bug where "Private Policy" would sometimes appear for app developer name
+  * Update ActionBarSherlock, Jackson, and Android Support Library dependencies
+
+
+#### Version 2.1.1-BETA ####
+
+  *5/6/2013*
+  
+  * Some Users reported the new notification icon was hard to see. How about some different icon colors? Find them in the settings menu. Will add label to settings tab later.
+
+
 #### Version 2.1-BETA ####
  
   *5/4/2013*
