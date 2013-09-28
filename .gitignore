@@ -28,11 +28,6 @@ local.properties
 # PHP
 .buildpath
 .pmd
-libs/
-cache/
-
-# Dev Server
-*.exe
 
 #composer
 vendor/
