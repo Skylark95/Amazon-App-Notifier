@@ -20,6 +20,10 @@ Eclipse Setup
 #### Import Amazon-App-Notifier ####
 * Import the `app` directory into eclipse using File > Import > Maven > Existing Maven Projects
 * If you get a an error about a missing actionbarsherlock dependency, you can delete the error
+* If the project cannot find ActionBarSherlock, you may need to remove and add it again as an Anrdoid library
+  * This can be done by performing a right click on the project and going to Properties > Android
+  * In the Library section, select actionbarsherlock and press 'Remove'
+  * In the Library section, click 'Add...' and select the actionbarsherlock project
 
 #### Running Unit Tests in Eclipse ####
 * Right click on the `src/test/java` directory and select Run As > Run Configurations
