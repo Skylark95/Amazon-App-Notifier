@@ -26,8 +26,10 @@ Eclipse Setup
   * In the Library section, click 'Add...' and select the actionbarsherlock project
 
 #### Running Unit Tests in Eclipse ####
+* In the pom.xml, change the scope for android from provided to 'test'
+    * NOTE: This will need changed back to 'provided' in order to build the project again
 * Right click on the `src/test/java` directory and select Run As > Run Configurations
 * Create a new JUnit run configuration 
 * In the new run configuration add the folder `amazonfreenotify-app/bin/classes` to the classpath
-* In the pom.xml, change the scope for android from provided to test 
-  (this will need changed back in order to build the project again)
+* Run the JUnit tests uning the new run configuration
+
