@@ -15,7 +15,7 @@ Eclipse Setup
 * Checkout latest version of [ActionBarSherlock](https://github.com/JakeWharton/ActionBarSherlock)
 * Import the `actionbarsherlock` directory into eclipse using File > Import > Android > Existing Android Code Into Workspace
 * Delete the existing android-support-v4.jar under the directory `actionbarsherlock/lib`
-* Right click on the imported actionbarsherlock project and select AndroidTools > Add Support Library
+* Right click on the imported actionbarsherlock project and select Android Tools > Add Support Library
 
 #### Import Amazon-App-Notifier ####
 * Import the `app` directory into eclipse using File > Import > Maven > Existing Maven Projects
