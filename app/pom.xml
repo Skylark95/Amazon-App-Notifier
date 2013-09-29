@@ -12,6 +12,7 @@
 	<url>https://github.com/Skylark95/Amazon-App-Notifier</url>
 	<description>Open source rewrite of Amazon App Notifier (Free App Notifier For Amazon)</description>
 
+	<!-- Repo will contain any missing artifacts that are not in maven central -->
 	<repositories>
 		<repository>
 			<id>skylark95-releases</id>
@@ -128,8 +129,18 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 	<build>
 		<finalName>${project.name}</finalName>
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>2.5</version>
+			</extension>
+		</extensions>
+
 		<plugins>
 			<plugin>
 				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
@@ -189,6 +200,7 @@
 			</plugin>
 		</plugins>
 	</build>
+
 	<reporting>
 		<plugins>
 			<plugin>
@@ -228,9 +240,24 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
+	<!-- Used to deploy snaphots and releases -->
+	<!-- Properties are defined in settings.xml -->
+	<!-- See: http://maven.skylark95.com/settings.xml -->
+	<distributionManagement>
+		<repository>
+			<id>${skylark95.repo.id}</id>
+			<url>${skylark95.repo.ftp.releases}</url>
+		</repository>
+		<snapshotRepository>
+			<id>${skylark95.repo.id}</id>
+			<url>${skylark95.repo.ftp.snapshots}</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 	<profiles>
 		<profile>
-			<id>sign</id>
+			<id>android-sign</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -254,7 +281,7 @@
 									<storepass>${android.sign.storepass}</storepass>
 									<keypass>${android.sign.keypass}</keypass>
 									<alias>${android.sign.keyalias}</alias>
-									<arguments>
+									<arguments>    
 										<argument>-sigalg</argument>
 										<argument>MD5withRSA</argument>
 										<argument>-digestalg</argument>
@@ -268,6 +295,14 @@
 						<groupId>com.jayway.maven.plugins.android.generation2</groupId>
 						<artifactId>android-maven-plugin</artifactId>
 						<inherited>true</inherited>
+						<executions>
+						    <execution>
+						        <phase>install</phase>
+						        <goals>
+						            <goal>zipalign</goal>
+						        </goals>
+						    </execution>
+						</executions>
 						<configuration>
 							<sign>
 								<debug>false</debug>
