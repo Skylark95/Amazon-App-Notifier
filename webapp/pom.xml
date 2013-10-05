@@ -2,69 +2,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	
-	<groupId>com.skylark95</groupId>
+	<parent>
+        <groupId>com.skylark95</groupId>
+        <artifactId>amazonfreenotify-parent</artifactId>
+        <version>2.1.2-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+	
 	<artifactId>amazonfreenotify-webapp</artifactId>
+	<name>AmazonAppNotifier-WebApp</name>
 	<packaging>war</packaging>
-	<version>3.0-SNAPSHOT</version>
 	
-	<name>Amazon App Notifier WebApp</name>
-	<url>http://www.skylark95.com/</url>
-	<description>Open source rewrite of Amazon App Notifier (Free App Notifier For Amazon)</description>
-	
-	<scm>
-		<url>https://github.com/Skylark95/Amazon-App-Notifier/</url>
-		<connection>scm:git:git://github.com/Skylark95/Amazon-App-Notifier.git</connection>
-		<developerConnection>scm:git:git@github.com:Skylark95/Amazon-App-Notifier.git</developerConnection>
-	</scm>
-
-	<developers>
-		<developer>
-			<name>Derek</name>
-			<email>derek@skylark95.com</email>
-			<id>skylark95</id>
-			<url>http://www.skylark95.com/</url>
-			<timezone>-6</timezone>
-			<roles>
-				<role>developer</role>
-			</roles>
-		</developer>
-	</developers>
-
-	<licenses>
-		<license>
-			<name>GPL v3</name>
-			<url>http://www.gnu.org/licenses/gpl.html</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-
-	<issueManagement>
-		<system>GitHub Issues</system>
-		<url>https://github.com/Skylark95/Amazon-App-Notifier/issues</url>
-	</issueManagement>
-	
-	<dependencies>
-	</dependencies>
-	<build>
-		<finalName>amazonfreenotify-webapp</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.2.1</version>
-				<configuration>
-					<executable>${basedir}/www/mongoose-4.1.exe</executable>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>

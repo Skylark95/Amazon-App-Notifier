@@ -24,6 +24,8 @@
 	<modules>
 	    <module>app/pom.xml</module>
 	    <module>apptest/pom.xml</module>
+	    <module>icon/pom.xml</module>
+	    <module>webapp/pom.xml</module>
 	</modules>
 
 	<scm>
@@ -61,6 +63,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<main.basedir>${project.basedir}</main.basedir>
 		<java.version>1.6</java.version>
 
 		<!-- Android -->
@@ -203,7 +206,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
+		
 	<!-- Used to deploy snaphots and releases -->
 	<!-- Properties are defined in settings.xml -->
 	<!-- See: http://maven.skylark95.com/settings.xml -->

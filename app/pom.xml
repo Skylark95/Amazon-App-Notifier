@@ -13,7 +13,7 @@
 	<artifactId>amazonfreenotify-app</artifactId>
 	<name>AmazonAppNotifier-App</name>
 	<packaging>apk</packaging>
-
+	
 	<dependencies>
 		<!-- Android -->
 		<dependency>
@@ -81,6 +81,9 @@
 						<fileset>
 							<directory>bin</directory>
 						</fileset>
+						<fileset>
+                            <directory>tmp</directory>
+                        </fileset>
 					</filesets>
 				</configuration>
 			</plugin>
