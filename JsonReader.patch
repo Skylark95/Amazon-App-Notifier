@@ -1,0 +1,679 @@
+From 885ee446ff2cd1eca436a3cfbab5b4b2dc09c09d Mon Sep 17 00:00:00 2001
+From: Derek <derek@skylark95.com>
+Date: Fri, 4 Oct 2013 22:03:35 -0500
+Subject: [PATCH] JsonReader.patch
+
+---
+ JsonReader.patch                                   |  0
+ .../amazonfreenotify/net/AppDataReader.java        | 32 -----------
+ .../amazonfreenotify/net/AppDataReaderImpl.java    | 46 ---------------
+ .../net/AppDataResponseJsonReader.java             | 39 +++++++++++++
+ .../skylark95/amazonfreenotify/net/JsonReader.java | 61 ++++++++++++++++++++
+ .../amazonfreenotify/net/JsonReaderException.java  | 11 ++++
+ .../amazonfreenotify/net/ValidJsonReader.java      | 29 ++++++++++
+ .../notification/FreeAppNotificationFactory.java   | 15 ++---
+ .../service/FreeAppNotificationService.java        |  4 +-
+ .../service/TestAppNotificationService.java        |  4 +-
+ .../validation/ValidatonException.java             | 11 ++++
+ .../amazonfreenotify/validation/Validator.java     |  7 +++
+ .../appdata/AppDataResponseValidator.java          | 14 +++++
+ .../validation/appdata/FreeAppDataValidator.java   | 14 +++++
+ .../amazonfreenotify/net/AppDataReaderTest.java    | 65 ----------------------
+ .../net/AppDataResponseJsonReaderTest.java         | 35 ++++++++++++
+ .../FreeAppNotificationFactoryTest.java            | 15 +++--
+ .../skylark95/amazonfreenotify/util/TestUtils.java | 19 ++++---
+ 18 files changed, 253 insertions(+), 168 deletions(-)
+ create mode 100644 JsonReader.patch
+ delete mode 100644 app/src/main/java/com/skylark95/amazonfreenotify/net/AppDataReader.java
+ delete mode 100755 app/src/main/java/com/skylark95/amazonfreenotify/net/AppDataReaderImpl.java
+ create mode 100755 app/src/main/java/com/skylark95/amazonfreenotify/net/AppDataResponseJsonReader.java
+ create mode 100644 app/src/main/java/com/skylark95/amazonfreenotify/net/JsonReader.java
+ create mode 100644 app/src/main/java/com/skylark95/amazonfreenotify/net/JsonReaderException.java
+ create mode 100644 app/src/main/java/com/skylark95/amazonfreenotify/net/ValidJsonReader.java
+ create mode 100644 app/src/main/java/com/skylark95/amazonfreenotify/validation/ValidatonException.java
+ create mode 100644 app/src/main/java/com/skylark95/amazonfreenotify/validation/Validator.java
+ create mode 100644 app/src/main/java/com/skylark95/amazonfreenotify/validation/appdata/AppDataResponseValidator.java
+ create mode 100644 app/src/main/java/com/skylark95/amazonfreenotify/validation/appdata/FreeAppDataValidator.java
+ delete mode 100644 app/src/test/java/com/skylark95/amazonfreenotify/net/AppDataReaderTest.java
+ create mode 100644 app/src/test/java/com/skylark95/amazonfreenotify/net/AppDataResponseJsonReaderTest.java
+
+diff --git a/JsonReader.patch b/JsonReader.patch
+new file mode 100644
+index 0000000..e69de29
+diff --git a/app/src/main/java/com/skylark95/amazonfreenotify/net/AppDataReader.java b/app/src/main/java/com/skylark95/amazonfreenotify/net/AppDataReader.java
+deleted file mode 100644
+index 2e55a30..0000000
+--- a/app/src/main/java/com/skylark95/amazonfreenotify/net/AppDataReader.java
++++ /dev/null
+@@ -1,32 +0,0 @@
+-/*
+- * This file is part of Amazon App Notifier (Free App Notifier for Amazon)
+- *
+- * Copyright 2013 Derek <derek@skylark95.com>
+- *
+- * This program is free software: you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation, either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * Amazon App Notifier is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with Amazon App Notifier. if not, If not, see <http://www.gnu.org/licenses/>.
+- *
+- *
+- */
+-
+-package com.skylark95.amazonfreenotify.net;
+-
+-import java.io.IOException;
+-
+-import com.skylark95.amazonfreenotify.beans.AppDataResponse;
+-
+-public interface AppDataReader {
+-	
+-	AppDataResponse downloadAppData(String appDataUrl) throws IOException;
+-
+-}
+diff --git a/app/src/main/java/com/skylark95/amazonfreenotify/net/AppDataReaderImpl.java b/app/src/main/java/com/skylark95/amazonfreenotify/net/AppDataReaderImpl.java
+deleted file mode 100755
+index ee7299c..0000000
+--- a/app/src/main/java/com/skylark95/amazonfreenotify/net/AppDataReaderImpl.java
++++ /dev/null
+@@ -1,46 +0,0 @@
+-/*
+- * This file is part of Amazon App Notifier (Free App Notifier for Amazon)
+- *
+- * Copyright 2013 Derek <derek@skylark95.com>
+- *
+- * This program is free software: you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation, either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * Amazon App Notifier is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with Amazon App Notifier. if not, If not, see <http://www.gnu.org/licenses/>.
+- *
+- *
+- */
+-
+-package com.skylark95.amazonfreenotify.net;
+-
+-import java.io.IOException;
+-import java.net.URL;
+-
+-import android.util.Log;
+-
+-import com.fasterxml.jackson.databind.ObjectMapper;
+-import com.skylark95.amazonfreenotify.beans.AppDataResponse;
+-import com.skylark95.amazonfreenotify.util.Logger;
+-
+-public final class AppDataReaderImpl implements AppDataReader {
+-	
+-	private static final String TAG = Logger.getTag(AppDataReaderImpl.class);
+-	
+-	public AppDataResponse downloadAppData(String appDataUrl) throws IOException {
+-		ObjectMapper mapper = new ObjectMapper();
+-		URL url = new URL(appDataUrl);
+-		Log.i(TAG, "Downloading App Data");
+-		AppDataResponse response = mapper.readValue(url, AppDataResponse.class);
+-		Log.i(TAG, "App Data downloaded successfully");
+-		return response;
+-	}
+-
+-}
+diff --git a/app/src/main/java/com/skylark95/amazonfreenotify/net/AppDataResponseJsonReader.java b/app/src/main/java/com/skylark95/amazonfreenotify/net/AppDataResponseJsonReader.java
+new file mode 100755
+index 0000000..4d1b0a0
+--- /dev/null
++++ b/app/src/main/java/com/skylark95/amazonfreenotify/net/AppDataResponseJsonReader.java
+@@ -0,0 +1,39 @@
++/*
++ * This file is part of Amazon App Notifier (Free App Notifier for Amazon)
++ *
++ * Copyright 2013 Derek <derek@skylark95.com>
++ *
++ * This program is free software: you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation, either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * Amazon App Notifier is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with Amazon App Notifier. if not, If not, see <http://www.gnu.org/licenses/>.
++ *
++ *
++ */
++
++package com.skylark95.amazonfreenotify.net;
++
++import com.fasterxml.jackson.databind.ObjectMapper;
++import com.skylark95.amazonfreenotify.beans.AppDataResponse;
++import com.skylark95.amazonfreenotify.validation.Validator;
++import com.skylark95.amazonfreenotify.validation.appdata.AppDataResponseValidator;
++
++public class AppDataResponseJsonReader extends ValidJsonReader<AppDataResponse> {
++	
++    public AppDataResponseJsonReader() {
++        this(new ObjectMapper(), new AppDataResponseValidator());
++    }
++    
++    public AppDataResponseJsonReader(ObjectMapper objectMapper, Validator<AppDataResponse> appDataResponseValidator) {
++        super(objectMapper, appDataResponseValidator);
++    }
++	
++}
+diff --git a/app/src/main/java/com/skylark95/amazonfreenotify/net/JsonReader.java b/app/src/main/java/com/skylark95/amazonfreenotify/net/JsonReader.java
+new file mode 100644
+index 0000000..3a5c6e5
+--- /dev/null
++++ b/app/src/main/java/com/skylark95/amazonfreenotify/net/JsonReader.java
+@@ -0,0 +1,61 @@
++/*
++ * This file is part of Amazon App Notifier (Free App Notifier for Amazon)
++ *
++ * Copyright 2013 Derek <derek@skylark95.com>
++ *
++ * This program is free software: you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation, either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * Amazon App Notifier is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with Amazon App Notifier. if not, If not, see <http://www.gnu.org/licenses/>.
++ *
++ *
++ */
++
++package com.skylark95.amazonfreenotify.net;
++
++import com.fasterxml.jackson.core.type.TypeReference;
++import com.fasterxml.jackson.databind.ObjectMapper;
++
++import java.io.IOException;
++import java.net.URL;
++
++
++public abstract class JsonReader<T> {
++    
++    private final TypeReference<T> jsonTypeReference;
++    protected final ObjectMapper objectMapper;
++
++    public JsonReader(ObjectMapper objectMapper) {
++        this.jsonTypeReference = new JsonTypeReference();
++        this.objectMapper = objectMapper;
++    }
++	
++    public T read(String url) throws JsonReaderException {
++        try {
++            return read(new URL(url));
++        } catch (IOException e) {
++            throw new JsonReaderException(e.getMessage(), e);
++        }
++    }
++
++    public T read(URL url) throws JsonReaderException {
++        try {
++            return objectMapper.readValue(url, jsonTypeReference);
++        } catch (IOException e) {
++            throw new JsonReaderException(e.getMessage(), e);
++        }
++    }
++    
++    private final class JsonTypeReference extends TypeReference<T> {
++        
++    }
++
++}
+diff --git a/app/src/main/java/com/skylark95/amazonfreenotify/net/JsonReaderException.java b/app/src/main/java/com/skylark95/amazonfreenotify/net/JsonReaderException.java
+new file mode 100644
+index 0000000..c503185
+--- /dev/null
++++ b/app/src/main/java/com/skylark95/amazonfreenotify/net/JsonReaderException.java
+@@ -0,0 +1,11 @@
++package com.skylark95.amazonfreenotify.net;
++
++public class JsonReaderException extends Exception {
++
++    private static final long serialVersionUID = -7500851308511593672L;
++
++    public JsonReaderException(String detailMessage, Throwable throwable) {
++        super(detailMessage, throwable);
++    }
++
++}
+diff --git a/app/src/main/java/com/skylark95/amazonfreenotify/net/ValidJsonReader.java b/app/src/main/java/com/skylark95/amazonfreenotify/net/ValidJsonReader.java
+new file mode 100644
+index 0000000..b3f1c35
+--- /dev/null
++++ b/app/src/main/java/com/skylark95/amazonfreenotify/net/ValidJsonReader.java
+@@ -0,0 +1,29 @@
++package com.skylark95.amazonfreenotify.net;
++
++import com.fasterxml.jackson.databind.ObjectMapper;
++import com.skylark95.amazonfreenotify.validation.ValidatonException;
++import com.skylark95.amazonfreenotify.validation.Validator;
++
++import java.net.URL;
++
++public abstract class ValidJsonReader<T> extends JsonReader<T> {
++
++    private final Validator<T> validator;
++
++    public ValidJsonReader(ObjectMapper objectMapper, Validator<T> validator) {
++        super(objectMapper);
++        this.validator = validator;
++    }
++
++    @Override
++    public T read(URL url) throws JsonReaderException {
++        T bean = super.read(url);
++        try {
++            validator.validate(bean);
++        } catch (ValidatonException e) {
++            throw new JsonReaderException(e.getMessage(), e);
++        }
++        return bean;
++    }
++
++}
+diff --git a/app/src/main/java/com/skylark95/amazonfreenotify/notification/FreeAppNotificationFactory.java b/app/src/main/java/com/skylark95/amazonfreenotify/notification/FreeAppNotificationFactory.java
+index e3bd00f..1e90981 100755
+--- a/app/src/main/java/com/skylark95/amazonfreenotify/notification/FreeAppNotificationFactory.java
++++ b/app/src/main/java/com/skylark95/amazonfreenotify/notification/FreeAppNotificationFactory.java
+@@ -33,7 +33,8 @@ import android.util.Log;
+ 
+ import com.skylark95.amazonfreenotify.R;
+ import com.skylark95.amazonfreenotify.beans.AppDataResponse;
+-import com.skylark95.amazonfreenotify.net.AppDataReader;
++import com.skylark95.amazonfreenotify.net.JsonReader;
++import com.skylark95.amazonfreenotify.net.JsonReaderException;
+ import com.skylark95.amazonfreenotify.net.NetworkUtils;
+ import com.skylark95.amazonfreenotify.settings.Preferences;
+ import com.skylark95.amazonfreenotify.util.Logger;
+@@ -45,7 +46,7 @@ public final class FreeAppNotificationFactory {
+ 	private FreeAppNotificationFactory() {
+ 	}
+ 
+-	public static FreeAppNotification buildNotification(Context context, AppDataReader reader) {
++	public static FreeAppNotification buildNotification(Context context, JsonReader<AppDataResponse> reader) {
+ 		Log.v(TAG, "ENTER - buildNotification()");
+ 		PendingIntent appStore = getAppStoreIntent(context);
+ 		FreeAppNotification notification = build(context, appStore, reader);
+@@ -54,7 +55,7 @@ public final class FreeAppNotificationFactory {
+ 		return notification;
+ 	}
+ 
+-	private static FreeAppNotification build(Context context, PendingIntent appStore, AppDataReader reader) {
++	private static FreeAppNotification build(Context context, PendingIntent appStore, JsonReader<AppDataResponse> reader) {
+ 		FreeAppNotification notification;
+ 		if (NetworkUtils.isDeviceOnline(context)) {
+ 			Log.v(TAG, "Building Online Notification");
+@@ -66,7 +67,7 @@ public final class FreeAppNotificationFactory {
+ 		return notification;
+ 	}
+ 
+-	private static FreeAppNotification buildOnlineNotification(Context context, PendingIntent appStore, AppDataReader reader) {
++	private static FreeAppNotification buildOnlineNotification(Context context, PendingIntent appStore, JsonReader<AppDataResponse> reader) {
+ 		FreeAppNotification notification;
+ 		SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
+ 		if (pref.getBoolean(Preferences.PREF_SHOW_NAME_PRICE, true)) {
+@@ -79,11 +80,11 @@ public final class FreeAppNotificationFactory {
+ 		return notification;
+ 	}
+ 
+-	private static FreeAppNotification buildAppDataNotification(Context context, PendingIntent appStore, AppDataReader reader) {
++	private static FreeAppNotification buildAppDataNotification(Context context, PendingIntent appStore, JsonReader<AppDataResponse> reader) {
+ 		FreeAppNotification notification;
+ 		AppDataResponse response = null;
+ 		try {
+-			response = reader.downloadAppData(context.getString(R.string.app_data_url));
++			response = reader.read(context.getString(R.string.app_data_url));
+ 			if (appStore != null) {
+ 				Log.d(TAG, "AppData Notification - AppStore OK");
+ 				notification = new AppDataNotification(context, appStore, response.getFreeAppData());
+@@ -94,7 +95,7 @@ public final class FreeAppNotificationFactory {
+ 				PendingIntent storeDownloadLink = getAppStoreDownloadIntent(context);				
+ 				notification = new SimpleAppNotification(context, storeDownloadLink, title, text);
+ 			}
+-		} catch (IOException e) {
++		} catch (JsonReaderException e) {
+ 			Log.e(TAG, "Download Error (IOException): " + e.getMessage(), e);
+ 			notification = buildErrorNotification(context, appStore);
+ 		}		
+diff --git a/app/src/main/java/com/skylark95/amazonfreenotify/service/FreeAppNotificationService.java b/app/src/main/java/com/skylark95/amazonfreenotify/service/FreeAppNotificationService.java
+index fd5a753..21b039c 100755
+--- a/app/src/main/java/com/skylark95/amazonfreenotify/service/FreeAppNotificationService.java
++++ b/app/src/main/java/com/skylark95/amazonfreenotify/service/FreeAppNotificationService.java
+@@ -25,7 +25,7 @@ import android.content.Intent;
+ import android.util.Log;
+ 
+ import com.commonsware.cwac.wakeful.WakefulIntentService;
+-import com.skylark95.amazonfreenotify.net.AppDataReaderImpl;
++import com.skylark95.amazonfreenotify.net.AppDataResponseJsonReader;
+ import com.skylark95.amazonfreenotify.notification.FreeAppNotification;
+ import com.skylark95.amazonfreenotify.notification.FreeAppNotificationFactory;
+ import com.skylark95.amazonfreenotify.settings.SettingsUtils;
+@@ -44,7 +44,7 @@ public class FreeAppNotificationService extends WakefulIntentService {
+ 		Log.v(TAG, "ENTER - doWakefulWork()");
+ 		if (SettingsUtils.isTodayChecked(this)) {
+ 			Log.d(TAG, "Today is checked");
+-			FreeAppNotification notification = FreeAppNotificationFactory.buildNotification(this, new AppDataReaderImpl());
++			FreeAppNotification notification = FreeAppNotificationFactory.buildNotification(this, new AppDataResponseJsonReader());
+ 			notification.showNotificationIfNecessary();
+ 		}
+ 		Log.v(TAG, "EXIT - doWakefulWork()");
+diff --git a/app/src/main/java/com/skylark95/amazonfreenotify/service/TestAppNotificationService.java b/app/src/main/java/com/skylark95/amazonfreenotify/service/TestAppNotificationService.java
+index 73b7f94..203f632 100755
+--- a/app/src/main/java/com/skylark95/amazonfreenotify/service/TestAppNotificationService.java
++++ b/app/src/main/java/com/skylark95/amazonfreenotify/service/TestAppNotificationService.java
+@@ -25,7 +25,7 @@ import android.content.Intent;
+ import android.util.Log;
+ 
+ import com.commonsware.cwac.wakeful.WakefulIntentService;
+-import com.skylark95.amazonfreenotify.net.AppDataReaderImpl;
++import com.skylark95.amazonfreenotify.net.AppDataResponseJsonReader;
+ import com.skylark95.amazonfreenotify.notification.FreeAppNotification;
+ import com.skylark95.amazonfreenotify.notification.FreeAppNotificationFactory;
+ import com.skylark95.amazonfreenotify.util.Logger;
+@@ -41,7 +41,7 @@ public class TestAppNotificationService extends WakefulIntentService {
+ 	@Override
+ 	protected void doWakefulWork(Intent intent) {
+ 		Log.v(TAG, "Enter - doWakefulWork()");
+-		FreeAppNotification notification = FreeAppNotificationFactory.buildNotification(this, new AppDataReaderImpl());
++		FreeAppNotification notification = FreeAppNotificationFactory.buildNotification(this, new AppDataResponseJsonReader());
+ 		notification.showNotificationReguardless();
+ 		Log.v(TAG, "EXIT - doWakefulWork()");
+ 	}
+diff --git a/app/src/main/java/com/skylark95/amazonfreenotify/validation/ValidatonException.java b/app/src/main/java/com/skylark95/amazonfreenotify/validation/ValidatonException.java
+new file mode 100644
+index 0000000..9965574
+--- /dev/null
++++ b/app/src/main/java/com/skylark95/amazonfreenotify/validation/ValidatonException.java
+@@ -0,0 +1,11 @@
++package com.skylark95.amazonfreenotify.validation;
++
++public class ValidatonException extends Exception {
++
++    private static final long serialVersionUID = -6414993017207025843L;
++
++    public ValidatonException(String detailMessage) {
++        super(detailMessage);
++    }
++
++}
+diff --git a/app/src/main/java/com/skylark95/amazonfreenotify/validation/Validator.java b/app/src/main/java/com/skylark95/amazonfreenotify/validation/Validator.java
+new file mode 100644
+index 0000000..2559f60
+--- /dev/null
++++ b/app/src/main/java/com/skylark95/amazonfreenotify/validation/Validator.java
+@@ -0,0 +1,7 @@
++package com.skylark95.amazonfreenotify.validation;
++
++public interface Validator<T> {
++    
++    void validate(T bean) throws ValidatonException;
++
++}
+diff --git a/app/src/main/java/com/skylark95/amazonfreenotify/validation/appdata/AppDataResponseValidator.java b/app/src/main/java/com/skylark95/amazonfreenotify/validation/appdata/AppDataResponseValidator.java
+new file mode 100644
+index 0000000..18a618f
+--- /dev/null
++++ b/app/src/main/java/com/skylark95/amazonfreenotify/validation/appdata/AppDataResponseValidator.java
+@@ -0,0 +1,14 @@
++package com.skylark95.amazonfreenotify.validation.appdata;
++
++import com.skylark95.amazonfreenotify.beans.AppDataResponse;
++import com.skylark95.amazonfreenotify.validation.ValidatonException;
++import com.skylark95.amazonfreenotify.validation.Validator;
++
++public class AppDataResponseValidator implements Validator<AppDataResponse> {
++
++    @Override
++    public void validate(AppDataResponse bean) throws ValidatonException {
++        // TODO Auto-generated method stub
++    }
++
++}
+diff --git a/app/src/main/java/com/skylark95/amazonfreenotify/validation/appdata/FreeAppDataValidator.java b/app/src/main/java/com/skylark95/amazonfreenotify/validation/appdata/FreeAppDataValidator.java
+new file mode 100644
+index 0000000..5d3a8bb
+--- /dev/null
++++ b/app/src/main/java/com/skylark95/amazonfreenotify/validation/appdata/FreeAppDataValidator.java
+@@ -0,0 +1,14 @@
++package com.skylark95.amazonfreenotify.validation.appdata;
++
++import com.skylark95.amazonfreenotify.beans.FreeAppData;
++import com.skylark95.amazonfreenotify.validation.ValidatonException;
++import com.skylark95.amazonfreenotify.validation.Validator;
++
++public class FreeAppDataValidator implements Validator<FreeAppData> {
++
++    @Override
++    public void validate(FreeAppData bean) throws ValidatonException {
++        // TODO Auto-generated method stub
++    }
++
++}
+diff --git a/app/src/test/java/com/skylark95/amazonfreenotify/net/AppDataReaderTest.java b/app/src/test/java/com/skylark95/amazonfreenotify/net/AppDataReaderTest.java
+deleted file mode 100644
+index a01d163..0000000
+--- a/app/src/test/java/com/skylark95/amazonfreenotify/net/AppDataReaderTest.java
++++ /dev/null
+@@ -1,65 +0,0 @@
+-/*
+- * This file is part of Amazon App Notifier (Free App Notifier for Amazon)
+- *
+- * Copyright 2013 Derek <derek@skylark95.com>
+- *
+- * This program is free software: you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation, either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * Amazon App Notifier is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with Amazon App Notifier. if not, If not, see <http://www.gnu.org/licenses/>.
+- *
+- *
+- */
+-
+-package com.skylark95.amazonfreenotify.net;
+-
+-import static org.junit.Assert.*;
+-
+-import java.io.File;
+-import java.io.FileNotFoundException;
+-import java.io.IOException;
+-import java.util.Scanner;
+-
+-import org.junit.Test;
+-import org.junit.runner.RunWith;
+-
+-import com.fasterxml.jackson.core.JsonProcessingException;
+-import com.fasterxml.jackson.databind.ObjectMapper;
+-import com.skylark95.amazonfreenotify.beans.AppDataResponse;
+-import com.skylark95.amazonfreenotify.util.TestUtils;
+-import com.xtremelabs.robolectric.RobolectricTestRunner;
+-
+-@RunWith(RobolectricTestRunner.class)
+-public class AppDataReaderTest {
+-
+-	@Test
+-	public void appDataReaderMapsValuesCorrectly() {
+-		File file = new File(TestUtils.TEST_APP_DATA_PATH);
+-		AppDataResponse appData = TestUtils.readTestAppData();
+-		try {
+-			assertEquals(getJsonString(file), buildJsonString(appData));
+-		} catch (IOException e) {
+-			fail(e.getMessage());
+-		}
+-	}
+-
+-	private String getJsonString(File file) throws FileNotFoundException {
+-		return new Scanner(file).nextLine().replaceAll("\\\\/", "/");
+-	}
+-
+-
+-	private String buildJsonString(AppDataResponse appData) throws JsonProcessingException {
+-		ObjectMapper mapper = new ObjectMapper();
+-		return mapper.writeValueAsString(appData);
+-	}
+-
+-
+-}
+diff --git a/app/src/test/java/com/skylark95/amazonfreenotify/net/AppDataResponseJsonReaderTest.java b/app/src/test/java/com/skylark95/amazonfreenotify/net/AppDataResponseJsonReaderTest.java
+new file mode 100644
+index 0000000..82ceee0
+--- /dev/null
++++ b/app/src/test/java/com/skylark95/amazonfreenotify/net/AppDataResponseJsonReaderTest.java
+@@ -0,0 +1,35 @@
++package com.skylark95.amazonfreenotify.net;
++
++import com.fasterxml.jackson.databind.ObjectMapper;
++import com.skylark95.amazonfreenotify.beans.AppDataResponse;
++import com.skylark95.amazonfreenotify.validation.Validator;
++
++import org.junit.Before;
++import org.junit.Test;
++import org.junit.runner.RunWith;
++import org.mockito.Mock;
++import org.mockito.runners.MockitoJUnitRunner;
++
++@RunWith(MockitoJUnitRunner.class)
++public class AppDataResponseJsonReaderTest {
++    
++    @Mock
++    private ObjectMapper objectMapper;
++    @Mock
++    private Validator<AppDataResponse> appDataResponseValidator;
++    @Mock
++    private AppDataResponse appDataResponse;
++    
++    private AppDataResponseJsonReader appDataResponseJsonReader;
++
++    @Before
++    public void setUp() {
++        appDataResponseJsonReader = new AppDataResponseJsonReader(objectMapper, appDataResponseValidator);
++    }
++    
++    @Test
++    public void canSuccessfullyReadAppData() {
++        
++    }
++
++}
+diff --git a/app/src/test/java/com/skylark95/amazonfreenotify/notification/FreeAppNotificationFactoryTest.java b/app/src/test/java/com/skylark95/amazonfreenotify/notification/FreeAppNotificationFactoryTest.java
+index ada624a..a35e3c5 100644
+--- a/app/src/test/java/com/skylark95/amazonfreenotify/notification/FreeAppNotificationFactoryTest.java
++++ b/app/src/test/java/com/skylark95/amazonfreenotify/notification/FreeAppNotificationFactoryTest.java
+@@ -43,7 +43,10 @@ import android.preference.PreferenceManager;
+ 
+ import com.actionbarsherlock.app.SherlockFragmentActivity;
+ import com.skylark95.amazonfreenotify.R;
+-import com.skylark95.amazonfreenotify.net.AppDataReader;
++import com.skylark95.amazonfreenotify.beans.AppDataResponse;
++import com.skylark95.amazonfreenotify.net.AppDataResponseJsonReader;
++import com.skylark95.amazonfreenotify.net.JsonReader;
++import com.skylark95.amazonfreenotify.net.JsonReaderException;
+ import com.skylark95.amazonfreenotify.settings.Preferences;
+ import com.skylark95.amazonfreenotify.util.TestUtils;
+ import com.xtremelabs.robolectric.Robolectric;
+@@ -74,7 +77,7 @@ public class FreeAppNotificationFactoryTest {
+ 	private Context context;
+ 	private SharedPreferences pref;
+ 	private Intent mockAppstoreIntent;
+-	private AppDataReader mockAppDataReader;
++	private JsonReader<AppDataResponse> mockAppDataReader;
+ 	private Intent noAppstoreIntent;
+ 	
+ 	@Before
+@@ -237,16 +240,16 @@ public class FreeAppNotificationFactoryTest {
+ 	}
+ 
+ 	private void setMockAppDataReader(boolean shouldPass) {
+-		mockAppDataReader = mock(AppDataReader.class);
++		mockAppDataReader = mock(AppDataResponseJsonReader.class);
+ 		try {
+ 			if (shouldPass) {
+-				when(mockAppDataReader.downloadAppData(context.getString(R.string.app_data_url)))
++				when(mockAppDataReader.read(context.getString(R.string.app_data_url)))
+ 					.thenReturn(TestUtils.readTestAppData());
+ 			} else {
+-				when(mockAppDataReader.downloadAppData(context.getString(R.string.app_data_url)))
++				when(mockAppDataReader.read(context.getString(R.string.app_data_url)))
+ 					.thenThrow(new IOException());
+ 			}			
+-		} catch (IOException e) {
++		} catch (JsonReaderException e) {
+ 			fail(e.getMessage());
+ 		}
+ 	}
+diff --git a/app/src/test/java/com/skylark95/amazonfreenotify/util/TestUtils.java b/app/src/test/java/com/skylark95/amazonfreenotify/util/TestUtils.java
+index d36dc58..3a819f3 100644
+--- a/app/src/test/java/com/skylark95/amazonfreenotify/util/TestUtils.java
++++ b/app/src/test/java/com/skylark95/amazonfreenotify/util/TestUtils.java
+@@ -21,7 +21,7 @@
+ 
+ package com.skylark95.amazonfreenotify.util;
+ 
+-import static org.junit.Assert.*;
++import static org.junit.Assert.fail;
+ 
+ import android.content.Context;
+ import android.preference.PreferenceManager;
+@@ -32,8 +32,9 @@ import android.support.v4.app.FragmentTransaction;
+ 
+ import com.actionbarsherlock.app.SherlockFragmentActivity;
+ import com.skylark95.amazonfreenotify.beans.AppDataResponse;
+-import com.skylark95.amazonfreenotify.net.AppDataReader;
+-import com.skylark95.amazonfreenotify.net.AppDataReaderImpl;
++import com.skylark95.amazonfreenotify.net.AppDataResponseJsonReader;
++import com.skylark95.amazonfreenotify.net.JsonReader;
++import com.skylark95.amazonfreenotify.net.JsonReaderException;
+ import com.skylark95.amazonfreenotify.settings.PrefNotificationDays;
+ 
+ import java.io.File;
+@@ -68,11 +69,13 @@ public final class TestUtils {
+ 		try {
+ 			File file = new File(TEST_APP_DATA_PATH);
+ 			URL url = file.toURI().toURL();
+-			AppDataReader appDataReader = new AppDataReaderImpl();
+-			retVal = appDataReader.downloadAppData(url.toString());		
+-		} catch (IOException e) {
+-			fail(e.getMessage());			
+-		} 
++			JsonReader<AppDataResponse> appDataReader = new AppDataResponseJsonReader();
++			retVal = appDataReader.read(url);		
++		} catch (JsonReaderException e) {
++		    fail(e.getMessage());   
++        } catch (IOException e) {
++            fail(e.getMessage());
++        } 
+ 		return retVal;
+ 	}
+ 	
+-- 
+1.8.4
+
