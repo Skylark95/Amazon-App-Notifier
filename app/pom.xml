@@ -56,10 +56,26 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.6</java.version>
-		<android.version>4.3_r1</android.version>
-		<android.platform>18</android.platform>
+		
+		<!-- Android -->
+		<android.api.version>4.3_r1</android.api.version>
+		<android.platform.version>18</android.platform.version>
 		<android.support.version>18</android.support.version>
 		<android.plugin.version>3.6.0</android.plugin.version>
+		
+		<!-- Dependencies -->
+		<actionbarsherlock.version>4.4.0</actionbarsherlock.version>
+		<jackson.version>2.2.3</jackson.version>
+        <commonsware.wakeful.version>1.0.0</commonsware.wakeful.version>
+		
+		<!-- Testing -->
+		<junit.version>4.8.2</junit.version>
+		<robolectric.version>1.2</robolectric.version>
+		<fest.assert.version>2.0M10</fest.assert.version>
+		<fest.android.version>1.0.7</fest.android.version>
+		<mockito.version>1.9.5</mockito.version>
+		
+		<!-- Static Code Analysis -->
 		<checkstyle.version>2.10</checkstyle.version>
 		<cobertura.version>2.6</cobertura.version>
 		<findbugs.version>2.5.2</findbugs.version>
@@ -67,10 +83,11 @@
 	</properties>
 
 	<dependencies>
+	    <!-- Android -->
 		<dependency>
 			<groupId>android</groupId>
 			<artifactId>android</artifactId>
-			<version>${android.version}</version>
+			<version>${android.api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -78,10 +95,12 @@
 			<artifactId>compatibility-v4</artifactId>
 			<version>${android.support.version}</version>
 		</dependency>
+		
+		<!-- Dependencies -->
 		<dependency>
 			<groupId>com.actionbarsherlock</groupId>
 			<artifactId>actionbarsherlock</artifactId>
-			<version>4.4.0</version>
+			<version>${actionbarsherlock.version}</version>
 			<type>apklib</type>
 			<exclusions>
 				<exclusion>
@@ -93,39 +112,59 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.2.3</version>
+			<version>${jackson.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
-			<version>2.2.3</version>
+			<version>${jackson.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
-			<version>2.2.3</version>
+			<version>${jackson.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.commonsware</groupId>
 			<artifactId>cwac-wakeful</artifactId>
-			<version>1.0.0</version>
+			<version>${commonsware.wakeful.version}</version>
 		</dependency>
+		
+		<!-- Testing -->
 		<dependency>
 			<groupId>com.pivotallabs</groupId>
 			<artifactId>robolectric</artifactId>
-			<version>1.2</version>
+			<version>${robolectric.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
-			<version>1.9.5</version>
+			<version>${mockito.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.easytesting</groupId>
+			<artifactId>fest-assert-core</artifactId>
+			<version>${fest.assert.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.squareup</groupId>
+			<artifactId>fest-android</artifactId>
+			<version>${fest.android.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.actionbarsherlock</groupId>
+			<artifactId>actionbarsherlock-fest</artifactId>
+			<version>${actionbarsherlock.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -149,7 +188,7 @@
 				<extensions>true</extensions>
 				<configuration>
 					<sdk>
-						<platform>${android.platform}</platform>
+						<platform>${android.platform.version}</platform>
 					</sdk>
 					<genDirectory>${project.basedir}/gen</genDirectory>
 					<genDirectoryAidl>${project.basedir}/bin/classes</genDirectoryAidl>
@@ -281,7 +320,7 @@
 									<storepass>${android.sign.storepass}</storepass>
 									<keypass>${android.sign.keypass}</keypass>
 									<alias>${android.sign.keyalias}</alias>
-									<arguments>    
+									<arguments>
 										<argument>-sigalg</argument>
 										<argument>MD5withRSA</argument>
 										<argument>-digestalg</argument>
@@ -296,12 +335,12 @@
 						<artifactId>android-maven-plugin</artifactId>
 						<inherited>true</inherited>
 						<executions>
-						    <execution>
-						        <phase>install</phase>
-						        <goals>
-						            <goal>zipalign</goal>
-						        </goals>
-						    </execution>
+							<execution>
+								<phase>install</phase>
+								<goals>
+									<goal>zipalign</goal>
+								</goals>
+							</execution>
 						</executions>
 						<configuration>
 							<sign>
