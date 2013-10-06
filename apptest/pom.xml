@@ -65,7 +65,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.easytesting</groupId>
-			<artifactId>fest-assert-core</artifactId>
+			<artifactId>fest-assert</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -79,5 +79,37 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<extensions>true</extensions>
+				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+				<artifactId>android-maven-plugin</artifactId>
+				<configuration>
+					<androidManifestFile>${project.basedir}/../app/AndroidManifest.xml</androidManifestFile>
+					<assetsDirectory>${project.basedir}/../app/assets</assetsDirectory>
+					<resourceDirectory>${project.basedir}/../app/res</resourceDirectory>
+					<undeployBeforeDeploy>true</undeployBeforeDeploy>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

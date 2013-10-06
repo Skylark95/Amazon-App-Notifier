@@ -13,7 +13,7 @@
 	<artifactId>amazonfreenotify-app</artifactId>
 	<name>AmazonAppNotifier-App</name>
 	<packaging>apk</packaging>
-	
+
 	<dependencies>
 		<!-- Android -->
 		<dependency>
@@ -82,9 +82,36 @@
 							<directory>bin</directory>
 						</fileset>
 						<fileset>
-                            <directory>tmp</directory>
-                        </fileset>
+							<directory>tmp</directory>
+						</fileset>
 					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<configuration>
+					<excludes>apt/tutorial/**,com/actionbarsherlock/**,com/skylark95/amazonfreenotify/donate/google/**</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>findbugs-maven-plugin</artifactId>
+				<configuration>
+					<failOnError>false</failOnError>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**com/android/**</exclude>
+						<exclude>**com/actionbarsherlock/**</exclude>
+						<exclude>**apt/tutorial/**</exclude>
+						<exclude>**com/skylark95/amazonfreenotify/donate/google/**</exclude>
+					</excludes>
+					<failOnViolation>false</failOnViolation>
 				</configuration>
 			</plugin>
 		</plugins>

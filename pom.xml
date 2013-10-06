@@ -20,12 +20,12 @@
 			<url>http://maven.skylark95.com/repo/releases</url>
 		</repository>
 	</repositories>
-	
+
 	<modules>
-	    <module>app/pom.xml</module>
-	    <module>apptest/pom.xml</module>
-	    <module>icon/pom.xml</module>
-	    <module>webapp/pom.xml</module>
+		<module>app/pom.xml</module>
+		<module>apptest/pom.xml</module>
+		<module>icon/pom.xml</module>
+		<module>webapp/pom.xml</module>
 	</modules>
 
 	<scm>
@@ -63,12 +63,11 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<main.basedir>${project.basedir}</main.basedir>
 		<java.version>1.6</java.version>
 
 		<!-- Android -->
-		<android.api.version>4.3_r1</android.api.version>
-		<android.platform.version>18</android.platform.version>
+		<platform.version>4.3_r1</platform.version>
+		<android.sdk.version>18</android.sdk.version>
 		<android.support.version>18</android.support.version>
 		<android.plugin.version>3.6.0</android.plugin.version>
 
@@ -80,11 +79,15 @@
 		<!-- Testing -->
 		<junit.version>4.8.2</junit.version>
 		<robolectric.version>1.2</robolectric.version>
-		<fest.assert.version>2.0M10</fest.assert.version>
+		<fest.assert.version>1.4</fest.assert.version>
 		<fest.android.version>1.0.7</fest.android.version>
 		<mockito.version>1.9.5</mockito.version>
 		<android.maps.version>18_r2</android.maps.version>
-		<amazonfreenotify.app.workingDirectory>${project.basedir}/app</amazonfreenotify.app.workingDirectory>
+
+		<!-- Metrics -->
+		<checkstyle.version>2.10</checkstyle.version>
+		<findbugs.version>2.5.2</findbugs.version>
+		<pmd.version>3.0.1</pmd.version>
 	</properties>
 
 	<dependencyManagement>
@@ -93,7 +96,7 @@
 			<dependency>
 				<groupId>android</groupId>
 				<artifactId>android</artifactId>
-				<version>${android.api.version}</version>
+				<version>${platform.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>android.support</groupId>
@@ -101,10 +104,10 @@
 				<version>${android.support.version}</version>
 			</dependency>
 			<dependency>
-                <groupId>com.google.android.maps</groupId>
-                <artifactId>maps</artifactId>
-                <version>${android.maps.version}</version>
-            </dependency>
+				<groupId>com.google.android.maps</groupId>
+				<artifactId>maps</artifactId>
+				<version>${android.maps.version}</version>
+			</dependency>
 
 			<!-- Dependencies -->
 			<dependency>
@@ -152,7 +155,7 @@
 			</dependency>
 			<dependency>
 				<groupId>org.easytesting</groupId>
-				<artifactId>fest-assert-core</artifactId>
+				<artifactId>fest-assert</artifactId>
 				<version>${fest.assert.version}</version>
 			</dependency>
 			<dependency>
@@ -193,20 +196,101 @@
 					<artifactId>android-maven-plugin</artifactId>
 					<version>${android.plugin.version}</version>
 					<extensions>true</extensions>
+					<executions>
+						<execution>
+							<id>lint</id>
+							<goals>
+								<goal>lint</goal>
+							</goals>
+							<phase>install</phase>
+						</execution>
+					</executions>
 					<configuration>
 						<sdk>
-							<platform>${android.platform.version}</platform>
+							<platform>${android.sdk.version}</platform>
 						</sdk>
+						<lint>
+							<skip>false</skip>
+						</lint>
+						<undeployBeforeDeploy>true</undeployBeforeDeploy>
 					</configuration>
 				</plugin>
 				<plugin>
 					<artifactId>maven-clean-plugin</artifactId>
 					<version>2.5</version>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>${checkstyle.version}</version>
+					<configuration>
+						<configLocation>config/quality/checkstyle/checkstyle.xml</configLocation>
+						<enableRulesSummary>false</enableRulesSummary>
+					</configuration>
+					<executions>
+						<execution>
+							<id>checkstyle-check</id>
+							<phase>process-sources</phase>
+							<goals>
+								<goal>check</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>findbugs-maven-plugin</artifactId>
+					<version>${findbugs.version}</version>
+					<configuration>
+						<excludeFilterFile>config/quality/findbugs/findbugs-filter.xml</excludeFilterFile>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-pmd-plugin</artifactId>
+					<version>${pmd.version}</version>
+					<configuration>
+						<targetJdk>1.5</targetJdk>
+					</configuration>
+					<executions>
+						<execution>
+							<id>pmd-check</id>
+							<goals>
+								<goal>check</goal>
+								<goal>cpd-check</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-checkstyle-plugin</artifactId>
+										<versionRange>[${checkstyle.version},)</versionRange>
+										<goals>
+											<goal>check</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
 			</plugins>
+
 		</pluginManagement>
 	</build>
-		
+
 	<!-- Used to deploy snaphots and releases -->
 	<!-- Properties are defined in settings.xml -->
 	<!-- See: http://maven.skylark95.com/settings.xml -->
