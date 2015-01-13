@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Free App Notifier</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about">About</string>
+    <string name="action_rate">Rate</string>
+    <string name="by_label">by</string>
+    <string name="developer">Developer Name</string>
+    <string name="price_was">$#.##</string>
+    <string name="price_now">FREE</string>
+    <string name="app_rating_text">#.#</string>
+    <string name="app_icon">App Icon</string>
+    <string name="app_name_header">App Name</string>
+    <string name="category">Other</string>
+    <string name="category_label">Categorized Under</string>
+
+</resources>
