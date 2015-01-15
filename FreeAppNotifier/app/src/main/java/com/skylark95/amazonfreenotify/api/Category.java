@@ -49,6 +49,7 @@ public enum Category {
     }
 
     public static Category forString(String categoryStr) {
+
         for(Category category : values()) {
             if (category.getText().equalsIgnoreCase(categoryStr)) {
                 return category;

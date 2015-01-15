@@ -15,5 +15,8 @@
     <string name="app_name_header">App Name</string>
     <string name="category">Other</string>
     <string name="category_label">Categorized Under</string>
+    <string name="description">Description</string>
+    <string name="buy">Buy Now</string>
+    <string name="title_activity_about">About</string>
 
 </resources>

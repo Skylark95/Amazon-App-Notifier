@@ -1,14 +1,19 @@
 package com.skylark95.amazonfreenotify;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.skylark95.amazonfreenotify.api.FreeApp;
 import com.skylark95.amazonfreenotify.api.MockFreeApp;
@@ -29,6 +34,7 @@ public class FreeAppNotifierActivity extends ActionBarActivity {
     @InjectView(R.id.app_rating_text) TextView appRatingText;
     @InjectView(R.id.app_rating_bar) RatingBar appRatingBar;
     @InjectView(R.id.category) TextView category;
+    @InjectView(R.id.description) TextView description;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,7 @@ public class FreeAppNotifierActivity extends ActionBarActivity {
         appRatingBar.setRating(freeApp.getRating().floatValue());
         priceWas.setPaintFlags(priceWas.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         category.setText(freeApp.getCateogry().getText());
+        description.setText(freeApp.getDescription());
         Picasso.with(this).load(freeApp.getIconUrl()).into(appIcon, new HideViewCallback(appIconProgress));
     }
 
@@ -64,11 +71,37 @@ public class FreeAppNotifierActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        // About App
+        if (id == R.id.action_about) {
+            openAboutActivity();
+            return true;
+        }
+
+        // Rate App
+        if (id == R.id.action_rate) {
+            openPlayStore();
+            return true;
+        }
+
+        // App Settings
         if (id == R.id.action_settings) {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openAboutActivity() {
+        Intent aboutActivity = new Intent(this, AboutActivity.class);
+        startActivity(aboutActivity);
+    }
+
+    private void openPlayStore() {
+        final String appPackageName = getPackageName();
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+        }
     }
 }

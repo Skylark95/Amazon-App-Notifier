@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="action_bar" type="color">#263238</item>
+    <item name="status_bar" type="color">#21272b</item>
+</resources>
