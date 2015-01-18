@@ -1,5 +1,6 @@
 package com.skylark95.amazonfreenotify;
 
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -71,9 +72,15 @@ public class FreeAppNotifierActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        // App Settings
+        if (id == R.id.action_settings) {
+            startActivity(SettingsActivity.class);
+            return true;
+        }
+
         // About App
         if (id == R.id.action_about) {
-            openAboutActivity();
+            startActivity(AboutActivity.class);
             return true;
         }
 
@@ -83,17 +90,11 @@ public class FreeAppNotifierActivity extends ActionBarActivity {
             return true;
         }
 
-        // App Settings
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
-    private void openAboutActivity() {
-        Intent aboutActivity = new Intent(this, AboutActivity.class);
-        startActivity(aboutActivity);
+    private void startActivity(Class<? extends Activity> activity) {
+        startActivity(new Intent(this, activity));
     }
 
     private void openPlayStore() {

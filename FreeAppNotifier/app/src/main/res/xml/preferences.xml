@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- Enable Notifications -->
+    <PreferenceCategory
+        android:key="pref_enable_notifications_title"
+        android:title="@string/pref_enabled" >
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_enabled"
+            android:title="@string/pref_enabled" />
+
+    </PreferenceCategory>
+
+    <!-- Schedule Notifications -->
+    <PreferenceCategory
+        android:key="pref_schedule_notifications_title"
+        android:title="@string/pref_schedule_notifications_title" >
+
+        <com.skylark95.amazonfreenotify.preference.TimePreference
+            android:dialogTitle="@string/pref_notification_time"
+            android:key="pref_notification_time"
+            android:title="@string/pref_notification_time" />
+
+        <RingtonePreference
+            android:defaultValue="content://settings/system/notification_sound"
+            android:dialogTitle="@string/pref_notification_sound"
+            android:key="pref_notification_sound"
+            android:ringtoneType="notification"
+            android:showDefault="true"
+            android:showSilent="false"
+            android:title="@string/pref_notification_sound" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_show_on_boot"
+            android:title="@string/pref_show_on_boot" />
+
+    </PreferenceCategory>
+
+    <!-- Customize Notifications -->
+    <PreferenceCategory
+        android:key="pref_customize_notifications_title"
+        android:title="@string/pref_customize_notifications_title" >
+
+        <ListPreference
+            android:key="pref_notify_icon_color"
+            android:title="@string/pref_notify_icon_color"
+            android:dialogTitle="@string/pref_notify_icon_color"
+            android:entries="@array/pref_notify_icon_color_entries"
+            android:entryValues="@array/pref_notify_icon_color_values"
+            android:defaultValue="@string/pref_notify_icon_color_default" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_expandable_notification"
+            android:summary="@string/pref_expandable_notification_summ"
+            android:title="@string/pref_expandable_notification" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

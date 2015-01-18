@@ -26,18 +26,18 @@
             android:showSilent="false"
             android:summary="@string/pref_notification_sound_summ"
             android:title="@string/pref_notification_sound" />
-        
+
         <Preference
             android:key="pref_notification_days_screen"
             android:summary="@string/pref_notification_days_screen_summ"
             android:title="@string/pref_notification_days_screen" >
-            <intent 
+            <intent
                 android:action="android.intent.action.VIEW"
                 android:targetPackage="com.skylark95.amazonfreenotify"
                 android:targetClass="com.skylark95.amazonfreenotify.settings.PrefNotificationDays" />
         </Preference>
-        
-        <ListPreference 
+
+        <ListPreference
             android:key="pref_notify_icon_color"
             android:summary="@string/pref_notify_icon_color_summ"
             android:title="@string/pref_notify_icon_color"
@@ -45,7 +45,7 @@
             android:entries="@array/pref_notify_icon_color_entries"
             android:entryValues="@array/pref_notify_icon_color_values"
             android:defaultValue="@string/pref_notify_icon_color_default" />
-                    
+
     </PreferenceCategory>
     <PreferenceCategory
         android:key="pref_advanced_settings_title"

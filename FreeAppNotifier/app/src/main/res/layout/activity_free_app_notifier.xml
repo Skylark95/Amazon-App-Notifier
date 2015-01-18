@@ -19,16 +19,18 @@
 
         <ProgressBar
             android:id="@+id/app_icon_progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:padding="30dp"
             android:layout_below="@+id/app_name"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"/>
 
         <ImageView
             android:id="@+id/app_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="fitXY"
             android:layout_below="@+id/app_name"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
