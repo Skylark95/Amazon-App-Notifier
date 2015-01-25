@@ -1,10 +1,18 @@
 package com.skylark95.amazonfreenotify.api;
 
+import android.content.Context;
+
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class MockFreeApp implements FreeApp {
+
+    private Context context;
+
+    public MockFreeApp(Context context) {
+        this.context = context;
+    }
 
     @Override
     public String getName() {
@@ -28,7 +36,7 @@ public class MockFreeApp implements FreeApp {
 
     @Override
     public Category getCateogry() {
-        return Category.forString("Games");
+        return Category.forString("Games", context);
     }
 
     @Override

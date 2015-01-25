@@ -44,13 +44,10 @@
         android:key="pref_customize_notifications_title"
         android:title="@string/pref_customize_notifications_title" >
 
-        <ListPreference
+        <com.skylark95.amazonfreenotify.preference.IconListPreference
             android:key="pref_notify_icon_color"
             android:title="@string/pref_notify_icon_color"
-            android:dialogTitle="@string/pref_notify_icon_color"
-            android:entries="@array/pref_notify_icon_color_entries"
-            android:entryValues="@array/pref_notify_icon_color_values"
-            android:defaultValue="@string/pref_notify_icon_color_default" />
+            android:dialogTitle="@string/pref_notify_icon_color" />
 
         <CheckBoxPreference
             android:defaultValue="true"

@@ -1,7 +1,6 @@
 package com.skylark95.amazonfreenotify.api;
 
 import java.math.BigDecimal;
-import java.net.URL;
 
 public interface FreeApp {
 

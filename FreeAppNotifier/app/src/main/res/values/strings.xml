@@ -18,5 +18,7 @@
     <string name="description">Description</string>
     <string name="buy">Buy Now</string>
     <string name="title_activity_about">About</string>
+    <string name="set">Set</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

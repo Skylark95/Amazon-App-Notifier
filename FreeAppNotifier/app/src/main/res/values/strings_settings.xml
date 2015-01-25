@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Enable Notifications -->
+    <string name="pref_enabled">Enable Notifications</string>
+
+    <!-- Schedule Notifications -->
+    <string name="pref_schedule_notifications_title">Schedule Notifications</string>
+
+    <string name="pref_notification_time">Notification Time</string>
+    <string name="pref_notification_sound">Notification Sound</string>
+    <string name="pref_show_on_boot">Show on boot</string>
+
+    <!-- Customize Notifications -->
+    <string name="pref_customize_notifications_title">Customize Notifications</string>
+
+    <string name="pref_expandable_notification">Expandable Notification</string>
+    <string name="pref_expandable_notification_summ">Show app description in expandable notification. (Android 4.1+ only)</string>
+
+    <string name="pref_notify_icon_color">Notification Icon</string>
+
+    <string-array name="pref_notify_icon_color_entries">
+        <item>App Icon</item>
+        <item>Orange</item>
+        <item>Blue</item>
+        <item>Red</item>
+        <item>Green</item>
+        <item>Grayscale</item>
+        <item>Transparent</item>
+    </string-array>
+    <string-array name="pref_notify_icon_color_values">
+        <item>app</item>
+        <item>orange</item>
+        <item>blue</item>
+        <item>red</item>
+        <item>green</item>
+        <item>grayscale</item>
+        <item>transparent</item>
+    </string-array>
+
+    <!-- Icons -->
+    <string name="icon_app">App Icon</string>
+    <string name="icon_orange">Orange</string>
+    <string name="icon_blue">Blue</string>
+    <string name="icon_red">Red</string>
+    <string name="icon_green">Green</string>
+    <string name="icon_grayscale">Grayscale</string>
+    <string name="icon_transparent">Transparent</string>
+
+    <!-- Categories -->
+    <string name="category_books_comics">Books &amp; Comics</string>
+    <string name="category_city_info">City Info</string>
+    <string name="category_communication">Communication</string>
+    <string name="category_cooking">Cooking</string>
+    <string name="category_education">Education</string>
+    <string name="category_entertainment">Entertainment</string>
+    <string name="category_finance">Finance</string>
+    <string name="category_games">Games</string>
+    <string name="category_health_fitness">Health &amp; Fitness</string>
+    <string name="category_kids">Kids</string>
+    <string name="category_lifestyle">Lifestyle</string>
+    <string name="category_music">Music</string>
+    <string name="category_navigation">Navigation</string>
+    <string name="category_news_magazines">News &amp; Magazines</string>
+    <string name="category_novelty">Novelty</string>
+    <string name="category_other">Other</string>
+    <string name="category_photography">Photography</string>
+    <string name="category_podcasts">Podcasts</string>
+    <string name="category_productivity">Productivity</string>
+    <string name="category_real_estate">Real Estate</string>
+    <string name="category_reference">Reference</string>
+    <string name="category_ringtones">Ringtones</string>
+    <string name="category_shopping">Shopping</string>
+    <string name="category_social_networking">Social Networking</string>
+    <string name="category_sports">Sports</string>
+    <string name="category_themes">Themes</string>
+    <string name="category_travel">Travel</string>
+    <string name="category_utilities">Utilities</string>
+    <string name="category_weather">Weather</string>
+    <string name="category_web_browsers">Web Browsers</string>
+</resources>

@@ -46,14 +46,14 @@ public class FreeAppNotifierActivity extends ActionBarActivity {
     }
 
     private void loadFreeAppDetails() {
-        FreeApp freeApp = new MockFreeApp();
+        FreeApp freeApp = new MockFreeApp(this);
         appName.setText(freeApp.getName());
         developer.setText(freeApp.getDeveloper());
         priceWas.setText("$" + freeApp.getOriginalPrice().toPlainString());
         appRatingText.setText(freeApp.getRating().toPlainString());
         appRatingBar.setRating(freeApp.getRating().floatValue());
         priceWas.setPaintFlags(priceWas.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        category.setText(freeApp.getCateogry().getText());
+        category.setText(freeApp.getCateogry().toString(this));
         description.setText(freeApp.getDescription());
         Picasso.with(this).load(freeApp.getIconUrl()).into(appIcon, new HideViewCallback(appIconProgress));
     }
