@@ -3,7 +3,7 @@ package com.skylark95.amazonfreenotify;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
-import com.skylark95.amazonfreenotify.fragment.SettingsFragment;
+import com.skylark95.amazonfreenotify.preference.SettingsFragment;
 
 public class SettingsActivity extends ActionBarActivity {
 

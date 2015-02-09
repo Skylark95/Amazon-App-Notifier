@@ -1,16 +1,18 @@
 package com.skylark95.amazonfreenotify.api;
 
 import java.math.BigDecimal;
+import java.util.Locale;
 
 public interface FreeApp {
 
     String getName();
     BigDecimal getOriginalPrice();
-    BigDecimal getRating();
+    float getRating();
     String getDeveloper();
-    Category getCateogry();
+    String getCateogry();
     String getIconUrl();
     String getAppUrl();
     String getDescription();
+    Locale getLocale();
 
 }

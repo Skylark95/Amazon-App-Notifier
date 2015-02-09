@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Customize Notifications -->
+    <string-array name="pref_notify_icon_color_entries">
+        <item>@string/pref_icon_app_entry</item>
+        <item>@string/pref_icon_orange_entry</item>
+        <item>@string/pref_icon_blue_entry</item>
+        <item>@string/pref_icon_red_entry</item>
+        <item>@string/pref_icon_green_entry</item>
+        <item>@string/pref_icon_grayscale_entry</item>
+        <item>@string/pref_icon_transparent_entry</item>
+    </string-array>
+    <string-array name="pref_notify_icon_color_values">
+        <item>@string/pref_icon_app_value</item>
+        <item>@string/pref_icon_orange_value</item>
+        <item>@string/pref_icon_blue_value</item>
+        <item>@string/pref_icon_red_value</item>
+        <item>@string/pref_icon_green_value</item>
+        <item>@string/pref_icon_grayscale_value</item>
+        <item>@string/pref_icon_transparent_value</item>
+    </string-array>
+
+    <string name="pref_icon_app_value">app</string>
+    <string name="pref_icon_orange_value">orange</string>
+    <string name="pref_icon_blue_value">blue</string>
+    <string name="pref_icon_red_value">red</string>
+    <string name="pref_icon_green_value">green</string>
+    <string name="pref_icon_grayscale_value">grayscale</string>
+    <string name="pref_icon_transparent_value">transparent</string>
+
+    <string-array name="pref_category_filters">
+        <item>@string/category_books_comics</item>
+        <item>@string/category_city_info</item>
+        <item>@string/category_communication</item>
+        <item>@string/category_cooking</item>
+        <item>@string/category_education</item>
+        <item>@string/category_entertainment</item>
+        <item>@string/category_finance</item>
+        <item>@string/category_games</item>
+        <item>@string/category_health_fitness</item>
+        <item>@string/category_kids</item>
+        <item>@string/category_lifestyle</item>
+        <item>@string/category_music</item>
+        <item>@string/category_navigation</item>
+        <item>@string/category_news_magazines</item>
+        <item>@string/category_novelty</item>
+        <item>@string/category_other</item>
+        <item>@string/category_photography</item>
+        <item>@string/category_podcasts</item>
+        <item>@string/category_productivity</item>
+        <item>@string/category_real_estate</item>
+        <item>@string/category_reference</item>
+        <item>@string/category_ringtones</item>
+        <item>@string/category_shopping</item>
+        <item>@string/category_social_networking</item>
+        <item>@string/category_sports</item>
+        <item>@string/category_themes</item>
+        <item>@string/category_travel</item>
+        <item>@string/category_utilities</item>
+        <item>@string/category_weather</item>
+        <item>@string/category_web_browsers</item>
+    </string-array>
+
+    <string name="app_amazon_appstore_value">appstore</string>
+    <string name="app_amazon_shopping_value">shopping</string>
+    <string name="app_web_browser_value">browser</string>
+    
+    <string-array name="pref_app_to_launch_entries">
+        <item>@string/app_amazon_appstore_entry</item>
+        <item>@string/app_amazon_shopping_entry</item>
+        <item>@string/app_web_browser_entry</item>
+    </string-array>
+    
+    <string-array name="pref_app_to_launch_values">
+        <item>@string/app_amazon_appstore_value</item>
+        <item>@string/app_amazon_shopping_value</item>
+        <item>@string/app_web_browser_value</item>
+    </string-array>
+
+</resources>

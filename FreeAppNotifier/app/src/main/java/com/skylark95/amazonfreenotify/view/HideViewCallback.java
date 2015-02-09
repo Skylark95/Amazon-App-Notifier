@@ -2,13 +2,14 @@ package com.skylark95.amazonfreenotify.view;
 
 import android.view.View;
 
-import com.skylark95.amazonfreenotify.util.LogFactory;
-import com.skylark95.amazonfreenotify.util.Logger;
 import com.squareup.picasso.Callback;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class HideViewCallback implements Callback {
 
-    public static final Logger LOGGER = LogFactory.getLogger(HideViewCallback.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(HideViewCallback.class);
 
     private final View view;
 

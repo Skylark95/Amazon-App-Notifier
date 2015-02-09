@@ -29,8 +29,13 @@
             android:key="pref_notification_sound"
             android:ringtoneType="notification"
             android:showDefault="true"
-            android:showSilent="false"
+            android:showSilent="true"
             android:title="@string/pref_notification_sound" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="pref_vibrate"
+            android:title="@string/pref_vibrate" />
 
         <CheckBoxPreference
             android:defaultValue="true"
@@ -44,10 +49,31 @@
         android:key="pref_customize_notifications_title"
         android:title="@string/pref_customize_notifications_title" >
 
-        <com.skylark95.amazonfreenotify.preference.IconListPreference
+        <ListPreference
             android:key="pref_notify_icon_color"
             android:title="@string/pref_notify_icon_color"
-            android:dialogTitle="@string/pref_notify_icon_color" />
+            android:dialogTitle="@string/pref_notify_icon_color"
+            android:entries="@array/pref_notify_icon_color_entries"
+            android:entryValues="@array/pref_notify_icon_color_values"
+            android:defaultValue="@string/pref_icon_app_value" />
+
+        <MultiSelectListPreference
+            android:key="pref_category_filters"
+            android:title="@string/pref_category_filters_title"
+            android:summary="@string/pref_category_filters_summ"
+            android:dialogTitle="@string/pref_category_filters_title"
+            android:entries="@array/pref_category_filters"
+            android:entryValues="@array/pref_category_filters"
+            android:defaultValue="@array/pref_category_filters" />
+
+        <ListPreference
+            android:key="pref_app_to_launch"
+            android:title="@string/pref_app_to_launch_title"
+            android:summary="@string/pref_app_to_launch_summ"
+            android:dialogTitle="@string/pref_app_to_launch_title"
+            android:entries="@array/pref_app_to_launch_entries"
+            android:entryValues="@array/pref_app_to_launch_values"
+            android:defaultValue="@string/app_amazon_appstore_value" />
 
         <CheckBoxPreference
             android:defaultValue="true"

@@ -21,11 +21,19 @@ import com.skylark95.amazonfreenotify.api.MockFreeApp;
 import com.skylark95.amazonfreenotify.view.HideViewCallback;
 import com.squareup.picasso.Picasso;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
 public class FreeAppNotifierActivity extends ActionBarActivity {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(FreeAppNotifierActivity.class);
 
     @InjectView(R.id.app_name) TextView appName;
     @InjectView(R.id.app_icon_progress) ProgressBar appIconProgress;
@@ -43,18 +51,22 @@ public class FreeAppNotifierActivity extends ActionBarActivity {
         setContentView(R.layout.activity_free_app_notifier);
         ButterKnife.inject(this);
         loadFreeAppDetails();
+        LOGGER.debug("Hello World4!");
     }
 
     private void loadFreeAppDetails() {
         FreeApp freeApp = new MockFreeApp(this);
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(freeApp.getLocale());
+
         appName.setText(freeApp.getName());
         developer.setText(freeApp.getDeveloper());
-        priceWas.setText("$" + freeApp.getOriginalPrice().toPlainString());
-        appRatingText.setText(freeApp.getRating().toPlainString());
-        appRatingBar.setRating(freeApp.getRating().floatValue());
+        priceWas.setText(numberFormat.format(freeApp.getOriginalPrice()));
         priceWas.setPaintFlags(priceWas.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        category.setText(freeApp.getCateogry().toString(this));
+        appRatingText.setText(String.valueOf(freeApp.getRating()));
+        appRatingBar.setRating(freeApp.getRating());
+        category.setText(freeApp.getCateogry());
         description.setText(freeApp.getDescription());
+
         Picasso.with(this).load(freeApp.getIconUrl()).into(appIcon, new HideViewCallback(appIconProgress));
     }
 
