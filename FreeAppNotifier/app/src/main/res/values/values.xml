@@ -62,20 +62,4 @@
         <item>@string/category_web_browsers</item>
     </string-array>
 
-    <string name="app_amazon_appstore_value">appstore</string>
-    <string name="app_amazon_shopping_value">shopping</string>
-    <string name="app_web_browser_value">browser</string>
-    
-    <string-array name="pref_app_to_launch_entries">
-        <item>@string/app_amazon_appstore_entry</item>
-        <item>@string/app_amazon_shopping_entry</item>
-        <item>@string/app_web_browser_entry</item>
-    </string-array>
-    
-    <string-array name="pref_app_to_launch_values">
-        <item>@string/app_amazon_appstore_value</item>
-        <item>@string/app_amazon_shopping_value</item>
-        <item>@string/app_web_browser_value</item>
-    </string-array>
-
 </resources>

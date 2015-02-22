@@ -7,17 +7,16 @@ import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.skylark95.amazonfreenotify.api.FreeApp;
-import com.skylark95.amazonfreenotify.api.MockFreeApp;
+import com.skylark95.amazonfreenotify.api.FreeAppManager;
+import com.skylark95.amazonfreenotify.api.MockFreeAppManager;
 import com.skylark95.amazonfreenotify.view.HideViewCallback;
 import com.squareup.picasso.Picasso;
 
@@ -25,10 +24,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.text.NumberFormat;
-import java.util.Locale;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 
 public class FreeAppNotifierActivity extends ActionBarActivity {
@@ -45,18 +44,27 @@ public class FreeAppNotifierActivity extends ActionBarActivity {
     @InjectView(R.id.category) TextView category;
     @InjectView(R.id.description) TextView description;
 
+    private final FreeAppManager appManager;
+
+    public FreeAppNotifierActivity() {
+        this(new MockFreeAppManager());
+    }
+
+    public FreeAppNotifierActivity(FreeAppManager appManager) {
+        this.appManager = appManager;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_free_app_notifier);
         ButterKnife.inject(this);
         loadFreeAppDetails();
-        LOGGER.debug("Hello World4!");
     }
 
     private void loadFreeAppDetails() {
-        FreeApp freeApp = new MockFreeApp(this);
-        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(freeApp.getLocale());
+        final FreeApp freeApp = appManager.getFreeApp(this);
+        final NumberFormat numberFormat = NumberFormat.getCurrencyInstance(freeApp.getLocale());
 
         appName.setText(freeApp.getName());
         developer.setText(freeApp.getDeveloper());
@@ -82,7 +90,7 @@ public class FreeAppNotifierActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        final int id = item.getItemId();
 
         // App Settings
         if (id == R.id.action_settings) {
@@ -105,16 +113,26 @@ public class FreeAppNotifierActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @OnClick(R.id.buy)
+    public void buy() {
+        appManager.openAppStore(this);
+    }
+
     private void startActivity(Class<? extends Activity> activity) {
         startActivity(new Intent(this, activity));
+    }
+
+    private void openUri(String uri) {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uri)));
     }
 
     private void openPlayStore() {
         final String appPackageName = getPackageName();
         try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+            openUri("market://details?id=" + appPackageName);
         } catch (ActivityNotFoundException e) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+            LOGGER.warn("Google Play Store Not Installed");
+            openUri("https://play.google.com/store/apps/details?id=" + appPackageName);
         }
     }
 }

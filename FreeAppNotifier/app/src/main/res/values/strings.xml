@@ -17,8 +17,11 @@
     <string name="category">Other</string>
     <string name="category_label">Categorized Under</string>
     <string name="description">Description</string>
-    <string name="buy">Buy Now</string>
+    <string name="buy">Get App</string>
+
+    <!-- About Activity -->
     <string name="title_activity_about">About</string>
+    <string name="version">Version</string>
 
     <!-- Preferences -->
     <!-- Title -->
@@ -89,10 +92,5 @@
     <string name="category_utilities">Utilities</string>
     <string name="category_weather">Weather</string>
     <string name="category_web_browsers">Web Browsers</string>
-    
-    <!-- Amazon Apps -->
-    <string name="app_amazon_appstore_entry">Amazon App Store</string>
-    <string name="app_amazon_shopping_entry">Amazon Shopping App</string>
-    <string name="app_web_browser_entry">Web Browser</string>
 
 </resources>

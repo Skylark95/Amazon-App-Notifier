@@ -22,6 +22,10 @@ public class MockFreeApp implements FreeApp {
         return "Monument Valley";
     }
 
+    public String getAsin() {
+        return "B00KA7JIII";
+    }
+
     @Override
     public BigDecimal getOriginalPrice() {
         return new BigDecimal("3.99");

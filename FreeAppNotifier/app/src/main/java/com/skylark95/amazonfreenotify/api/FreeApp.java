@@ -6,6 +6,7 @@ import java.util.Locale;
 public interface FreeApp {
 
     String getName();
+    String getAsin();
     BigDecimal getOriginalPrice();
     float getRating();
     String getDeveloper();

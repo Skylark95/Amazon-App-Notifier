@@ -66,15 +66,6 @@
             android:entryValues="@array/pref_category_filters"
             android:defaultValue="@array/pref_category_filters" />
 
-        <ListPreference
-            android:key="pref_app_to_launch"
-            android:title="@string/pref_app_to_launch_title"
-            android:summary="@string/pref_app_to_launch_summ"
-            android:dialogTitle="@string/pref_app_to_launch_title"
-            android:entries="@array/pref_app_to_launch_entries"
-            android:entryValues="@array/pref_app_to_launch_values"
-            android:defaultValue="@string/app_amazon_appstore_value" />
-
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="pref_expandable_notification"
