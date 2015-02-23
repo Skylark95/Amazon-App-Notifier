@@ -10,15 +10,13 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.koushikdutta.ion.Ion;
 import com.skylark95.amazonfreenotify.api.FreeApp;
 import com.skylark95.amazonfreenotify.api.FreeAppManager;
 import com.skylark95.amazonfreenotify.api.MockFreeAppManager;
-import com.skylark95.amazonfreenotify.view.HideViewCallback;
-import com.squareup.picasso.Picasso;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +33,6 @@ public class FreeAppNotifierActivity extends ActionBarActivity {
     private static final Logger LOGGER = LoggerFactory.getLogger(FreeAppNotifierActivity.class);
 
     @InjectView(R.id.app_name) TextView appName;
-    @InjectView(R.id.app_icon_progress) ProgressBar appIconProgress;
     @InjectView(R.id.app_icon) ImageView appIcon;
     @InjectView(R.id.developer) TextView developer;
     @InjectView(R.id.price_was) TextView priceWas;
@@ -75,7 +72,7 @@ public class FreeAppNotifierActivity extends ActionBarActivity {
         category.setText(freeApp.getCateogry());
         description.setText(freeApp.getDescription());
 
-        Picasso.with(this).load(freeApp.getIconUrl()).into(appIcon, new HideViewCallback(appIconProgress));
+        Ion.with(appIcon).placeholder(R.drawable.app_icon_placeholder).error(R.drawable.app_icon_error).load(freeApp.getIconUrl());
     }
 
     @Override
@@ -129,6 +126,7 @@ public class FreeAppNotifierActivity extends ActionBarActivity {
     private void openPlayStore() {
         final String appPackageName = getPackageName();
         try {
+            LOGGER.info("Opening Google Play Store");
             openUri("market://details?id=" + appPackageName);
         } catch (ActivityNotFoundException e) {
             LOGGER.warn("Google Play Store Not Installed");
