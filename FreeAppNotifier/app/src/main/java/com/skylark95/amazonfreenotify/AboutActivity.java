@@ -1,7 +1,9 @@
 package com.skylark95.amazonfreenotify;
 
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.webkit.WebView;
@@ -41,6 +43,14 @@ public class AboutActivity extends ActionBarActivity {
             }
         }
 
+        /*
+         * Open all links in browser
+         */
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+            return true;
+        }
     }
 
 }
