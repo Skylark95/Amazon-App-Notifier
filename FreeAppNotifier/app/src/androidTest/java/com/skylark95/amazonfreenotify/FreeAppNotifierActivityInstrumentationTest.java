@@ -1,5 +1,6 @@
 package com.skylark95.amazonfreenotify;
 
+import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.RatingBar;
 import android.widget.TextView;

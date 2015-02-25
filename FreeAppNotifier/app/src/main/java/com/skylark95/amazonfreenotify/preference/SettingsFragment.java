@@ -9,7 +9,7 @@ import com.skylark95.amazonfreenotify.R;
 
 public class SettingsFragment extends PreferenceFragment {
 
-    private Preference.OnPreferenceChangeListener updatePreferenceSummaryListener;
+    private Preference.OnPreferenceChangeListener updateNotificationSoundSummaryListener;
     private SharedPreferences.OnSharedPreferenceChangeListener updateNotificationIconSummaryListener;
     private Preference notificationSound;
 
@@ -18,8 +18,8 @@ public class SettingsFragment extends PreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
 
-        updatePreferenceSummaryListener = new UpdateNotificationSoundSummaryListener(getActivity());
-        updateNotificationIconSummaryListener = new UpdateNotificationIconSummaryListener(getActivity(), getPreferenceManager());
+        updateNotificationSoundSummaryListener = getUpdateNotificationSoundSummaryListener();
+        updateNotificationIconSummaryListener = getUpdateNotificationIconSummaryListener();
         notificationSound = findPreference(Settings.KEY_PREF_NOTIFICATION_SOUND);
 
         setNotificationSoundSummary();
@@ -39,18 +39,32 @@ public class SettingsFragment extends PreferenceFragment {
         /*
          * See: https://stackoverflow.com/questions/6725105/ringtonepreference-not-firing-onsharedpreferencechanged
          */
-        notificationSound.setOnPreferenceChangeListener(updatePreferenceSummaryListener);
+        notificationSound.setOnPreferenceChangeListener(updateNotificationSoundSummaryListener);
 
         getSharedPreferences().registerOnSharedPreferenceChangeListener(updateNotificationIconSummaryListener);
     }
 
-    private SharedPreferences getSharedPreferences() {
+    Preference.OnPreferenceChangeListener getUpdateNotificationSoundSummaryListener() {
+        if (updateNotificationSoundSummaryListener == null) {
+            updateNotificationSoundSummaryListener = new UpdateNotificationSoundSummaryListener(getActivity());
+        }
+        return updateNotificationSoundSummaryListener;
+    }
+
+    SharedPreferences.OnSharedPreferenceChangeListener getUpdateNotificationIconSummaryListener() {
+        if (updateNotificationIconSummaryListener == null) {
+            updateNotificationIconSummaryListener = new UpdateNotificationIconSummaryListener(getActivity(), getPreferenceManager());
+        }
+        return updateNotificationIconSummaryListener;
+    }
+
+    SharedPreferences getSharedPreferences() {
         return getPreferenceManager().getSharedPreferences();
     }
 
     private void setNotificationSoundSummary() {
         String notificationUri = getSharedPreferences().getString(Settings.KEY_PREF_NOTIFICATION_SOUND, null);
-        updatePreferenceSummaryListener.onPreferenceChange(notificationSound, notificationUri);
+        updateNotificationSoundSummaryListener.onPreferenceChange(notificationSound, notificationUri);
     }
 
     private void setNotificationIconSummary() {
