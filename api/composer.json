@@ -1,4 +1,9 @@
 {
+    "autoload": {
+        "psr-4": {
+            "Skylark95\\AmazonFreeApp\\": "src/"
+        }
+    },
     "require": {
         "sunra/php-simple-html-dom-parser": "v1.5.0",
         "gilbitron/php-simplecache": "~1.4"
