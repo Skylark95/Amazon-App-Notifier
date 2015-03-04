@@ -73,10 +73,12 @@ class FreeAppDomParser {
     {
         $parser = $this->get_parser();
         foreach ($html->find('div.bucket div.content') as $content) {
-            if (trim($parser->find($content->parent(), 'h2', 0, 'plaintext') === $title)) {
+            if (trim($parser->find($content->parent(), 'h2', 0, 'plaintext') === $title) ||
+                trim($parser->find($content->parent(), 'div.h2', 0, 'plaintext') === $title)) {
                 return $content->plaintext;
             }
         }
+        return '';
     }
 
     private function get_parser()

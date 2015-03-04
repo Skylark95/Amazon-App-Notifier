@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <phpunit bootstrap="./vendor/autoload.php">
     <testsuites>
-        <testsuite>
+       <testsuite name="Unit Tests">
             <directory>./tests</directory>
+        </testsuite>
+        <testsuite name="All Tests">
+            <directory>./tests</directory>
+            <file>./tests/FreeAppDomParserIT.php</file>
+        </testsuite>
+        <testsuite name="IT Tests">
+            <file>./tests/FreeAppDomParserIT.php</file>
         </testsuite>
     </testsuites>
 </phpunit>

@@ -1,6 +1,6 @@
 <?php
 
-class IntegrationTest extends PHPUnit_Framework_TestCase {
+class FreeAppDomParserIT extends PHPUnit_Framework_TestCase {
 
     private static $output;
 
