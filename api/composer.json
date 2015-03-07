@@ -1,4 +1,22 @@
 {
+    "name": "Amazon Free App Web API",
+    "description": "Web API endpoint to return the free app of the day from Amazon",
+    "version": "3.0.0-dev",
+    "type": "project",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Derek",
+            "email": "derek@skylark95.com",
+            "homepage": "http://www.skylark95.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "derek@skylark95.com",
+        "issues": "https://github.com/Skylark95/Amazon-App-Notifier/issues",
+        "source": "https://github.com/Skylark95/Amazon-App-Notifier"
+    },
     "autoload": {
         "psr-4": {
             "Skylark95\\AmazonFreeApp\\": "src/"
@@ -10,5 +28,9 @@
     },
     "require-dev": {
         "phpunit/phpunit": "4.5.*"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit --debug --testsuite unit",
+        "integration-test": "vendor/bin/phpunit --debug --testsuite integration"
     }
 }

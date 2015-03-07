@@ -33,7 +33,9 @@ class DomParserTest extends \PHPUnit_Framework_TestCase {
     {
         $result = $this->getMockBuilder('result');
         $result->plaintext = 'propertyValue';
-        $this->html->method('find')
+        $this->html
+            ->expects($this->once())
+            ->method('find')
             ->with('query', 0)
             ->willReturn($result);
 

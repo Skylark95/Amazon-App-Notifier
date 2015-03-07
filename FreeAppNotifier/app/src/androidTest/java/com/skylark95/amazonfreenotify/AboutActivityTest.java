@@ -7,11 +7,11 @@ import com.robotium.solo.By;
 import com.robotium.solo.Solo;
 
 import static org.assertj.core.api.Assertions.assertThat;
-public class AboutActivityInstrumentationTest extends ActivityInstrumentationTestCase2<FreeAppNotifierActivity> {
+public class AboutActivityTest extends ActivityInstrumentationTestCase2<FreeAppNotifierActivity> {
 
     private Solo solo;
 
-    public AboutActivityInstrumentationTest() {
+    public AboutActivityTest() {
         super(FreeAppNotifierActivity.class);
     }
 

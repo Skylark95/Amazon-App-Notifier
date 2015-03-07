@@ -10,12 +10,12 @@ import com.skylark95.amazonfreenotify.api.MockFreeApp;
 
 import static org.assertj.android.api.Assertions.assertThat;
 
-public class FreeAppNotifierActivityInstrumentationTest extends ActivityInstrumentationTestCase2<FreeAppNotifierActivity> {
+public class FreeAppNotifierActivityTest extends ActivityInstrumentationTestCase2<FreeAppNotifierActivity> {
 
     private Solo solo;
     private MockFreeApp mockFreeApp;
 
-    public FreeAppNotifierActivityInstrumentationTest() {
+    public FreeAppNotifierActivityTest() {
         super(FreeAppNotifierActivity.class);
     }
 

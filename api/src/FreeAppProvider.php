@@ -23,14 +23,15 @@ class FreeAppProvider {
     {
         $output;
         $label = "freeapp-$locale";
-        $cache = $this->get_cache($cache_time);
+        $cache = $this->get_cache();
+        $cache->set_cache_time($cache_time);
 
         if ($cache->is_cached($label)) {
-            $output = $cache->get_cache($label);
+            $output = $cache->get_cache_data($label);
         } else {
             $parser = $this->get_parser();
             $output = $parser->fetch_json($url, $locale);
-            $cache->set_cache($label, $output);
+            $cache->set_cache_data($label, $output);
         }
 
         return $output;
@@ -41,9 +42,9 @@ class FreeAppProvider {
         return $this->parser;
     }
 
-    private function get_cache($cache_time)
+    private function get_cache()
     {
-        return $this->cache->get($cache_time);
+        return $this->cache;
     }
 
 }

@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9dd9b1afcf863c89ac539f3ed2e7afd4",
+    "hash": "f01507010786466e3a6e0fb5f1a4f3e7",
     "packages": [
         {
             "name": "gilbitron/php-simplecache",
