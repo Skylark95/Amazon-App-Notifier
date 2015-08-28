@@ -1,0 +1,24 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        applicationId "com.skylark95.amazonfreenotify"
+        minSdkVersion 7
+        targetSdkVersion 22
+        versionCode 14
+        versionName "FINAL"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}
+
+dependencies {
+    compile "com.android.support:support-v4:22.2.1"
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
