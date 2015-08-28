@@ -1,7 +1,11 @@
 Amazon App Notifier
 ===================
-### *Free App Notifier For Amazon* ###
+### APP HAS BEEN DISCONTINUED ###
+App has been discontinued due to Amazon ending the Free App of the Day.
 
+
+
+### *Free App Notifier For Amazon* ###
 
 Download
 --------
@@ -114,4 +118,3 @@ Recent Changes
 	Please email me (derek@skylark95.com) if you find any bugs or report them on the GitHub project page<br/>
 
 **For the full changelog, see the [wiki](https://github.com/Skylark95/Amazon-App-Notifier/wiki/Changelog)**
-
